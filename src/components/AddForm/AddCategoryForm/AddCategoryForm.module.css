@@ -1,0 +1,60 @@
+.addCategoryForm {
+  position: fixed;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 300px;
+  border-radius: 8px;
+  padding: 0 20px 10px 15px;
+  text-align: center;
+  background-color: white;
+}
+.inputAddCategory, .textareaAddCategory {  
+  width: 100%;
+  margin-bottom: 3px;
+  border: 1px solid rgb(129, 129, 129);
+  /* cursor: pointer; */
+  text-align: start;
+  padding: 0 2px;    
+}
+/* .addCategoryForm div label {
+  margin-top: 10px;
+  text-align: start;
+}  */
+.addCategoryForm h2 {   
+  margin: 15px 0 10px 0;  
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(1, 1, 1, 0.35);
+  z-index: 1;
+}
+.inputAddCategory:focus::placeholder {
+  color: transparent;
+}
+.deleteButton {
+  position: absolute;
+  right: 0;
+  padding-top: 4px;
+}
+.textareaEditCategory {
+  width: 100%;
+}
+.buttonSubmit {
+  border: 1px solid black;
+  background-color: #1e88e5;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 3px 12px
+}
+.buttonSubmit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

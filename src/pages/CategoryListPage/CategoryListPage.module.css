@@ -1,0 +1,25 @@
+/* .posts {
+  width: 900px;
+  margin: 0 auto;
+} */
+.divAddcategory {
+  text-align: center;
+}
+.categoryPage {
+  /* position: relative; */
+}
+.category {
+  padding: 5px 10px;
+  text-align: center;
+}
+.category .postLoader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: blue;
+}
+.allCategoryList {
+  display: flex; 
+  align-items: center;
+  flex-direction: column;
+}

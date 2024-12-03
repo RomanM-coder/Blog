@@ -1,0 +1,29 @@
+.navContainer {
+  background-color: royalblue;
+  margin-top: 0;
+}
+.navWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brandLogo {
+  margin-left: 1.5rem;
+  font-size: 25px;
+}
+.navCollection {
+  display: flex;
+  justify-content: center;
+}
+.navCollection li {
+  list-style: none;
+  text-decoration: none;
+  margin: 5px 15px;
+}
+.navCollection li a { 
+  text-decoration: none;
+  color: white 
+}
+.navCollection li a:hover {  
+  color: rgb(211, 211, 211);   
+}
