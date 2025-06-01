@@ -1,0 +1,59 @@
+.adminUsers {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex-grow: 1;
+}
+.paginationContainer { 
+  padding-bottom: 3rem;
+}
+.userList {
+  list-style: none;
+  text-decoration: none;
+}
+.userNumber {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.singleNumber {
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+}
+.singleUser {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  text-align: center;
+  margin: 5px 0px;
+  width: 99%;
+}
+.singleLi {
+  margin: 0 5px;
+}
+.addButton {
+  background-color: transparent;
+  margin: 0 10px;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  position: relative;   
+}
+.addButton svg {
+  font-size: 27px;
+}
+.userWrapper {
+  width: 100%;
+}
+.containerButton {
+  display: flex;
+  flex-direction: row;
+}

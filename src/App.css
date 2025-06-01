@@ -1,15 +1,16 @@
-/* #root {
-   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center; 
-} */
-
-/* .nav-header {
-  display: flex;
+.navBarWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1; 
 }
-
-.nav-collection {
-  display: flex;
-  justify-content: flex-end;
-} */
+.header_scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  border-radius: 0;
+  background-color: white;
+}

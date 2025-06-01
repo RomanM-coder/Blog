@@ -1,0 +1,23 @@
+.imageStripes {
+  display: flex;
+  height: 100vh; 
+  overflow: hidden;  
+}
+.stripes {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.imgPng {  
+  position: absolute;
+  background-position: center;
+  background-size: cover;  
+  width: 50px; 
+}

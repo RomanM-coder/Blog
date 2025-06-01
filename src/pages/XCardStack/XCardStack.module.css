@@ -1,0 +1,85 @@
+.cardContainer {
+  padding: 0px 10px;
+}
+.cards {
+  padding: 0px 20px;
+}
+
+.cardsSliding {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: blue;
+  padding: 40px 0;
+  color: white;
+  overflow: hidden;
+}
+.cardSliding {
+  position: relative;
+  padding: 100px 0;
+  min-height: 400px;
+}
+.cardBg {
+  position: absolute;
+  inset: 0 40px 0 40px;
+  background-color: #fff;
+  border-radius: 30px;
+}
+.cardSlider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  overflow: hidden;
+  color: #252a2e;
+  z-index: 1;
+  width: 0px;
+}
+.cardTextArea {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  align-items: center;
+  color: inherit;
+}
+.cardSliding .cardSliderInverse .cardTextArea {
+  color: white;
+}
+.cardContent {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  color: inherit;
+}
+.cardSliding:nth-child(2n) .cardTextArea .cardContent {
+  flex-direction: row-reverse;
+}
+.cardText {
+  position: relative;
+  width: 50%;
+  color: inherit;
+}
+.cardImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 50%;
+}
+.cardSliding:nth-child(2n) .cardTextArea .cardContent .cardImage {
+  justify-content: flex-start;
+}
+.cardSliderInverse {
+  z-index: 2;
+  /* color: white; */
+}
+.cardImage img {
+  width: 400px;
+  height: auto;
+}

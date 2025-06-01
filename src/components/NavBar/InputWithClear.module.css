@@ -1,0 +1,38 @@
+.containerSearch {
+  display: flex;
+  justify-content: start;
+  border-radius: 8px;
+  border: 1px solid;
+  position: relative;
+}
+.searchIcon {
+  padding: 0 10px;
+  align-items: center;
+  display: flex;
+  margin: 5px 0 0 0;
+  color: white;
+}
+.searchInput {
+  text-align: start;
+  color: white; 
+  background-color: #4169e1; 
+  margin-right: 5px;
+  border: none;  
+  outline: none;  
+}
+.clearButton {
+  position: absolute;
+  right: 0.5rem;
+  top: 10%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 480px) {  
+  .containerSearch {
+    width: 100%;
+  }
+}  

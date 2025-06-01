@@ -1,59 +1,57 @@
+import React, { useState } from 'react'
+import { useGlobalState } from '../../useGlobalState.ts'
 import { ICategory } from '../../utilita/modelCategory'
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
 import { useNavigate } from "react-router-dom"
+import { basicUrl } from "../../utilita/defauit"
+import 'react-loading-skeleton/dist/skeleton.css'
 import styles from './CategoryCard.module.css'
 
 interface ICategoryCard {
   category: ICategory,
-  handleSelectCategory: (category: ICategory) => void,
-  handleEditFormShow: () => void,
-  handleDeleteFormShow: ()=> void  
+  handleSelectCategory: (category: ICategory) => void
+  maxWidth: number   
 }
 
-export const CategoryCard = ({
+export const CategoryCard: React.FC<ICategoryCard> = ({
   category, 
-  handleSelectCategory, 
-  handleEditFormShow,
-  handleDeleteFormShow  
-}: ICategoryCard) => {
-
+  handleSelectCategory,
+  maxWidth  
+}) => {
+  const [activeSubPage, setActiveSubPage] = useGlobalState('activeSubPage') // подменю - подстраницы      
+  const [isHovered, setIsHovered] = useState(false)  
+  let random = (Math.random()*10000)
+  random = Math.trunc(random) 
   const navigate = useNavigate()
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, category: ICategory) => {
     event.preventDefault()
     handleSelectCategory(category)
-    navigate(`post/${category._id}/${category.name}`, { replace: true })    
-  }
-
-  const handleDelete = () => {   
-    handleSelectCategory(category)
-    handleDeleteFormShow()   
-  }
-  const handleEdit = () => {
-    handleSelectCategory(category)    
-    handleEditFormShow()
-  }
-
+    setActiveSubPage(category.name)
+    navigate(`/posts/${category._id}`)    
+  }  
+  
   return (
     <>     
-      <div className={styles.categoryItem} data-tooltip={`${category.description}`}>                    
+      <div className={styles.categoryItem} 
+        style={{maxWidth: maxWidth}}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>                  
         <button 
           onClick={(event) => handleClick(event, category)}
           className={styles.nameCategoryBtn}          
         >
-          <h3 style={{fontSize: '22px'}}>{category.name}</h3>            
+          <h3 style={{fontSize: '22px', margin: '10px 0'}}>
+            {category.name}
+          </h3>
+          <div           
+            id='image1'              
+            style={{backgroundImage: `url(${basicUrl.urlDownload}?id=${category._id}&+rand=${random})`, backgroundPosition: 'center', backgroundSize: 'cover', width: '25px', height: '25px'}}
+            className={styles.imgPng}
+          ></div>          
+          {/* <img src={`${basicUrl.urlDownload}?id=${category._id}`} style={{width: '25px', height: '25px'}}/>             */}
         </button>
-        <div className={styles.containerAction}>                
-          <button className={styles.deleteButton} onClick={handleEdit}>
-            <EditIcon />
-          </button>
-          <button className={styles.deleteButton} onClick={handleDelete}>
-            <DeleteIcon />
-          </button>
-        </div>          
-      </div>
-          
+        {isHovered && (<div className={styles.tooltip}>{`${category.description}`}</div>)} 
+      </div>                
     </>
   )
 }

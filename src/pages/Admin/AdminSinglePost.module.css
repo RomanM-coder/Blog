@@ -1,0 +1,108 @@
+.singlePostPage {
+  flex-grow: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+}
+
+.paginationContainer {
+  /* margin-top: auto; */
+  padding-bottom: 3rem;
+}
+
+.favoriteButton, .deleteButton {
+  background-color: transparent;
+  margin: 0 10px;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  cursor: pointer; 
+}
+.deleteButton {
+  margin: 10px 10px;
+}
+.addButton {
+  background-color: transparent;
+  margin: 0 10px;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  margin: 10px 10px;  
+}
+.addButton svg {
+  font-size: 27px;
+}
+
+.favoriteButton:focus, .deleteButton:focus {
+  background-color: transparent; 
+}
+/* button:focus {  
+  background-color: transparent;
+} */
+.post {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #b1b0b0;
+  border-radius: 10px;
+  margin: 5px 10px;
+  padding: 5px 10px;
+}
+
+.deleteButton svg {
+  font-size: 27px;
+}
+.containerAction {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.postLoader {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  color: blue; 
+}
+.comments {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  border: 1px solid #b1b0b0;
+  border-radius: 10px;
+  margin: 5px 10px;
+  padding: 5px 10px;  
+}
+.headerComments {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.titleComents {
+  /* margin: 2px auto; */
+}
+
+.descriptionSinglePost {
+  margin-bottom: 10px;
+}
+
+.containerFavorite {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  text-align: center;
+}
+.favorite, .unFavorite {
+  display: flex;
+  flex-direction: column;
+}
+.number {
+  color: black;
+}
+.deleteAllComment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,241 @@
+{ 
+  "zod": {
+      "messageLowercase": "The password must contain lowercase",
+      "messageUppercase": "The password must contain uppercase",
+      "messageSymbols": "The password must contain symbols",
+      "messageNumber": "The password must contain number",
+      "messageShort": "The password is too short",
+      "messageLong": "The password is too long",
+      "messageEmailUncorrect": "Incorrect email",
+      "messageNameCatShort": "The category name is too short",
+      "messageNameCatLong": "The category name is too long",
+      "messageTransNameCatShort": "The translation of the category description is too short",
+      "messageTransNameCatLong": "The translation of the category description is too long",
+      "messageDescCatShort": "The category description is too short",
+      "messageDescCatLong": "The category description is too long",
+      "messageTransDescCatShort": "The translation of the category description is too short",
+      "messageTransDescCatLong": "The translation of the category description is too long",
+      
+      "messageNamePostShort": "The post name is too short",
+      "messageNamePostLong": "The post name is too long",
+      "messageTransNamePostShort": "The translation of the post description is too short",
+      "messageTransNamePostLong": "The translation of the post description is too long",
+      "messageDescPostShort": "The post description is too short",
+      "messageDescPostLong": "The post description is too long",
+      "messageTransDescPostShort": "The translation of the post description is too short",
+      "messageTransDescPostLong": "The translation of the post description is too long",
+      
+      "messageNameCommentLong": "The comment is too long",      
+      "messageTransNameCommentLong": "The translation of the comment description is too long"
+      
+    },
+  "auth": {    
+    "form": {
+      "title": "Authorization",
+      "siteTitle": "Simple blog",
+      "placeholderEmail": "Input email",
+      "fieldEmail": "Email",
+      "placeholderPassword": "Input password",
+      "fieldPassword": "Password",
+      "placeholderFile": "Upload a file",
+      "fieldFile": "File",
+      "enter": "ENTER",
+      "registr": "REGISTRATION"
+    },
+    "toast": {
+      "userAdd": "The user has been added",
+      "fileAdd": "The user's file has been added",
+      "userLogin": "The user is logged in"
+    }
+  },
+  "adminLogin": {
+    "login": "The admin is logged in"
+  },
+  "catList": {
+    "searchInput": "Search for a category by name",    
+    "header": "Category list page",
+    "category_one": "{{count}} category",    
+    "category_other": "{{count}} categories",
+    "category_zero": "There are no categories",
+    "orderAsc": "asc order",
+    "orderDesc": "desc order",
+    "byId": "by ID",
+    "byName": "by name",
+    "mix": "Shuffle",
+    "all": "All",
+    "count": "Quantity: ",
+    "next": "next >",
+    "prev": "< prev",      
+    "toast": {
+      
+    }
+  },
+  "adminCatList": {           
+    "toast": {
+      "categoryAdd": "Category added",      
+      "categoryUpdated": "The category has been changed",
+      "categoryDeleted": "Category deleted"
+    }
+  },
+  "addEditCatForm": {
+    "titleAdd": "Adding a category",
+    "titleEdit": "Edit a category",   
+    "placeholderName": "Category title",
+    "placeholderNameRu": "Russian translation of the category name",
+    "placeholderUploadFile": "Upload a file",
+    "placeholderChangeFile": "Edit the file",
+    "selectFile": "Select file",
+    "fileName": "File name: ",
+    "placeholderDescription": "Description of the category",
+    "placeholderDescriptionRu": "Description of the category in Russian",
+    "addCategory": "Add a category",
+    "saveCategory": "Save a category"
+  },  
+  "postPage": {
+    "searchInput": "Search for a post by name",
+    "header": "Page posts/ Category ",   
+    "noPost": "There are no posts yet",
+    "toast": {
+      "voteLike": "Your vote is counted"            
+    }
+  },
+  "adminPostPage": {
+    "header": "Admin page posts/ Category ",   
+    "createPost": "Create new post",    
+    "toast": {      
+      "addPost": "Post added",
+      "editPost": "Post edited",
+      "deletePost": "Post deleted"      
+    }
+  },
+  "addEditPostForm": {
+    "titleAdd": "Adding a post",
+    "titleEdit": "Editing a post",
+    "placeholderName": "Title post`s",
+    "titleIsRequired": "Title is required",
+    "placeholderNameRu": "The Russian translation of the title",
+    "titleTransIsRequired": "The Russian translation is required",    
+    "placeholderDescription": "Description post`s",
+    "descIsRequired": "Description is required",
+    "placeholderDescriptionRu": "Translation description post`s",
+    "descRuIsRequired": "Translation description is required",
+    "placeholderFavorite": "Favorite",
+    "placeholderNoFavorite": "No Favorite",
+    "addPost": "Add post",
+    "savePost": "Save post"   
+  },  
+  "singlePostPage": {
+    "searchInput": "Search for a comment by context",
+    "header": "Comments",    
+    "noComments": "There are no comments yet",
+    "noPost": "There is no post",
+    "toast": {
+      "changeLike": "The like has been changed",     
+      "editPost": "Post edited",
+      "deletePost": "Post deleted",
+      "addComment": "Comment added",
+      "detetedAllComments": "Comments on the post have been deleted"      
+    }
+  },
+  "adminSinglePost": {
+    "header": "Comments",    
+    "noComments": "There are no comments yet",
+    "noPost": "There is no post",
+    "deleteAllComments": "all comments",
+    "toast": {
+      "changeLikePost": "The like post has been changed",     
+      "editPost": "Post edited",
+      "deletePost": "Post deleted",      
+      "addComment": "Comment added",
+      "editComment": "Comment edited",
+      "deteteComment": "Comment deleted",
+      "detetedAllComments": "Comments on the post have been deleted"      
+    }
+  },
+  "addEditCommentForm": {
+    "titleAdd": "Adding a comment",
+    "titleEdit": "Editing a comment",
+    "placeholderComment": "Comment post`s",
+    "commentIsRequired": "Comment post`s is required",
+    "placeholderCommentRu": "The Russian translation of the comment",
+    "commentTransIsRequired": "The Russian translation comment is required",    
+    "placeholderLike": "Like post`s",    
+    "placeholderDislike": "Dislike post`s",    
+    "addComment": "Add comment",
+    "saveComment": "Save comment"   
+  },
+  "adminUser": {
+    "searchInput": "Search for a user email",    
+    "header": "Admin list user",
+    "user_one": "{{count}} user",    
+    "user_other": "{{count}} users",
+    "user_zero": "There are no users",
+    "orderAsc": "asc order",
+    "orderDesc": "desc order",
+    "byId": "by ID",
+    "byName": "by name",
+    "mix": "Shuffle",
+    "all": "All",
+    "count": "Quantity: ",
+    "next": "next >",
+    "prev": "< prev",      
+    "toast": {
+      "userAdd": "User added",      
+      "userUpdated": "The user has been changed",
+      "userDeleted": "User deleted"
+    }
+  },
+  "adminLog": {
+    "searchInput": "Search for a admin by id",    
+    "header": "Admin list",
+    "admin_one": "{{count}} admin",    
+    "admin_other": "{{count}} admins",
+    "admin_zero": "There are no admins",    
+    "count": "Quantity: ",
+    "next": "next >",
+    "prev": "< prev"    
+  },
+  "addEditUserForm": {
+    "titleAdd": "Adding a user",
+    "titleEdit": "Editing a user",
+    "placeholderEmail": "Email user`s",
+    "emailIsRequired": "Email user`s is required",
+    "placeholderRole": "Role user`s",
+    "roleIsRequired": "Role user`s is required",    
+    "placeholderVerified": "Verified email user`s",    
+    "placeholderBlocked": "Blocked user",
+    "placeholderCreatedAt": "User created at",
+    "createdAtRequired": "User`s created at is required",
+    "placeholderLastLogin": "Last login",
+    "lastLoginRequired": "User`s last login is required",
+    "checkPosts": "Mark the selected posts",
+    "checkComments": "Mark the selected comments",
+    "addUser": "Add user",
+    "saveUser": "Edit user"   
+  },   
+  "deleteForm": {
+    "doYouReally": "Do you really want to delete a {{type}}: ",
+    "doYouReallyAllComm": "Do you really want to delete all comments post: ",  
+    "Ok": "Ok",
+    "Cancel": "Cancel"
+  },
+  "navBar": {
+    "siteTitle": "Simple blog",
+    "minSiteTitle": "Sb",
+    "home": "Home",
+    "posts": "Posts",
+    "users": "Users",
+    "logs": "Logs",
+    "about": "About us",
+    "landing": "Presentation page",
+    "exit": "Exit",
+    "auth": "Authorization",
+    "toast": {
+      "keyboardLayout": "Please use the English keyboard layout."
+    }    
+  },
+  "footer": {
+    "title": "© React Blog",
+    "current_date": "Today is : {{date, MY_DATE}}"    
+  }
+}

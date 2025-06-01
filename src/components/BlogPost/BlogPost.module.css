@@ -18,9 +18,7 @@
 } */
 .post {
   display: flex;
-  justify-content: space-between;
-  border: 1px solid #b1b0b0;
-  border-radius: 10px;
+  justify-content: space-between;  
   margin: 5px 0;
   padding: 5px 10px;
 }
@@ -31,4 +29,36 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+.paragraphContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.aLink{
+  text-decoration: none;
+  color: black;
+  display: flex;
+}
+.paragraph {
+  white-space: nowrap; /* Запрещаем перенос текста */
+  overflow: hidden; /* Обрезаем текст */
+  /* Добавляем автоматическое троеточие */
+  text-overflow: ellipsis; 
+  max-width: 90vw; /* Ограничиваем ширину текста 90% экрана*/
+  margin-right: 5px; /* Отступ до троеточия */
+}
+
+.containerFavorite {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  text-align: center;
+}
+.favorite, .unFavorite {
+  display: flex;
+  flex-direction: column;
+}
+.number {
+  color: black;
 }

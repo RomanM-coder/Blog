@@ -1,0 +1,83 @@
+.editUserForm {
+  position: fixed;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 400px;  
+  border-radius: 8px;
+  padding: 0 20px 10px 15px;
+  text-align: center;
+  background-color: white;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(1, 1, 1, 0.35);
+  z-index: 1;
+}
+.deleteButton {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.buttonSubmit {
+  
+}
+.listPost, .listComment {
+  /* margin: 3px 0; */
+
+}
+.inputEditUser {
+  width: auto;
+  height: auto;
+
+  font-size: 16px;
+  color: black;
+  accent-color: #007bff;
+  margin-right: 8px; 
+  border: 1px solid rgb(129, 129, 129);
+  background-color: white;
+  cursor: pointer;
+}
+
+.wrapperPost, .wrapperComment {
+  display: flex;
+  flex-direction: column;
+ 
+  max-height: 200px; 
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px; 
+}
+
+input[type="checkbox"] {
+  /* margin-right: 8px;
+  width: 16px;
+  height: 16px; */
+  accent-color: #007bff; /* Цвет галочки */
+  margin-right: 10px; /* Отступ между чекбоксом и текстом */
+}
+.wrapperCheck {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.dateTime {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.inputDatetime {
+  margin-left: 10px;
+}

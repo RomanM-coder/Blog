@@ -1,0 +1,259 @@
+.row {
+  width: min-content;
+  margin: 0 auto;
+  padding-top: 60px;  
+}
+.collectionInput {
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+.cardBlue {
+  color: white;
+  background-color: #1e88e5;
+  padding: 15px;
+  border-radius: 3px;
+}
+.cardContent {
+ 
+}
+.cardAction {
+  display: flex;
+  justify-content: flex-start;
+}
+.cardTitle {
+  font-size: 24px;
+  color: white;  
+}
+.inputField { 
+  width: 324px;
+}
+.labelInput {
+  display: block;
+  text-align: left;
+  font-size: 16px; 
+}
+.btnYellow {
+  font-size: 17px;
+  /* width: 18%;   */
+  background-color: #f57f17;
+  border-radius: 3px;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: -2px 2px 4px -0.5px #000;
+  text-align: center;
+  border: none;     
+}
+
+.btnGray {
+  font-size: 17px;
+  /* width: 36%; */
+  background-color: #bdbdbd;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: -2px 2px 4px -0.5px #000;
+  text-align: center;
+}
+
+.btnGray:hover {
+  background-color: #adadad;
+  color: #e6e6e6;
+  transition: all 0.3s
+}
+.btnYellow:hover {
+  background-color: #e27515;
+  color: #e6e6e6;
+  transition: all 0.3s
+}
+input:hover {
+  /* border: none!important; */
+  /* border: none!important; */
+  /* border: 1px solid #fff!important;  */
+  /* border-bottom: 1px solid #fff; */
+}
+input:focus {
+  /* border: none!important; */
+  /* border-bottom: 1px solid #fff; */
+}
+.yellowInput {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #fff;
+  /* box-shadow: 0 1px 0 0 #fff!important; */
+  /* color: #ffffff!important; */
+  font-size: 16px;
+  background-color: inherit;
+  width: 300px;
+  cursor: auto;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+.yellowInput:hover {
+  /* border: none!important; */
+  /* border: 1px solid #fff!important; */
+  /* border-bottom: 1px solid #fff; */
+}
+.yellowInput:focus, .labelInput:focus {
+  /* border: none;
+  border-bottom: 1px solid #fff; */
+  color: #000!important;
+}
+/* .yellowInput {
+  color: #ffeb3b!important;
+} */
+.error {
+  color: #ff1744; 
+}
+
+.col {
+  position: relative;
+}
+
+.authLoader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: blue;
+}
+
+.fileAddAuth {
+  opacity: 0;
+  position: absolute; 
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  width: 115px;
+}
+
+.fileUpload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.labelFile {
+  /* cursor: pointer; */
+}
+.fileName {
+  cursor: default;
+}
+.imgPng {
+  width: 25px; 
+  height: 25px;
+}
+.emailVefify {
+  border-bottom: 1px solid #fff;
+  color: white;  
+}
+.emailVefify:hover {  
+  color: black;  
+}
+
+/* .yellowInput, .fileAddAuth {
+  outline: none;
+  all: unset; */
+  /* border: 1px solid rgb(129, 129, 129); */
+  /* background-color: unset; */
+  /* cursor: pointer; */
+  /* font-size: 16px;
+}  */
+
+
+
+
+
+
+
+
+
+
+
+.emailClearIcon:hover, .passwordVisibilityOffIcon:hover, .passwordVisibilityIcon:hover {
+  color: #000;
+  cursor: pointer;
+}
+
+button:disabled {
+  /* background: #ddd; */
+  background: transparent;
+  cursor: default;
+}
+
+input[type="button"]:active,
+input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+input:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+input[type="button"],
+input[type="submit"] {
+  -webkit-appearance: none;
+} */
+
+
+/* .popover__wrapper {
+  position: relative;
+}
+.popover__content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  transform: translate(0, 10px);
+  background-color: #f1f1f1;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: auto;
+  top: 44px;
+  color: #000;
+}
+.popover__content:before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  right: calc(50% - 10px);
+  top: -8px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #f1f1f1 transparent;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.popover__wrapper.open .popover__content {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, -10px);
+  transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+
+li.line {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.popover__message {
+  font-size: 15px;
+}
+.popover__message__p {
+  margin-top: 5px;
+}
+.popover__message__ul {
+  padding-left: 15px; 
+  margin-bottom: 5px;
+} */

@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next'
 import styles from './Footer.module.css'
 
-export const Footer = (year: {year: Number}) => {
+export const Footer: React.FC = () => {
+  const { t } = useTranslation()
   return (
-    <footer className="blue darken-4">
-      <span className={styles.btn}>© React Blog - {year.toString()}</span>
+    <footer className="footer">
+      <span className={styles.btn}>{t('footer.title')} - {t('footer.current_date', {date: new Date()})}</span> 
     </footer>
   );
 }

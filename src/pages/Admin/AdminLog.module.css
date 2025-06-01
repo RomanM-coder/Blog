@@ -1,0 +1,32 @@
+.title {
+  text-align: center;
+}
+.paginationContainer { 
+  /* margin-top: auto; */
+  padding-bottom: 3rem; 
+}
+.adminLogs {
+  flex-grow: 1;
+}
+.adminList {
+  margin-right: 10px;
+}
+.singleAdmin {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+}
+.adminWrapper {
+  margin-left: 10px;
+}
+.containerButton {
+  display: flex;
+}
+.addButton {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  position: relative;
+}

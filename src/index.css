@@ -4,13 +4,21 @@
   font-weight: 400;
 
   /* color-scheme: light dark; */
-  color: rgba(0, 0, 0, 0.87);
+  /* color: rgba(0, 0, 0, 0.87); */
   background-color: #cdd7e4;
 
   /* font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
+}
+
+.Glob {
+  position: relative;
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh;
+  padding-top: 60px;
 }
 
 /* a {
@@ -22,12 +30,16 @@ a:hover {
   color: #535bf2;
 } */
 
-body {
+body, p {
   margin: 0;
   /* display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh; */
+}
+
+* {
+  box-sizing: border-box; 
 }
 
 /* h1 {
@@ -100,15 +112,21 @@ textarea {
   /* background-color: unset; */
   /* cursor: pointer; */
   font-size: 16px;
+  resize: none;
 }
 input {
-  outline: none;
-  all:unset;
+  /* outline: none;
+  all: unset; */
   /* border: 1px solid rgb(129, 129, 129); */
   /* background-color: unset; */
   /* cursor: pointer; */
-  font-size: 16px;
+  /* font-size: 16px; */
 }
+/* a, ul, li {
+  text-decoration: none;
+  list-style-type: none;
+  list-style: none;
+} */
 /* input:hover, textarea:hover {
   border: 1px solid black
 }
@@ -134,5 +152,85 @@ input:focus {
   box-shadow: none;
   
 } */
+/* Pagination */
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-left: 0px;
+}
 
+.page-item {
+  list-style: none;
+  margin: 0 5px;
+  cursor: pointer;     
+}
+
+.page-item:hover {
+  opacity: 0.85;
+  color: black;
+}
+
+.page-item:active {
+  background-color: rgb(122, 161, 233);
+  transition: background-color 0.2s;
+}
+
+.page-link {
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-link:hover { 
+  border: 1px solid rgb(75, 75, 75);
+}
+
+[aria-label^='Page'] {
+  /* display: inline-block; */
+  width: 25px;
+  height: 25px;
+}
+
+/* [aria-label^='Jump'] {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: none;
+}
+
+[aria-label^='Jump']:hover { 
+  border: none;
+  cursor: default;
+} */
+
+[aria-label^='Next'], [aria-label^='Previous'] {
+  /* display: inline-block; */
+  width: 56px;
+  height: 25px;
+}
+
+[tabindex='-1'] {
+  background-color: rgb(122, 161, 233);
+  transition: background-color 0.2s;
+  cursor: default;  
+}
+
+[aria-disabled='true'] {
+  background-color: transparent;
+  transition: background-color 0.2s;
+  cursor: default;
+  opacity: 0.5;
+}
+/* .p{
+  color: #d3d5d5;
+  color: #e6e7e7;
+} */
+
+/* .no-click { */
+  /* pointer-events: none!important; Отключает клики */
+  /* cursor: default; Изменяет курсор */
+/* }  */

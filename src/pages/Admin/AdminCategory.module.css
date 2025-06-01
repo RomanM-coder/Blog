@@ -1,0 +1,89 @@
+/* .posts {
+  width: 900px;
+  margin: 0 auto;
+} */
+.divAddcategory {
+  text-align: center;
+}
+.categoryPage {
+  flex-grow: 1;
+}
+.category {
+  padding: 5px 10px;
+  text-align: center;
+}
+/* .category .postLoader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: blue; 
+} */
+.allCategoryList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: 85px;
+  grid-gap: 0.2rem;
+}
+.paginationContainer { 
+  /* margin-top: auto; */
+  padding-bottom: 3rem;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 0; 
+}
+
+.sortId, .sortName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shuffleButton {
+  background-color: #cdd7e4;
+  cursor: pointer;
+}
+
+#shuffleButton[disabled] {
+  cursor: default;
+  background-color: #cdd7e4!important;
+}
+
+/* .searchCategory {  
+  color: #444444; 
+  display: flex;
+  justify-content: start; 
+  align-items: center;
+  width: 450px;
+  margin: auto;  
+  height: 35px; 
+  position: absolute;
+  top: 16px;
+  left: 200px;
+} */
+
+/* .containerSearch {
+  display: flex;
+  justify-content: start;
+  border-radius: 8px;
+  border: 1px solid;
+} */
+
+/* .searchIcon {
+  padding: 0 10px;
+  align-items: center;
+  display: flex;
+  margin: 5px 0 0 0;
+  color: white;
+}
+
+.searchInput {
+  text-align: start;
+  color: white;
+} */
+.title {
+  margin: 10px 0;
+}
+.countCategory{
+  margin: 10px 0;
+}

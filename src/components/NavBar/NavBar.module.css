@@ -1,6 +1,7 @@
 .navContainer {
   background-color: royalblue;
   margin-top: 0;
+  /* position: relative; */  
 }
 .navWrapper {
   display: flex;
@@ -11,19 +12,470 @@
   margin-left: 1.5rem;
   font-size: 25px;
 }
-.navCollection {
+.namePosts {
+  color: white;
+  cursor: pointer; 
+}
+/* ------------------------ */
+.menuContainer {
+  display: flex;
+  align-items: center;
+}
+.navLinks {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0 5px;  
 }
-.navCollection li {
+/* против переноса */
+.elemMainMenu, .menuMainPosts {
+  white-space: nowrap;  
+}
+.elemMainMenu a {
+  display: inline-block;
+}
+/* --------------- */
+.navLinks .elemMainMenu a, .navLinks .menuMainPosts .namePosts {
+  cursor: pointer;
+  font-size: 16px;
   list-style: none;
   text-decoration: none;
   margin: 5px 15px;
+  /* color: white; */
 }
-.navCollection li a { 
+.navLinks .elemMainMenu a { 
   text-decoration: none;
+  list-style: none;
   color: white 
 }
-.navCollection li a:hover {  
+.navLinks .elemMainMenu a:hover {  
   color: rgb(211, 211, 211);   
 }
+.navLinks .menuMainPosts .namePosts:hover {  
+  color: rgb(211, 211, 211);     
+}
+.navLinks .dropdownContent a:hover {
+  color: rgb(90, 90, 90);
+}
+
+.searchCategory {  
+  color: #444444; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 400px;
+  margin: auto;  
+  height: 35px; 
+  /* position: absolute; */
+  /* top: 16px;
+  left: 200px; */
+}
+/* .containerSearch {
+  display: flex;
+  justify-content: start;
+  border-radius: 8px;
+  border: 1px solid;
+  position: relative;
+}
+.searchIcon {
+  padding: 0 10px;
+  align-items: center;
+  display: flex;
+  margin: 5px 0 0 0;
+  color: white;
+}
+.searchInput {
+  text-align: start;
+  color: white; 
+  background-color: #4169e1; 
+  margin-right: 5px;
+  border: none;  
+  outline: none;  
+} */
+.enRu {
+  display: flex;
+  justify-content: space-between;
+}
+.buttonLocale {
+  color: white;
+}
+.buttonLocale:hover {
+  color: rgb(211, 211, 211);
+}
+.bleskTeksta {
+  margin-left: 5px;  
+  padding: 0 30px;
+  font-weight: 300;  
+  font-size: 2.5rem;  
+  color: #fff;
+  background: linear-gradient(to right, #4d4d4d 0, #fff 10%, #4d4d4d 20%);
+  background-position: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 2s infinite linear;     
+}
+@keyframes shine {
+  0% {
+    background-position: 0px;
+  }
+  60% {
+    background-position: 240px;
+  }
+  100% {
+    background-position: 240px;
+  }
+}
+
+/* dropdown */
+.menuMainPosts {
+  position: relative;
+}
+/* .navLinks  */
+.mainMenu {
+
+}
+.mainMenuVert {
+
+}
+.postDropdown {
+  display: flex;
+  text-align: center;
+  position: absolute;  
+  top: 40px;
+  left: -15px;
+  color: black;
+  z-index: 10;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: #d7dfe9;
+  /* width: 100px; */
+  /* pointer-events: none;    */
+  /* opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; */
+}
+/* .navLinks .postDropdown:not(.open) {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+} */
+.navLinks .postDropdown.open {
+  /* opacity: 1;
+  transform: translateX(0);   */
+}
+.dropdownContent {  
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+  text-decoration: none;  
+}
+.dropdownContent li { 
+  margin: 2px 0; 
+}
+.dropdownContent li a { 
+  text-decoration: none;
+  color: black;  
+}
+.dropdownContent li[aria-checked="true"] {  
+  pointer-events: none!important; 
+  cursor: default!important;
+}
+.dropdownContent li[aria-checked="true"] a {  
+  pointer-events: none!important; 
+  cursor: default!important;
+  font-weight: 700;
+}
+.dropdownContent li[aria-checked="false"] a {  
+  pointer-events: auto; 
+  cursor: pointer; 
+}
+.dropdownContent li[aria-checked="false"] a {  
+  font-weight: 400;
+}
+.elemMainMenu a[aria-current="page"] {
+  cursor: default;  
+  pointer-events: none; 
+  /* opacity: 0.5;  */
+}
+
+/* ---------------- */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  padding-right: 5px;
+}
+
+/* гамбургер */
+
+.toggleHamburger {
+  /* display: block; */
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 61px;
+  height: 28px;
+  font-size: 0;
+  text-indent: -9999px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: background 0.3s;
+          transition: background 0.3s;
+}
+
+.toggleHamburger:focus {
+  outline: none;
+}
+
+.toggleHamburger span {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  background: white;
+}
+
+.toggleHamburger span::before,
+.toggleHamburger span::after {
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  content: "";
+}
+
+.toggleHamburger span::before {
+  top: -10px;
+}
+
+.toggleHamburger span::after {
+  bottom: -10px;
+}
+
+/* Стиль 2 
+ * «Гамбургер» превращается в «x» (класс toggleX). 
+ * Берется исходное состояние, затем полоски плавно перемещаются в центр 
+ * и трансформируются в «x».
+*/
+.toggleX {
+  background-color: #4169e1;
+}
+
+.toggleX span {
+  -webkit-transition: background 0 0.3s;
+          transition: background 0 0.3s;
+}
+
+.toggleX span::before,
+.toggleX span::after {
+  -webkit-transition-duration: 0.3s, 0.3s;
+          transition-duration: 0.3s, 0.3s;
+  -webkit-transition-delay: 0.3s, 0;
+          transition-delay: 0.3s, 0;
+}
+
+.toggleX span::before {
+  -webkit-transition-property: top, -webkit-transform;
+          transition-property: top, transform;
+}
+
+.toggleX span::after {
+  -webkit-transition-property: bottom, -webkit-transform;
+          transition-property: bottom, transform;
+}
+
+/* активное состояние, т.е. меню открыто */
+.toggleX.active {
+  background-color: #4169e1;
+}
+
+.toggleX.active span {
+  background: none;
+}
+
+.toggleX.active span::before {
+  top: 0;
+  background-color: rgb(252, 85, 85);
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.toggleX.active span::after {
+  bottom: 0;
+  background-color: rgb(252, 85, 85);
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.toggleX.active span::before,
+.toggleX.active span::after {
+  -webkit-transition-delay: 0, 0.3s;
+          transition-delay: 0, 0.3s;
+}
+/* ---------------------------------- */
+.mobileMenu {
+  display: none;  
+  position: absolute;
+  top: 50px;
+  right: 3px;
+  z-index: 5;
+  /* width: 90px; */
+  margin-top: 2px;
+  margin-bottom: 2px;
+  list-style-type: none;
+  text-decoration: none;
+  background: #d7dfe9;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);   
+}
+.navLinksVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+.navLinksVertical .elemMainMenu, .navLinksVertical .menuMainPosts {
+  /* cursor: pointer; */
+  font-size: 16px;
+  list-style: none;
+  text-decoration: none;
+  margin: 5px 3px;
+}
+.mobileMenu .elemMainMenu a { 
+  text-decoration: none;
+  color: black 
+}
+.mobileMenu .menuMainPosts .namePosts {  
+  color: black 
+}
+.mobileMenu .menuMainPosts .namePosts:hover {  
+  color: rgb(90, 90, 90); 
+}
+.mobileMenu .elemMainMenu a:hover {  
+  color: rgb(90, 90, 90);   
+}
+.navLinksVertical .dropdownContent a:hover {
+  color: rgb(90, 90, 90);
+}
+
+@media (max-width: 1250px) {
+  .navLinks .elemMainMenu a, .navLinks .menuMainPosts .namePosts {    
+    margin: 5px;
+  }
+  .navLinks {    
+    padding-left: 5px;
+  }
+  .searchCategory {
+    justify-content: start;
+    width: 350px;
+  }
+  .bleskTeksta {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 992px) {  
+  .searchCategory {    
+    width: 300px;
+  }
+  .navLinks {    
+    gap: 5px;      
+  }  
+  .navLinks .elemMainMenu a, .navLinks .menuMainPosts .namePosts {    
+    margin: 2px;
+  }    
+  .bleskTeksta {
+    padding: 0 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menuDesktop {
+    display: none;
+  }
+  .hamburger {
+    display: block;    
+  }
+  .mobileMenu {
+    display: block;       
+  }
+  /* .mobileMenu:not(.open) { */
+    /* display: none;  */
+    /* height: 0; */
+    /* opacity: 0;
+  } */
+  .postDropdown {      
+    top: 20px;
+    left: -105px;      
+  }
+
+  @media (max-width: 480px) {     
+    .searchCategory {    
+      width: 200px;
+      margin: 0 50px 0 0;
+    }   
+    .bleskTeksta {
+      padding: 0 5px;
+    }
+    /* .containerSearch {
+      width: 100%;
+    } */
+  }  
+}
+
+
+/* Добавьте анимацию для мобильного меню */
+/* .mobile-menu {
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(-100%);
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+} */
+ /* Используйте backdrop для затемнения фона  */
+
+ /* .backdrop {
+  display: none;
+}
+
+.mobile-menu.open + .backdrop {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  cursor: pointer;
+} */

@@ -1,0 +1,13 @@
+.userItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.containerAction {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.nameUserBtn {
+  width: 99%;
+}

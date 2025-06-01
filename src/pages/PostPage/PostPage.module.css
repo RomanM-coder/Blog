@@ -1,0 +1,49 @@
+.posts {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.posts h4 {
+  margin: 10px 5px;
+}
+.divAddPost {
+  text-align: center;
+}
+.blogPage {
+  /* position: relative; */
+  flex-grow: 1;
+}
+.allPosts {
+  display: grid; 
+  grid-template-columns: auto;
+  grid-auto-rows: 160px; 
+  padding: 0 10px;
+}
+.postWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px;
+  margin: 5px 0px;
+}
+.postContainer {
+  border: 1px solid #b1b0b0;
+  border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  .divAddPost {
+    font-size: 14px;
+  }
+}
+
+/* .blogPage .postLoader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: blue;
+} */
+/* .btnBlack {
+  padding: 10px;
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+} */

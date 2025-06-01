@@ -1,10 +1,12 @@
-footer {
-  height: 50px;
-  /* background-color: #393939; */
-
-  display: flex !important;
+footer { 
+  position: absolute;
+  bottom: 0;
+  width: 100%; 
+  /* padding: 1rem; */
+  text-align: center;
   align-items: center;
-  justify-content: center;
+  height: 50px;
+  text-align: center;
 }
 
 span {

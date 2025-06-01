@@ -1,0 +1,237 @@
+{  
+  "zod": {
+    "messageLowercase": "Пароль должен содержать строчные буквы",
+    "messageUppercase": "Пароль должен содержать большие буквы",
+    "messageSymbols": "Пароль должен содержать символ",
+    "messageNumber": "Пароль должен содержать число",
+    "messageShort": "Пароль слишком короткий",
+    "messageLong": "Пароль слишком длинный",
+    "messageEmailUncorrect": "Некорректный email",
+
+    "messageNameCatShort": "Имя категории слишком короткое",
+    "messageNameCatLong": "Имя категории слишком длинное",
+    "messageTransNameCatShort": "Перевод категории слишком короткий",
+    "messageTransNameCatLong": "Перевод категории слишком длинный",
+    "messageDescCatShort": "Описание категории слишком короткое",
+    "messageDescCatLong": "Описание категории слишком длинное",
+    "messageTransDescCatShort": "Перевод описания категории слишком короткий",
+    "messageTransDescCatLong": "Перевод описания категории слишком длинный",   
+    
+    "messageNamePostShort": "Заголовок поста слишком короткий",
+    "messageNamePostLong": "Заголовок поста слишком длинный",
+    "messageTransNamePostShort": "Перевод заголовка поста слишком короткий",
+    "messageTransNamePostLong": "Перевод заголовка поста слишком длинный",
+    "messageDescPostShort": "Описание поста слишком короткое",
+    "messageDescPostLong": "Описание поста слишком длинное",
+    "messageTransDescPostShort": "Перевод описания поста слишком короткий",
+    "messageTransDescPostLong": "Перевод описания поста слишком длинный",
+    
+    "messageNameCommentLong": "Комментарий слишком длинный",      
+    "messageTransNameCommentLong": "Перевод комментария слишком длинный"
+    },
+  "auth": {     
+    "form": {
+      "title": "Авторизация",
+      "siteTitle": "Простой блог",
+      "placeholderEmail": "Введите email",
+      "fieldEmail": "Электронная почта",
+      "placeholderPassword": "Введите password",
+      "fieldPassword": "Пароль",
+      "placeholderFile": "Загрузить файл",
+      "fieldFile": "Файл",
+      "enter": "ВОЙТИ",
+      "registr": "РЕГИСТРАЦИЯ"
+    },
+    "toast": {
+      "userAdd": "Пользователь добавлен",
+      "fileAdd": "Файл пользователя добавлен",
+      "userLogin": "Пользователь залогинен"
+    }        
+  },
+  "adminLogin": {
+    "login": "Админ залогинен"
+  },
+  "catList": {   
+    "searchInput": "Поиск категории по имени",
+    "header": "Страница списка категорий",
+    "category_one": "Одна категория",
+    "category_few": "{{count}} категории",
+    "category_many": "{{count}} категорий",
+    "category_other": "{{count}} категория",
+    "category_zero": "Категорий пока нет",
+    "orderAsc": "по возр",
+    "orderDesc": "по убыв",   
+    "byId": "по ID",
+    "byName": "по имени",
+    "mix": "Смешать",
+    "all": "Все",
+    "count": "Количество: ",
+    "next": "след >",
+    "prev": "< пред",        
+    "toast": {
+     
+    }
+  },
+  "adminCatList": {           
+    "toast": {
+      "categoryAdd": "Категория добавлена",      
+      "categoryUpdated": "Категория изменена",
+      "categoryDeleted": "Категория удалена"
+    }
+  }, 
+  "addEditCatForm": {
+    "titleAdd": "Добавление категории",
+    "titleEdit": "Редактирование категории",
+    "placeholderName": "Название категории",
+    "placeholderNameRu": "Русский перевод названия категории",
+    "placeholderUploadFile": "Загрузить файл",
+    "placeholderChangeFile": "Изменить файл",
+    "selectFile": "Выбрать файл",
+    "fileName": "Имя файла: ",
+    "placeholderDescription": "Описание категории",
+    "placeholderDescriptionRu": "Описание категории на русском",
+    "addButton": "Добавить категорию",
+    "saveCategory": "Сохранить категорию"
+  },  
+  "postPage": {
+    "searchInput": "Поиск постов по имени",
+    "header": "Страница постов/ Категория ",    
+    "noPost": "Постов пока нет",
+    "toast": {
+      "voteLike": "Ваш голос учтен"            
+    }
+  },
+  "adminPostPage": {
+    "header": "Админстраница постов/ Категория ",    
+    "createPost": "Создать новый пост",  
+    "toast": {      
+      "addPost": "Пост добавлен",
+      "editPost": "Пост изменен",
+      "deletePost": "Пост удален"      
+    }
+  },
+  "addEditPostForm": {
+    "titleAdd": "Добавление поста",
+    "titleEdit": "Редактирование поста",
+    "placeholderName": "Заголовок поста",
+    "titleIsRequired": "Заголовок необходим",
+    "placeholderNameRu": "Перевод названия на русский язык",    
+    "titleTransIsRequired": "Перевод заголовка необходим",    
+    "placeholderDescription": "Описание поста",
+    "descIsRequired": "Описание поста необходимо",
+    "placeholderDescriptionRu": "Описание поста на русском",
+    "descRuIsRequired": "Перевод описания поста необходим",
+    "placeholderFavorite": "Нравится",
+    "placeholderNoFavorite": "Не нравится",
+    "savePost": "Сохранить пост",
+    "addButton": "Добавить пост"
+  },  
+  "singlePostPage": {
+    "searchInput": "Поиск ком-ия по контексту",
+    "header": "Комментарии",    
+    "noComments": "Пока комментариев нет",
+    "noPost": "Поста нет",
+    "toast": {
+      "changeLike": "Лайк изменен",      
+      "editPost": "Пост изменен",
+      "deletePost": "Пост удален",
+      "addComment": "Комментарий добавлен",
+      "detetedAllComments": "Комментарии поста удалены"   
+    }
+  },
+  "adminSinglePost": {
+    "header": "Комментарии",    
+    "noComments": "Пока комментариев нет",
+    "noPost": "Поста нет",
+    "deleteAllComments": "все ком-ии",
+    "toast": {
+      "changeLikePost": "Лайк поста изменен",      
+      "editPost": "Пост изменен",
+      "deletePost": "Пост удален",
+      "addComment": "Комментарий добавлен",
+      "editComment": "Комментарий изменен",
+      "deteteComment": "Комментарий удален",
+      "detetedAllComments": "Комментарии поста удалены"   
+    }    
+  },  
+  "addEditCommentForm": {
+    "titleAdd": "Добавление комментария",
+    "titleEdit": "Редактирование комментария",
+    "placeholderComment": "Комментарий поста",
+    "commentIsRequired": "Комментарий поста необходим",
+    "placeholderCommentRu": "Русский перевод комментария",
+    "commentTransIsRequired": "Русский перевод комментария необходим",    
+    "placeholderLike": "Лайки комментария",    
+    "placeholderDislike": "Дизлайки комментария",    
+    "addComment": "Добавить комментарий",
+    "saveComment": "Сохранить комментарий"      
+  },
+  "adminUser": {
+    "searchInput": "Поиск пользователя по email",    
+    "header": "Админлист  Пользователи",
+    "user_one": "{{count}} пользователь",    
+    "user_other": "{{count}} пользователи",
+    "user_zero": "Пользователей нет",    
+    "count": "Количество: ",
+    "next": "след >",
+    "prev": "< пред",      
+    "toast": {
+      "userAdd": "Пользователь добавлен",      
+      "userUpdated": "Пользователь изменен",
+      "userDeleted": "Пользователь удален"
+    }
+  },
+  "adminLog": {
+    "searchInput": "Поиск админа по id",    
+    "header": "лист админов",
+    "admin_one": "{{count}} админ",    
+    "admin_other": "{{count}} админов",
+    "admin_zero": "Нет админов",    
+    "count": "Количество: ",
+    "next": "след >",
+    "prev": "< пред"    
+  },
+  "addEditUserForm": {
+    "titleAdd": "Добавление пользователя",
+    "titleEdit": "Редактирование пользователя",
+    "placeholderEmail": "Email пользователя",
+    "emailIsRequired": "Email пользователя необходим",
+    "placeholderRole": "Роль пользователя",
+    "roleIsRequired": "Роль пользователя необходима",    
+    "placeholderVerified": "email пользователя верифицировано",    
+    "placeholderBlocked": "Блокировка пользователя",
+    "placeholderCreatedAt": "Пользователь создан",
+    "createdAtRequired": "Время создания пользователя необходимо",
+    "placeholderLastLogin": "Последнее посещение",
+    "lastLoginRequired": "Последнее посещение пользователя необходимо",
+    "checkPosts": "Отметьте выбранные посты",
+    "checkComments": "Отметьте выбранные комменты",
+    "addUser": "Добавить пользователя",
+    "saveUser": "Сохранить пользователя"   
+  },  
+  "deleteForm": {
+    "doYouReally": "Вы действительно хотите удалить {{type}}: ",
+    "doYouReallyAllComm": "Вы действительно хотите удалить вск комментарии поста: ",   
+    "Ok": "Да",
+    "Cancel": "Отменить"
+  },  
+  "navBar": {
+    "siteTitle": "Простой блог",
+    "minSiteTitle": "Пб",
+    "home": "Дом",
+    "posts": "Посты",
+    "users": "Пользователи",
+    "logs": "Логи",
+    "about": "О нас",
+    "landing": "Презентация",
+    "exit": "Выйти",
+    "auth": "Авторизация",
+    "toast": {
+      "keyboardLayout": "Пожалуйста, используйте русскую раскладку клавиатуры."
+    }   
+  },
+  "footer": {
+    "title": "© Реакт Блог",
+    "current_date": "Сегодня : {{date, MY_DATE}}"    
+  }
+}

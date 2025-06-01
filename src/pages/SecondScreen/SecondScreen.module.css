@@ -1,0 +1,27 @@
+.landingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.screenWrapper {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 80%;
+  text-align: center;
+ 
+}
+
+.active {
+  background-color: #f0f0f0; /* Активный элемент */
+  border-color: #007bff;
+}
+
+.array2Description {
+  font-style: italic;
+  color: gray;
+  margin-top: 0.5rem;
+}

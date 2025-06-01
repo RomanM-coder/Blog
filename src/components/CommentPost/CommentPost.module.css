@@ -1,0 +1,23 @@
+.comment {
+  border: 1px solid #b1b0b0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-bottom: 4px;
+}
+.titleComent {
+  margin: 5px 5px 12px 5px;
+}
+.likeComment {
+  margin: 4px;
+}
+.likedButton, .dislikedButton {
+  font-size: 13px;
+  margin: 0 15px;
+}
+.dislikedButton {
+
+}
+.deleteButton {
+  margin: 5px 5px;
+}

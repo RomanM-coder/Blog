@@ -1,0 +1,88 @@
+.favoriteButton, .deleteButton {
+  background-color: transparent;
+  margin: 0 10px;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  cursor: pointer; 
+}
+.deleteButton {
+  margin: 10px 10px;
+}
+.favoriteButton:focus, .deleteButton:focus {
+  background-color: transparent; 
+}
+/* button:focus {  
+  background-color: transparent;
+} */
+.post {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #b1b0b0;
+  border-radius: 10px;
+  margin: 5px 0;
+  padding: 5px 10px;
+}
+.deleteButton svg {
+  font-size: 27px;
+}
+.containerAction {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.paragraphContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.aLink{
+  text-decoration: none;
+  color: black;
+  display: flex;
+}
+.paragraph {
+  white-space: nowrap; /* Запрещаем перенос текста */
+  overflow: hidden; /* Обрезаем текст */
+  /* Добавляем автоматическое троеточие */
+  text-overflow: ellipsis; 
+  max-width: 75vw; /* Ограничиваем ширину текста */
+  margin-right: 5px; /* Отступ до троеточия */
+}
+
+.containerFavorite {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  text-align: center;
+}
+.favorite, .unFavorite {
+  display: flex;
+  flex-direction: column;
+}
+.number {
+  color: black;
+}
+
+@media (max-width: 900px) {
+  .paragraph {
+    max-width: 80vw;
+  }
+}
+
+@media (max-width: 768px) {  
+  .containerAction {
+    width: 80px;
+  }
+}
+@media (max-width: 650px) {
+  .paragraph {
+    max-width: 73vw;
+  }  
+}
+@media (max-width: 480px) {
+  .paragraph {
+    max-width: 65vw;
+  }  
+}
