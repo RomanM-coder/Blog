@@ -1,0 +1,37 @@
+.comment_item {
+  /* padding-top: 12px; */
+}
+.content_read_more {
+  padding: 0 24px;
+  /* margin-top: 20px; */
+  text-align: start;
+}
+.link_button {
+  font-size: 17px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  color: #0b5dd7;
+  cursor: pointer;
+}
+.link_button:hover {
+  opacity: 0.75;
+}
+
+.comments_container {
+  will-change: height;
+  /* transition: height 0.3s ease-in-out; */
+  overflow: hidden;
+}
+.animation_fast {
+  transition: height 0.3s ease-in-out;
+}
+.animation_slow {
+  transition: height 1.5s ease-in-out;
+}
+.commentsContainerWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* width: 100%; */
+}

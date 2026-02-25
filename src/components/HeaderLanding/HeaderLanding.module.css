@@ -1,27 +1,79 @@
-.Header_headerWrapper {
- 
+.headerSection {
+  position: relative;
 }
-.Header_header {
+.headerWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: #1843bf;
+}
+.gradient {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: transparent;
+  z-index: auto;
+}
+.headerBlock {
+  margin-block: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+  color: white;
+  gap: 10px;
+  align-items: flex-start;
+  padding-right: 20px;
+  z-index: 0;
+  min-height: auto;
+}
+.titlePart {
+  font-size: 48px;
+  text-transform: uppercase;
+  text-align: left;
+  margin-top: 0;
+}
+.headerDescription {
+  font-size: 18px;
+  text-align: left;
+}
+.rightContent {
+  padding-left: 20px;
+}
+.headerImg {
+  width: 300px;
+  height: 300px;
+  color: transparent;
+}
 
+@media (max-width: 1440px) {
+  .titlePart {
+    font-size: 32px;
+  }
+  .headerDescription {
+    font-size: 16px;
+  }
 }
-.Header_left {
 
-}
-.Header_right {
-
-}
-.elemMainMenu {
-
-}
-.button_lang {
-
-}
-.header_lang {
-
-}
-.button_auth {
-
-}
-.Header_noscroll {
-  overflow-y: hidden !important;
+@media (max-width: 600px) {
+  .titlePart {
+    font-size: 24px;
+  }
+  .headerDescription {
+    font-size: 14px;
+  }
 }

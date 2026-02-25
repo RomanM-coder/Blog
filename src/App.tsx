@@ -1,136 +1,245 @@
 import { useGlobalState } from './useGlobalState'
-import { useEffect, useState, memo, ReactNode } from 'react'
-import { BrowserRouter, useLocation } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { AuthContext } from './context/AuthContext'
 import { SocketContext, socket } from './context/SocketContext'
+import { SearchContext } from './context/SearchContext'
+import { SortContext } from './context/SortContext'
 import { NavBar } from './components/NavBar/NavBar'
 import { Footer } from './components/Footer/Footer'
-import { useRoutes } from './routes'
+import AppRoutes from './routes'
 import { useAuth } from './pages/AuthPage/auth.hook'
-import { CircularProgress } from '@mui/material'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useAxiosMonitor } from './utilita/useAxiosMonitor.hook'
+import { motion } from 'framer-motion'
+import { Toaster } from 'react-hot-toast'
+import { ActiveLine } from './components/NavBar/ActiveLine'
+import { SimpleSpinner } from './pages/SimpleSpinner/SimpleSpinner'
+import useScreenSize from './utilita/useScreenSize'
 import './App.css'
 
-interface AnimatedPageProps {
-  children: ReactNode;
-}
+const App: React.FC = () => {
+  useAxiosMonitor()
+  const [query, setQuery] = useState('')
+  const [type, setType] = useState<'all' | 'posts' | 'comments'>('all')
+  const [sortType, setSortType] = useState<
+    'fresh' | 'popular' | 'month' | 'year' | 'all'
+  >('all')
+  const { login, logout, token, userId, ready, role } = useAuth()
 
-// Компонент для обертывания страниц
-const AnimatedPage = memo(({ children }: AnimatedPageProps) => {
-  const location = useLocation() // Получаем текущий маршрут
-
-  return (
-    <AnimatePresence mode="wait" key={location.pathname}>
-      <motion.div
-        key={location.pathname} // Ключ изменяется при переходе на новый маршрут
-        initial={{ opacity: 0, x: -100 }} // Начальное состояние анимации
-        // initial={false}
-        animate={{ opacity: 1, x: 0 }} // Конечное состояние анимации
-        exit={{ opacity: 0, x: 100 }} // Анимация при исчезновении
-        transition={{ duration: 0.5 }} // Длительность анимации        
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
-  )
-})
-
-const App: React.FC = () => {  
-  const [itemSearch, setItemSearch] = useGlobalState('itemSearch')  
-  const [isMenuVisible, setIsMenuVisible] = useState(true) // Состояние видимости меню
-  const [lastScrollY, setLastScrollY] = useState(0) // Предыдущая позиция скролла 
-
-  const {login, logout, token, userId, ready} = useAuth()
-  // setIsAuthenticated(!!token)  
-  
-  const routes = useRoutes(
-    // {dataGetSearch: catSearch}
-  ) 
- 
-  const getSearch = (query: string) => {
-    setItemSearch(query)
-  }  
+  const clearSearch = () => {
+    setQuery('')
+  }
+  const clearSortType = () => {
+    setSortType('all')
+  }
 
   if (userId) {
     if (!ready) {
-      return (
-        <div style={{position: 'relative'}}>
-          <CircularProgress style={{position: 'absolute', left: '50%', bottom: '-300px'}} />
-        </div>
-      )
+      return <SimpleSpinner />
     }
   }
 
-  useEffect(()=> {}, [itemSearch])
+  const renderCount = useRef(0)
 
-  // useEffect(()=> {
-  //   setIsAuthenticated(!!token)
-  // }, [token])
+  useEffect(() => {
+    renderCount.current += 1
+    console.log(`🔄 App.tsx render #${renderCount.current} at ${Date.now()}`)
+  }, [])
 
-  // const postsOpacity = isLoading ? 0.5 : 1
-  // const pointerEvents = isLoading ? "none" as React.CSSProperties["pointerEvents"] : "auto" as React.CSSProperties["pointerEvents"]
-  // const postsOpacity = 1
-  // const pointerEvents = "auto" as React.CSSProperties["pointerEvents"]
-  
+  const [isAuthenticated] = useGlobalState('isAuthenticated')
+  const [activePage] = useGlobalState('activePage')
+  const [isMenuVisible, setIsMenuVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(window.scrollY)
+  // const tickingRef = useRef(false)
+  const isMenuVisibleRef = useRef(true)
+  const lastScrollYRef = useRef(window.scrollY)
+  const { width } = useScreenSize() // перерасчет ширин элементов
+
+  const lastTimestampRef = useRef(0) // отдельный ref для времени
+  const rafIdRef = useRef<number>()
+
+  // const menuItemsRefs = useRef<Record<number, HTMLDivElement>>({})
+  const [isNavBarAnimationComplete, setIsNavBarAnimationComplete] =
+    useState(true)
+  const [
+    isNavBarHamburgerAnimationComplete,
+    setIsNavBarHamburgerAnimationComplete,
+  ] = useState(false)
+  const [isOpenHamburger, setIsOpenHamburger] = useState(false)
+  const menuItemsRefs = useRef<Map<number, HTMLDivElement>>(new Map())
+
+  const setMenuItemRef = (index: number, el: HTMLDivElement | null) => {
+    if (el) {
+      menuItemsRefs.current.set(index, el)
+    } else {
+      menuItemsRefs.current.delete(index)
+    }
+  }
+
+  // первонач версия
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
+      if (isAuthenticated) {
+        if (rafIdRef.current) return // убрано - в PostPage не работает
+        // if (scrollTop + clientHeight >= scrollHeight - 100)
 
-      // Если движемся вниз и меню видимо — скрываем его
-      if (currentScrollY > lastScrollY && currentScrollY > 60 && isMenuVisible) {
-        setIsMenuVisible(false)
-      }
+        rafIdRef.current = requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
 
-      // Если движемся вверх и меню не видимо — показываем его
-      if (currentScrollY < lastScrollY && !isMenuVisible) {
-        setIsMenuVisible(true)
+          if (Date.now() - lastTimestampRef.current < 50) {
+            rafIdRef.current = undefined
+            return
+          }
+          lastTimestampRef.current = Date.now()
+
+          // if (Date.now() - lastTimestampRef.current < 16) {
+          //   // 16ms = 60fps
+          //   rafIdRef.current = undefined
+          //   return
+          // }
+
+          // Если движемся вниз и меню видимо — скрываем его
+          if (
+            currentScrollY > lastScrollYRef.current &&
+            currentScrollY > 60 &&
+            isMenuVisibleRef.current
+          ) {
+            setIsMenuVisible(false)
+            isMenuVisibleRef.current = false
+          }
+          // Если движемся вверх и меню не видимо — показываем его
+          else if (
+            currentScrollY < lastScrollYRef.current &&
+            !isMenuVisibleRef.current
+          ) {
+            setIsMenuVisible(true)
+            isMenuVisibleRef.current = true
+          }
+          // setLastScrollY(currentScrollY)
+          lastScrollYRef.current = currentScrollY
+          rafIdRef.current = undefined
+        })
+      } else {
+        const currentScrollY = window.scrollY
+
+        // if (Date.now() - lastTimestampRef.current < 16) return
+        // lastTimestampRef.current = Date.now()
+
+        // Если движемся вниз и меню видимо — скрываем его
+        if (
+          currentScrollY > lastScrollY &&
+          currentScrollY > 60 &&
+          isMenuVisible
+        ) {
+          setIsMenuVisible(false)
+        }
+
+        // Если движемся вверх и меню не видимо — показываем его
+        else if (currentScrollY < lastScrollY && !isMenuVisible) {
+          setIsMenuVisible(true)
+        }
+
+        setLastScrollY(currentScrollY)
       }
-      console.log('currentScrollY=', currentScrollY)
-      
-      setLastScrollY(currentScrollY) // Обновляем предыдущую позицию скролла
     }
-
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current)
+      }
     }
-  }, [
-    lastScrollY//, isMenuVisible
-  ])
+  }, [lastScrollY, isMenuVisible])
+
+  const visibleActiveLine =
+    width! < 768
+      ? isOpenHamburger && isNavBarHamburgerAnimationComplete
+      : isMenuVisible && isNavBarAnimationComplete
 
   return (
-    <AuthContext.Provider value={{ token, userId, login, logout}}>     
-      <BrowserRouter>
-        <div className='Glob' style={{
-          // opacity: postsOpacity, 
-          // pointerEvents: pointerEvents, 
-          // position: 'relative',
-          // overflow: 'hidden auto'
+    <BrowserRouter>
+      <AuthContext.Provider value={{ token, userId, login, logout, role }}>
+        <SearchContext.Provider
+          value={{
+            query,
+            type,
+            setQuery,
+            setType,
+            clearSearch,
           }}
-          // initial={{opacity: 0}}
-          // animate={{opacity: 1}}
-          // transition={{ duration: 1 }}
+        >
+          <SortContext.Provider
+            value={{
+              sortType,
+              setSortType,
+              clearSortType,
+            }}
           >
-          <motion.div
-            key='header_nav' 
-            className={ lastScrollY > 60 ? 'navBarWrapper header_scrolled' : 'navBarWrapper' }
-            initial={{ transform: isMenuVisible ? 'translateY(-100px) translateZ(0px)' : 'none' }}
-            animate={{ transform: isMenuVisible ? 'none' : 'translateY(-100px) translateZ(0px)' }}
-            transition={{ duration: 0.4 }} 
-            style={{ transform: isMenuVisible ? 'none' : 'translateY(-100px) translateZ(0px)' }}
-          > 
-            <NavBar />
-          </motion.div>
-          <SocketContext.Provider value={socket}>
-            <AnimatedPage> 
-              {routes}
-            </AnimatedPage> 
-          </SocketContext.Provider>       
-          <Footer /> 
-        </div>
-      </BrowserRouter>      
-    </AuthContext.Provider>
+            <div className="Glob">
+              <div className="top-section-navbar"></div>
+              <div className="content-body">
+                <ActiveLine
+                  activePage={activePage}
+                  menuItemsRefs={menuItemsRefs}
+                  isVisible={visibleActiveLine} // Передаем видимость NavBar
+                  isOpenHamburger={isOpenHamburger}
+                  width={width!}
+                />
+                <motion.div
+                  key="header_nav"
+                  // className={`navBarWrapper ${
+                  //   (isAuthenticated ? lastScrollYRef.current : lastScrollY) >
+                  //     60 && 'header_scrolled'
+                  // }`}
+                  className="navBarWrapper"
+                  initial={{
+                    transform: (
+                      isAuthenticated ? isMenuVisibleRef.current : isMenuVisible
+                    )
+                      ? 'translateY(-100px) translateZ(0px)'
+                      : 'none',
+                  }}
+                  animate={{
+                    transform: (
+                      isAuthenticated ? isMenuVisibleRef.current : isMenuVisible
+                    )
+                      ? 'none'
+                      : 'translateY(-100px) translateZ(0px)',
+                  }}
+                  transition={{ duration: 0.4 }}
+                  onAnimationStart={() => setIsNavBarAnimationComplete(false)}
+                  onAnimationComplete={() => setIsNavBarAnimationComplete(true)}
+                  style={{
+                    transform: (
+                      isAuthenticated ? isMenuVisibleRef.current : isMenuVisible
+                    )
+                      ? 'none'
+                      : 'translateY(-100px) translateZ(0px)',
+                  }}
+                >
+                  <NavBar
+                    setMenuItemRef={setMenuItemRef}
+                    isOpenHamburger={isOpenHamburger}
+                    setIsOpenHamburger={setIsOpenHamburger}
+                    setIsNavBarHamburgerAnimationComplete={
+                      setIsNavBarHamburgerAnimationComplete
+                    }
+                    isNavBarVisible={isMenuVisible}
+                  />
+                </motion.div>
+                {/* </div> */}
+                <SocketContext.Provider value={socket}>
+                  <AppRoutes />
+                </SocketContext.Provider>
+                <Footer />
+              </div>
+              <Toaster />
+            </div>
+          </SortContext.Provider>
+        </SearchContext.Provider>
+      </AuthContext.Provider>
+    </BrowserRouter>
   )
 }
 

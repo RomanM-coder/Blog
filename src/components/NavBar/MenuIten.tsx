@@ -1,84 +1,98 @@
-import React from 'react'
-import { AnimatePresence, motion, Variants } from 'framer-motion'
+import React, { useEffect, useRef } from 'react'
+import { motion, Variants } from 'framer-motion'
 import styles from './MenuItem.module.css'
 
 interface IMenuItemProps {
-  item: React.ReactNode,
-  index: number,
-  activePage: number,
-  widthActiveLine: number,  
-  isVertical?: boolean,
-  getKey: string,
-  width: number|undefined
+  item: React.ReactNode
+  index: number
+  activePage: number
+  isVertical?: boolean
+  getKey: string
+  width: number | undefined
+  itemlength?: number
+  setMenuItemRef: (index: number, el: HTMLDivElement | null) => void
 }
 
 export const MenuItem: React.FC<IMenuItemProps> = ({
   item,
   index,
   activePage,
-  widthActiveLine,  
   isVertical = false,
   getKey,
-  width
+  width,
+  itemlength,
+  setMenuItemRef,
 }) => {
+  const itemRef = useRef<HTMLDivElement>(null)
 
   const itemVariants: Variants = {
     open: {
       opacity: 1,
       scale: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       color: activePage === index ? 'rgb(255, 0, 0)' : '#fff',
-      transition: { type: "spring", stiffness: 300, damping: 24 }
+      transition: { type: 'spring', stiffness: 300, damping: 24 },
     },
     closed: {
       opacity: 0,
       scale: 0.3,
-      filter: "blur(20px)",
-      color: 'rgb(255, 255, 255)',   
-      transition: { duration: 0.2, when: "afterChildren" }      
-    }
+      filter: 'blur(20px)',
+      color: 'rgb(255, 255, 255)',
+      transition: { duration: 0.2, when: 'afterChildren' },
+    },
+  }
+  const marginWidth = () => {
+    if (width! > 1300) {
+      return '0 0.5rem'
+    } else if (width! > 1200 && width! < 1300) {
+      return '0 0.3rem'
+    } else if (width! > 1100 && width! < 1200) {
+      return '0 0.1rem'
+    } else if (width! > 1100 && width! < 0) return '0 0'
   }
 
+  const triggerShowRedLine =
+    itemlength === 6
+      ? activePage === index
+      : index !== 2
+        ? activePage === index && index !== itemlength! - 1
+        : activePage === 2 || activePage === 3 || activePage === 4
+
+  // Регистрируем ref после монтирования
+  useEffect(() => {
+    if (setMenuItemRef && itemRef.current) {
+      setMenuItemRef(index, itemRef.current)
+    }
+
+    // Очистка при размонтировании
+    return () => {
+      if (setMenuItemRef) {
+        setMenuItemRef(index, null)
+      }
+    }
+  }, [index, setMenuItemRef])
+
   return (
-    // <AnimatePresence>
     <motion.div
+      ref={itemRef}
       key={getKey}
       className={
         activePage === index
           ? `${isVertical ? styles.mainMenuVert : styles.mainMenu} activeLine`
           : isVertical
-          ? styles.mainMenuVert
-          : styles.mainMenu
+            ? styles.mainMenuVert
+            : styles.mainMenu
       }
       style={{
-        margin: width! < 850 ? '0 0.1rem' : '0 0.5rem',
+        // margin: width! < 850 ? '0 0.1rem' : '0 0.5rem',
+        margin: marginWidth(),
         textAlign: 'center',
         position: 'relative',
-        fontWeight: activePage === index ? 600 : 400,
+        fontWeight: triggerShowRedLine ? 700 : 400,
       }}
-      // initial={{ color: 'rgb(255, 255, 255)' }}
-      // animate={{ color: activePage === index ? 'rgb(255, 0, 0)' : '#fff' }}
-      // transition={{ duration: 0.25 }}
-      // initial="closed"
-      // animate={isOpenHamburger ? "open" : "closed"}
-      // exit="closed"
-      variants={itemVariants}     
+      variants={itemVariants}
     >
-      {activePage === index && (
-        <motion.div
-          layoutId="activeItem"
-          style={{
-            width: `calc(100% - ${widthActiveLine}px)`,
-            height: '2px',
-            position: 'absolute',
-            bottom: '0px',
-            left: `${widthActiveLine / 2}px`,
-            backgroundColor: 'red',
-          }}
-        />
-      )}
       {item}
     </motion.div>
-    // </AnimatePresence>
   )
 }

@@ -1,0 +1,159 @@
+.singlePostPage {
+  flex-grow: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+}
+
+.favoriteButton,
+.deleteButton {
+  background-color: transparent;
+  margin: 0 10px;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}
+.deleteButton {
+  margin: 10px 10px;
+}
+.addButton {
+  background-color: transparent;
+  margin: 0 10px;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  margin: 10px 10px;
+}
+.addButton svg {
+  font-size: 27px;
+}
+
+.favoriteButton:focus,
+.deleteButton:focus {
+  background-color: transparent;
+}
+/* button:focus {  
+  background-color: transparent;
+} */
+.post {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #b1b0b0;
+  border-radius: 10px;
+  margin: 5px 10px;
+  padding: 5px 10px;
+}
+
+.deleteButton svg {
+  font-size: 27px;
+}
+.containerAction {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.postLoader {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  color: blue;
+}
+
+.descriptionSinglePost {
+  margin-bottom: 10px;
+  max-width: 90vw;
+}
+
+.containerFavorite {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  text-align: center;
+}
+.favorite,
+.unFavorite {
+  display: flex;
+  flex-direction: column;
+}
+.number {
+  color: black;
+}
+
+.widgets {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding: 0 10px;
+}
+.widget_item {
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 16px;
+  width: 100%;
+}
+.widget_item_title {
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+.widget_item_count {
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  position: sticky;
+  top: 20px;
+
+  /* height: 900px; */
+  max-height: calc(100vh - 10px);
+  overflow-y: auto;
+  scrollbar-color: #bdbdc0 transparent;
+  scrollbar-width: thin;
+  padding-right: 8px;
+  pointer-events: auto;
+  z-index: auto;
+
+  /* align-self: start; */
+}
+.sidebarScrollContainer {
+  /* 🔑 КЛЮЧЕВОЕ: фиксированная высота относительно вьюпорта */
+  /* max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  scrollbar-color: #bdbdc0 transparent;
+  scrollbar-width: thin;
+  padding-right: 8px; */
+}
+.comment_item:nth-child(1) {
+  padding-top: 0;
+}
+.comment_item {
+  padding-top: 12px;
+}
+.headerComments {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.titleComents {
+  /* margin: 2px auto; */
+}
+.notCommentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}

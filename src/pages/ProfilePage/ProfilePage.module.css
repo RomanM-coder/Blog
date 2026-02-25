@@ -1,0 +1,50 @@
+.profilePage {
+  width: clamp(350px, 45%, 600px);
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #b1b0b0;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+.profileError {
+  text-align: center;
+  margin: 20px;
+  font-size: 20px;
+}
+.profileLoading {
+  text-align: center;
+}
+
+/* skeleton */
+
+.profilePage {
+  margin-top: 18px;
+}
+.profileHeader {
+  margin-top: 18px;
+  margin-bottom: 0px;
+}
+
+.avatarOverlay {
+  margin: 0 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  border-radius: 5px;
+}
+.infoHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.infoContent {
+  padding-bottom: 20px;
+}
+.btnEdit {
+  margin: 0 20px 15px 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  border-radius: 5px;
+  text-align: center;
+}

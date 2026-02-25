@@ -8,12 +8,18 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+dist/
+build/
+out/
 dist-ssr
 *.local
+.env
 
 # Editor directories and files
 .vscode/*
+.vscode/
+*.vscode.js
+*.vscode.json
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -22,3 +28,24 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Кэши
+cache/
+coverage/
+temp/
+
+# Артефакты CI/CD
+.gitlab-ci.yml
+.dockerignore
+Dockerfile
+
+# Инструменты
+.eslintcache
+.prettier.config.js
+.jest/
+jest.config.js
+/.vite
+
+# Базы данных (локальные)
+*.sqlite
+*.db

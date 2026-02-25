@@ -1,0 +1,55 @@
+.productCard {
+  position: relative;
+  height: 300px;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: pointer;
+  /* width: 100%;
+  display: flex;
+  justify-content: center; */
+  /* perspective: 1000px;
+  flex: 1;
+  min-width: 0; */
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.front {
+  transition: opacity 0.5s ease;
+  background-color: #4169e1;
+}
+
+.back {
+  transform: rotateY(180deg);
+  /* transition: opacity 3s ease; */
+  transition: opacity 0.5s ease 0.3s; /* задержка 0.4s */
+  color: chocolate;
+  background-color: #f0f0f0;
+  font-size: 20px;
+}
+
+/* Когда карточка перевернута — скрываем front */
+.productCard.flipped .front {
+  opacity: 0;
+}
+.productCard.flipped .back {
+  opacity: 1;
+}
+
+/* Когда карточка не перевернута — показываем front */
+.productCard:not(.flipped) .front {
+  opacity: 1;
+  transition: opacity 0.5s ease 0.3s;
+}
+.productCard:not(.flipped) .back {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}

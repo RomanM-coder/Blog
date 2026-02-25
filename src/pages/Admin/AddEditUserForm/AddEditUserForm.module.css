@@ -1,14 +1,17 @@
 .editUserForm {
   position: fixed;
-  top: 50%; 
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  width: 400px;  
+  width: 400px;
   border-radius: 8px;
-  padding: 0 20px 10px 15px;
+  padding: 0 10px 10px 10px;
   text-align: center;
   background-color: white;
+
+  overflow-y: scroll;
+  height: 750px;
 }
 .overlay {
   position: fixed;
@@ -27,37 +30,40 @@
   right: 0;
 }
 .buttonSubmit {
-  
+  margin-top: 15px;
 }
-.listPost, .listComment {
-  /* margin: 3px 0; */
-
+.listPost,
+.listComment,
+.listPublishedId {
+  display: flex;
+  justify-content: start;
 }
 .inputEditUser {
-  width: auto;
+  width: 100%;
   height: auto;
 
   font-size: 16px;
   color: black;
   accent-color: #007bff;
-  margin-right: 8px; 
+  /* margin-right: 8px; */
   border: 1px solid rgb(129, 129, 129);
   background-color: white;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
-.wrapperPost, .wrapperComment {
+.wrapperPost,
+.wrapperComment {
   display: flex;
   flex-direction: column;
- 
-  max-height: 200px; 
+
+  max-height: 200px;
   overflow-y: auto;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 5px; 
+  padding: 5px 5px 5px 10px;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   /* margin-right: 8px;
   width: 16px;
   height: 16px; */
@@ -67,17 +73,29 @@ input[type="checkbox"] {
 .wrapperCheck {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: start;
   text-align: center;
   align-items: center;
+  padding-left: 10px;
 }
 .dateTime {
   display: flex;
   flex-direction: row;
   text-align: center;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding-left: 10px;
+}
+.lableDateTime {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .inputDatetime {
   margin-left: 10px;
+}
+.fieldsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

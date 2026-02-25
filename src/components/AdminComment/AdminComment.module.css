@@ -7,25 +7,115 @@
 
   display: flex;
   justify-content: space-between;
+  background-color: #fff;
 }
-.titleComent {
+.titleComment {
   margin: 5px 5px 12px 5px;
 }
-.likeComment {
+
+/* .likeComment {
   margin: 4px;
-}
-.likedButton, .dislikedButton {
+} */
+/* .likedButton,
+.dislikedButton {
   font-size: 13px;
   margin: 0 15px;
 }
 .dislikedButton {
-
-}
-.deleteButton {
+} */
+.deleteButton,
+.editButton {
   margin: 5px 5px;
+}
+.deleteButton:hover {
+  opacity: 0.65;
 }
 .containerAction {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.wrapperPencil {
+  display: flex;
+  align-items: center;
+  margin: 0 3px;
+  height: 24px;
+  transition: opacity 0.25s ease;
+}
+
+.wrapperPencil:hover {
+  opacity: 0.65;
+}
+
+/* старт шапка коммента - user */
+.author {
+  font-size: 15px;
+  line-height: 22px;
+  display: grid;
+  grid-template-columns: 45px auto;
+  grid-template-rows: repeat(2, auto);
+  gap: 0 10px;
+  width: 205px;
+  align-items: center;
+}
+.author_avatar {
+  grid-row: span 2;
+  display: flex;
+  align-items: center;
+}
+
+.avatar_container {
+  position: relative;
+  display: inline-block;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: 85% 85%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f0f0f0;
+  background-position-y: 1px;
+}
+.author_name {
+  text-align: start;
+}
+.author_details {
+  text-align: start;
+}
+.content_header {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px 12px 5px;
+}
+/* ---------- end шапка коммента - user */
+
+.content_reactions {
+  padding: 14px 24px 6px;
+}
+.reactions {
+  /* position: relative; */
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.reaction_button {
+  background-color: #f9f9f9;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  cursor: pointer;
+  /* font-size: var(--reaction-button-font-size);
+  line-height: var(--reaction-button-size);
+  min-width: var(--reaction-button-min-width); */
+}
+.reaction_button:hover {
+  background-color: #e4e4e4;
+}
+.reaction_button_counter {
+  color: #606060;
+  font-size: 15px;
 }

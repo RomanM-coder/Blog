@@ -1,8 +1,14 @@
+import { ISectionPost } from './modelSectionsPost'
+
 export interface IPost {
-  _id?: string,
-  title: string,    
-  description: string, 
-  favorite: number,
-  nofavorite: number,
+  _id?: string
+  title: string
+  sections: ISectionPost[]
+  favorite: number
+  nofavorite: number
+  views: number
+  createdAt: Date
+  updatedAt?: Date
   categoryId: string
+  userId: string
 }

@@ -1,0 +1,50 @@
+.posts {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.divAddPost {
+  text-align: center;
+}
+.blogPage {
+  /* position: relative; */
+  flex-grow: 1;
+  padding-bottom: 105px;
+}
+.allPosts {
+  display: grid;
+  grid-template-columns: auto;
+  grid-auto-rows: auto;
+  padding: 0 10px;
+}
+
+.containerFavorite {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  text-align: center;
+}
+.favorite,
+.unFavorite {
+  display: flex;
+  flex-direction: column;
+}
+.number {
+  color: black;
+}
+.headerPostPage {
+  margin-bottom: 3px;
+}
+.countPostPage {
+  margin-top: 3px;
+}
+@media (max-width: 768px) {
+  .divAddPost {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .divAddPost {
+    font-size: 12px;
+  }
+}

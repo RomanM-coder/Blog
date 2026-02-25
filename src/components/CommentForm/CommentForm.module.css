@@ -1,0 +1,165 @@
+.commentForm {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+}
+.commentBranches {
+  display: flex;
+}
+.commentBranch {
+  border-color: #e5e5e5;
+  width: 26px;
+  border-left: 1px solid #e5e5e5;
+}
+
+.commentBranchArc {
+  width: 20px;
+  height: 25px;
+  border: solid 8px #e5e5e5;
+  border-width: 0 0 1px 1px;
+  border-bottom-left-radius: 8px;
+  pointer-events: none;
+}
+.inputWrapper {
+  padding-top: 12px;
+  padding-bottom: 6px;
+}
+
+.commentInput {
+  /* min-height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: white;
+  outline: none;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: start;
+  position: relative;
+  z-index: 2;
+  background: transparent; */
+
+  min-height: 45px;
+  padding: 8px 12px 12px 12px;
+  outline: none;
+  border: none;
+  resize: none;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  flex-grow: 1;
+  text-align: start;
+}
+
+.placeholder {
+  /* position: absolute; */
+  /* top: 12px;
+  left: 12px; */
+  color: #999;
+  pointer-events: none;
+  z-index: 1;
+}
+.commentInput[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+}
+
+/* .commentInput[data-placeholder]:not(:focus):before {
+  content: attr(data-placeholder);
+  color: #999;
+  pointer-events: none;
+} */
+
+/* хор вариант */
+/* .commentInput[data-placeholder]:has(*):before {
+  content: attr(data-placeholder);
+} */
+
+/* .commentInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+} */
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid #888888ff;
+  box-shadow: none;
+  background-color: #f5f5f5;
+  transition: all 0.2s ease;
+
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.inputContainer:hover {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  background-color: white;
+}
+
+.inputContainer.focused {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  background-color: white;
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  font-weight: 500;
+  justify-content: center;
+  cursor: pointer;
+  white-space: nowrap;
+  background-color: #0b5dd7;
+  border-radius: 9px;
+  font-size: 15px;
+  color: white;
+  padding: 0 14px;
+  height: 34px;
+  transition: background-color 0.2s ease;
+}
+.submitButton:hover {
+  background-color: #0a55c5;
+}
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  font-weight: 500;
+  justify-content: center;
+  cursor: pointer;
+  white-space: nowrap;
+  background-color: #f0f0f0;
+  border-radius: 9px;
+  font-size: 15px;
+  color: black;
+  padding: 0 14px;
+  height: 34px;
+  transition: background-color 0.2s ease;
+}
+.cancelButton:hover {
+  background-color: #e0e0e0;
+}
+.commentForm_footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 5px 20px;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  gap: 10px;
+}
+
+.hasLeftBorder {
+  border-left: 1px solid #e5e5e5;
+}
+
+.noLeftBorder {
+  border-left: none;
+}

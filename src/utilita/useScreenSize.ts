@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from 'react'
 
 interface Size {
-  width: number | undefined;
-  height: number | undefined;
-  ratio: number;
+  width: number | undefined
+  height: number | undefined
+  ratio: number
 }
 
 export default function useScreenSize(): Size {
@@ -13,26 +13,35 @@ export default function useScreenSize(): Size {
     width: undefined,
     height: undefined,
     ratio: 1,
-  });
+  })
+
+  const lastExecutedRef = useRef<number>(0)
 
   useEffect(() => {
-    // Handler to call on window resize
     function handleResize() {
-      const newRatio = window.devicePixelRatio;
+      const now = Date.now()
 
-      // Set window width/height to state
+      // выполняем не чаще чем раз 50 мс
+      if (now - lastExecutedRef.current >= 50) {
+        updateSize()
+        lastExecutedRef.current = now
+      }
+    }
+
+    function updateSize() {
+      const newRatio = window.devicePixelRatio
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
         ratio: newRatio,
-      });
+      })
     }
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-  return windowSize;
+
+    window.addEventListener('resize', handleResize)
+    updateSize()
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return windowSize
 }

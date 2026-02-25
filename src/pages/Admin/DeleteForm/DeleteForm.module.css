@@ -1,6 +1,6 @@
 .modalContainer {
   position: fixed;
-  top: 40%; 
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
@@ -21,26 +21,27 @@
   background-color: rgba(1, 1, 1, 0.35);
   z-index: 1;
 }
-.deleteButton, .cancelButton {
-  margin: 0 10px; 
+.deleteButton,
+.cancelButton {
+  margin: 0 10px;
   padding: 6px 10px;
   border-radius: 5px;
   border: 1px solid #bbbbbb;
 }
 .deleteButton {
- background-color: #2195f3;
+  background-color: #2195f3;
+  transition: background-color 0.3s ease;
 }
 .cancelButton {
- background-color: rgb(216, 215, 215);
+  background-color: rgb(216, 215, 215);
+  transition: background-color 0.3s ease;
 }
 .deleteButton:hover {
-  background-color: #1f8ae2;  
-  transition: all 0.3s ease;
- }
- .cancelButton:hover {
+  background-color: #1f8ae2;
+}
+.cancelButton:hover {
   background-color: rgb(190, 190, 190);
-  transition: all 0.3s ease;
- }
- .confirmationMessage {
+}
+.confirmationMessage {
   padding: 10px 0 15px 0;
- }
+}

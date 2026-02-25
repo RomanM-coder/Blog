@@ -1,0 +1,19 @@
+.title {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.paginationContainer {
+  /* margin-top: auto; */
+  padding-bottom: 3rem;
+}
+.adminLogs {
+  flex-grow: 1;
+}
+.adminList {
+  padding: 0 15px;
+}
+.logCount {
+  text-align: center;
+  margin: 5px 0 10px 0;
+  font-size: 18px;
+}

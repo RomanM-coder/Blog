@@ -1,0 +1,12 @@
+/* .cardContainer {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+} */
+.LandingWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

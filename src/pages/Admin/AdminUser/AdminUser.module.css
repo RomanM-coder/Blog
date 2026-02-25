@@ -1,0 +1,143 @@
+.adminUsers {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex-grow: 1;
+  padding: 0 15px;
+}
+.paginationContainer {
+  padding-bottom: 3rem;
+}
+.userList {
+  /* list-style: none;
+  text-decoration: none; */
+}
+.userNumber {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.singleNumber {
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+}
+.singleUser {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  text-align: center;
+  margin: 5px 0px;
+  width: 99%;
+}
+.singleLi {
+  margin: 0 5px;
+}
+.addButton {
+  background-color: transparent;
+  margin-right: 20px;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  position: relative;
+}
+.addButton svg {
+  font-size: 27px;
+}
+.userWrapper {
+  width: 100%;
+}
+.containerButton {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+.divAddButton {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  height: 24px;
+}
+.imgSVG {
+  margin-left: 5px;
+  width: 20px;
+  height: 20px;
+}
+.buttonRender {
+  padding: 0.25rem 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 0.25rem;
+  margin: 0 5px;
+
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.buttonRender:hover {
+  background-color: #2563eb;
+}
+
+.buttonDanger {
+  background-color: rgb(253, 87, 87);
+}
+.buttonDanger:hover {
+  background-color: red;
+}
+.bio {
+  max-width: 150px; /* Максимальная ширина */
+  width: 150px; /* Фиксированная ширина */
+  /* display: block; */
+  max-height: 72px; /* Позволит вместить ~3 строки */
+  text-align: start;
+
+  word-wrap: break-word; /* Перенос длинных слов */
+  overflow-wrap: break-word; /* Современная альтернатива */
+  white-space: normal; /* Разрешаем перенос строк */
+  word-break: break-word; /* Перенос слов при необходимости */
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Ограничить 3 строками */
+  overflow: hidden;
+}
+.email {
+  cursor: pointer;
+}
+.userCount {
+  margin: 0;
+}
+.title {
+  margin-bottom: 10px;
+}
+/* .cofirmed,
+.notCofirmed,
+.blocked,
+.active {
+  display: block;
+  max-width: 30px;
+  width: 30px;
+} */
+
+/* Квадратная кнопка для троеточия */
+/* .pagination .breakMe a,
+.pagination .breakMe span {
+  min-width: 40px;
+  width: 40px; 
+  padding: 0;
+} */
+
+.customBreak {
+  min-width: 40px;
+  width: 40px; /* фиксированная ширина */
+  padding: 0;
+}

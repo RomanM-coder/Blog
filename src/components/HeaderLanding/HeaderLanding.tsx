@@ -1,49 +1,42 @@
-import { motion } from 'framer-motion'
-import { NavLink } from "react-router-dom"
+import useScreenSize from '../../utilita/useScreenSize.ts'
 import { useTranslation } from 'react-i18next'
-import LanguageIcon from '@mui/icons-material/Language'
-import TranslateIcon from '@mui/icons-material/Translate'
+import zastavka from '../../assets/zastavkaBlueGradient.webp'
+import cornFlower from '../../assets/static/cornflower.png'
 import styles from './HeaderLanding.module.css'
 
 export const HeaderLanding = () => {
-
-  const { t, i18n } = useTranslation()
+  const { width } = useScreenSize() // перерасчет ширин элементов
+  const { t } = useTranslation()
 
   return (
-    <div className={styles.Header_headerWrapper}>
-      <div className={styles.Header_header}>
-        <div className={styles.Header_left}>
-          <motion.li
-            className={styles.elemMainMenu}                 
-            whileTap={{ scale: 0.96 }}
-          >
-            <NavLink to={'/page1'}>{t('menuland.page1')}</NavLink>
-          </motion.li>
-          <motion.li
-            className={styles.elemMainMenu}                 
-            whileTap={{ scale: 0.96 }}
-          >
-            <NavLink to={'/page2'}>{t('menuland.page2')}</NavLink>
-          </motion.li>
-        </div>
-        <div className={styles.Header_right}>
-          <motion.button
-            className={styles.button_lang}                 
-            whileTap={{ scale: 0.96 }}
-          >
-            <div className={styles.header_lang}>
-              <TranslateIcon />
-              {t('menuland.lang')}
+    <section className={styles.headerSection}>
+      <div className={styles.headerWrapper}>
+        <div
+          className={styles.gradient}
+          style={{ backgroundImage: `url(${zastavka})` }}
+        ></div>
+        <div className={styles.headerBlock}>
+          <div className={styles.leftContent}>
+            <h2 className={styles.titlePart}>{t('headerLanding.header')}</h2>
+            <div className={styles.headerDescription}>
+              {t('headerLanding.context1')}
+              <br />
+              <br />
+              {t('headerLanding.context2')}
             </div>
-          </motion.button>
-          <motion.button
-            className={styles.button_auth}                 
-            whileTap={{ scale: 0.96 }}
-          >
-            <NavLink to={'/auth'}>{t('menuland.auth')}</NavLink>
-          </motion.button>
+          </div>
+          {width! > 1024 ? (
+            <div className={styles.rightContent}>
+              <img
+                className={styles.headerImg}
+                src={cornFlower}
+                alt="header title"
+                loading="lazy"
+              />
+            </div>
+          ) : null}
         </div>
       </div>
-    </div>
+    </section>
   )
-} 
+}

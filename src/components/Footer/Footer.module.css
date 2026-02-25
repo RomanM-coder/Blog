@@ -1,7 +1,8 @@
-footer { 
+.footer {
   position: absolute;
   bottom: 0;
-  width: 100%; 
+  left: calc(50% - 170px);
+  /* width: 100%;  */
   /* padding: 1rem; */
   text-align: center;
   align-items: center;
@@ -9,13 +10,9 @@ footer {
   text-align: center;
 }
 
-span {
+.footer_span {
   vertical-align: middle;
   font-weight: 400;
   font-size: 18px;
-  color: white;
-}
-
-.btn { 
   color: darkgrey;
 }

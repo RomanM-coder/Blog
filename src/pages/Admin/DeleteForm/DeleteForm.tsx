@@ -1,22 +1,25 @@
-import { ICategory } from "../../../utilita/modelCategory"
-import { IComment } from "../../../utilita/modelComment"
-import { IPost } from "../../../utilita/modelPost"
-import { IUser } from "../../../utilita/modelUser"
+import { ICategory } from '../../../utilita/modelCategory'
+import { IUser } from '../../../utilita/modelUser'
 import { useTranslation } from 'react-i18next'
 import styles from './DeleteForm.module.css'
+import { IPostFull } from '../../../utilita/modelPostFull'
+import { ICommentFull } from '../../../utilita/modelCommentFull'
 
 interface DeleteFormProps {
-  type: 'category' | 'post' | 'comment' | 'user' 
-  selectedItem: ICategory | IPost | IComment | IUser
-  onDelete: (selectedItem: ICategory | IPost | IComment | IUser, admId: string) => Promise<void>
+  type: 'category' | 'post' | 'comment' | 'user'
+  selectedItem: ICategory | IPostFull | ICommentFull | IUser
+  onDelete: (
+    selectedItem: ICategory | IPostFull | ICommentFull | IUser,
+    admId: string,
+  ) => Promise<void>
   handleDeleteFormHide: () => void
 }
 
 export const DeleteForm: React.FC<DeleteFormProps> = ({
-  type, 
+  type,
   selectedItem,
   onDelete,
-  handleDeleteFormHide
+  handleDeleteFormHide,
 }) => {
   const { t } = useTranslation()
   const userId = JSON.parse(localStorage.getItem('userData')!).userId as string
@@ -25,23 +28,23 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
     handleDeleteFormHide()
   }
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (type === 'category') {
       const item = selectedItem as ICategory
-      onDelete(item, userId)
+      await onDelete(item, userId)
     }
     if (type === 'post') {
-      const item = selectedItem as IPost
-      onDelete(item, userId)
+      const item = selectedItem as IPostFull
+      await onDelete(item, userId)
     }
     if (type === 'comment') {
-      const item = selectedItem as IComment
-      onDelete(item, userId)
+      const item = selectedItem as ICommentFull
+      await onDelete(item, userId)
     }
     if (type === 'user') {
       const item = selectedItem as IUser
-      onDelete(item, userId)
-    }    
+      await onDelete(item, userId)
+    }
     handleDeleteFormHide()
   }
 
@@ -51,11 +54,11 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
       return item.name
     }
     if (type === 'post') {
-      const item = selectedItem as IPost
+      const item = selectedItem as IPostFull
       return item.title
     }
     if (type === 'comment') {
-      const item = selectedItem as IComment
+      const item = selectedItem as ICommentFull
       return item.content
     }
     if (type === 'user') {
@@ -74,22 +77,24 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
   return (
     <>
       <div className={styles.modalContainer}>
-        <div className="modal-content">            
+        <div className="modal-content">
           <p className={styles.confirmationMessage}>
-            <span style={{color: 'black'}}>{doYouReally(type)}</span> 
-            <span style={{fontWeight: 'bold', color: 'black'}}>{contentItem(type)}</span>
-            <span style={{color: 'black'}}>?</span> 
+            <span style={{ color: 'black' }}>{doYouReally(type)}</span>
+            <span style={{ fontWeight: 'bold', color: 'black' }}>
+              {contentItem(type)}
+            </span>
+            <span style={{ color: 'black' }}>?</span>
           </p>
           <div className="button-container">
-            <button 
-              id="deleteBtn" 
+            <button
+              id="deleteBtn"
               className={styles.deleteButton}
               onClick={handleDelete}
             >
               {t('deleteForm.Ok')}
-            </button>              
-            <button 
-              id="cancelBtn" 
+            </button>
+            <button
+              id="cancelBtn"
               className={styles.cancelButton}
               onClick={handleCancel}
             >
@@ -98,11 +103,10 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
           </div>
         </div>
       </div>
-      <div 
-        className={styles.overlay} 
-        onClick={() => handleDeleteFormHide()}               
-      >        
-      </div>
-  </>
+      <div
+        className={styles.overlay}
+        onClick={() => handleDeleteFormHide()}
+      ></div>
+    </>
   )
 }

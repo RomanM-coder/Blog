@@ -1,14 +1,17 @@
 export interface IUserForm {
-  _id?: string,
-  email: string,
-  password?: string,
-  verified: boolean,
-  role: string,
-  block: boolean,
-  // createdAt: string,
-  // lastLogin?: string|undefined,
-  createdAt: Date,
-  lastLogin: Date|null,  
-  votepost: string[],
-  votecomment: string[] 
+  _id?: string
+  email: string
+  avatar?: string
+  firstName?: string
+  lastName?: string
+  bio?: string
+  confirmed: boolean
+  role: 'user' | 'admin' | 'moderator' //string
+  blocked: boolean
+  createdAt: Date
+  lastLogin?: Date | null
+  votepost: string[]
+  votecomment: string[]
+  commentsCount: number
+  postsPublishedId: string[]
 }

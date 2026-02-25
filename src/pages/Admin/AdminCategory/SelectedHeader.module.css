@@ -1,0 +1,47 @@
+.divAddcategory {
+  text-align: center;
+}
+
+.title {
+  margin: 10px 0;
+}
+.countCategory {
+  margin: 10px 0;
+}
+
+.sortId,
+.sortName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid;
+  margin: 0px 5px;
+  border-radius: 8px;
+}
+
+.changeItemPerPage {
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+  margin: 0px 5px;
+  border-radius: 8px;
+}
+
+.allButton {
+  border-radius: 8px;
+  border: 1px solid;
+  margin-right: 5px;
+}
+.withSVG {
+  margin-right: 8px;
+}
+
+.shuffleButton {
+  background-color: #cdd7e4;
+  cursor: pointer;
+}
+
+#shuffleButton[disabled] {
+  cursor: default;
+  background-color: #cdd7e4 !important;
+}

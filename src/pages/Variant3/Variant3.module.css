@@ -1,0 +1,248 @@
+.cardContainer {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+.titleWrapper {
+  position: sticky;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  top: 15px;
+  margin-top: 0px;
+  transition: top 0.3s ease-in-out;
+  margin: 0 auto;
+}
+.titleSection {
+  font-size: 48px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 20px;
+}
+.cards {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.active {
+  /* position: absolute; */
+}
+.cardWrapper {
+  width: 97%;
+  margin: 0 auto;
+  padding: 20px 40px;
+  border-top: 2px solid #94adfd;
+  border-left: 2px solid #94adfd;
+  border-right: 2px solid #94adfd;
+  border-radius: 35px 35px 0 0;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transform-origin: center;
+  transition: top 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+
+  position: sticky;
+  top: 120px;
+}
+
+.cardContent {
+  max-width: 100%;
+  /* flex: 0 0 360px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+  align-items: center;
+  /* margin: 0 auto; */
+  gap: 40px;
+}
+.leftSection {
+  width: calc(50% - 200px);
+  max-width: calc(50% - 200px);
+  display: flex;
+  align-items: center;
+  text-align: left;
+  word-wrap: break-word;
+  gap: 40px;
+}
+
+.cardNumber {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgb(198, 210, 245);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2b12e0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.8px;
+}
+.cardTitle {
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.cardImageSection {
+  max-width: 400px;
+  max-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px auto;
+  flex: 0 0 400px;
+}
+
+.cardImage {
+  color: transparent;
+  max-width: 400px;
+  max-height: 600px;
+  width: auto;
+  /* height: auto; */
+  height: 360px;
+  object-fit: contain;
+  /* background-color: #cdd7e4; Цвет, похожий на основную палитру изображения */
+  /* width: auto;
+  height: 100%; */
+  /* width: 240px; */
+  /* max-height: 100%;
+  max-width: 100%; */
+}
+.rightSection {
+  width: calc(50% - 200px);
+  max-width: calc(50% - 200px);
+}
+/* h2, 
+h3 {
+  padding: 0 20px;
+} */
+
+/* bler */
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 1440px) {
+  .titleSection {
+    font-size: 32px;
+  }
+  .leftSection {
+    width: calc(50% - 120px);
+    max-width: calc(50% - 120px);
+  }
+  .cardTitle {
+    font-size: 18px;
+  }
+  .cardImageSection {
+    max-width: 240px;
+    max-height: 360px;
+    flex: 0 0 240px;
+  }
+  .cardImage {
+    max-width: 240px;
+    max-height: 360px;
+  }
+  .rightSection {
+    width: calc(50% - 120px);
+    max-width: calc(50% - 120px);
+  }
+}
+
+@media (max-width: 1280px) {
+  .cardImageSection {
+    flex: initial;
+  }
+}
+
+@media (max-width: 1024px) {
+  .titleWrapper {
+    max-width: 800px;
+  }
+  .leftSection {
+    width: calc(50% - 85px);
+    max-width: calc(50% - 85px);
+  }
+  .cardNumber {
+    font-size: 16px;
+  }
+  .cardImageSection {
+    max-width: 170px;
+    max-height: 250px;
+  }
+  .cardImage {
+    max-width: 170px;
+    max-height: 250px;
+  }
+  .rightSection {
+    width: calc(50% - 85px);
+    max-width: calc(50% - 85px);
+  }
+  .cardDescription {
+    font-size: 14px;
+  }
+  .cardWrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 830px) {
+  .cardTitle {
+    font-size: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .cardContent {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .leftSection {
+    width: 90%;
+    max-width: 90%;
+    justify-content: center;
+  }
+  .cardNumber {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 12px;
+  }
+  .cardImageSection {
+    max-width: 100px;
+    max-height: 130px;
+  }
+  .cardImage {
+    max-width: 100px;
+    max-height: 130px;
+  }
+  .rightSection {
+    width: 90%;
+    max-width: 90%;
+    padding-bottom: 25px;
+  }
+}
+
+@media (max-width: 700px) {
+  .titleSection {
+    font-size: 24px;
+  }
+  .rightSection {
+    width: 100%;
+    max-width: 100%;
+  }
+}

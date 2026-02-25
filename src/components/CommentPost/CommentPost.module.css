@@ -1,23 +1,116 @@
 .comment {
   border: 1px solid #b1b0b0;
   border-radius: 10px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  padding-bottom: 4px;
 }
-.titleComent {
-  margin: 5px 5px 12px 5px;
+.headerComment {
+  display: grid;
+  height: 36px;
+  font-size: 15px;
+  /* line-height: 25px; */
+  grid-template-columns: 36px 1fr;
+  /* grid-template-rows: 18px 18px; */
+  gap: 0 10px;
+  align-items: center;
+  padding: 4px 10px 0px 5px;
+}
+/* .wrapperImg {
+  height: 36px;
+} */
+.authorAvatar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  text-align: start;
+  gap: 10px;
+  line-height: 18px;
+}
+.wrapperText {
+  /* display: flex;
+  flex-direction: column; */
+  display: grid;
+  grid-template-rows: 18px 18px;
+  height: 36px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.authorMain {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: auto 1fr; /* authorName по содержимому, inPost занимает всё пространство */
+  gap: 6px;
+  height: 18px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.authorName {
+  line-height: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* flex: 1; Занимает всё доступное пространство */
+  min-width: 0;
+  text-align: start;
+}
+.inPost {
+  font-size: 15px;
+  line-height: 18px;
+  white-space: nowrap;
+  color: #535353;
+  flex-shrink: 0;
+  text-align: start;
+}
+.authorDetail {
+  font-size: 15px;
+  line-height: 18px;
+  /* display: flex;
+  align-items: center; */
+  color: #1b1b1b;
+  max-width: 100%;
+  overflow: hidden;
+  text-align: start;
+  height: 18px;
+}
+.postName {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.titleComment {
+  margin: 10px 0px 5px 0px;
+  padding-left: 4px;
+  padding-right: 15px;
+  text-align: start;
+  cursor: pointer;
+
+  /* max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; */
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4em;
+  /* max-height: 4.2em; */
+}
+.reactions {
+  display: flex;
+  text-align: start;
+  margin: 5px 0;
 }
 .likeComment {
   margin: 4px;
 }
-.likedButton, .dislikedButton {
+.likedButton,
+.dislikedButton {
+  display: flex;
   font-size: 13px;
   margin: 0 15px;
 }
 .dislikedButton {
-
-}
-.deleteButton {
-  margin: 5px 5px;
 }

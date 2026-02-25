@@ -1,0 +1,22 @@
+.profileStats {
+}
+.statsGrid {
+  padding: 0 50px;
+}
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+}
+.statNumber {
+  margin-left: 10px;
+}
+.statLabel {
+  margin-right: 10px;
+}
+.bg1 {
+  background-color: rgb(226, 248, 255);
+}
+.bg2 {
+  background-color: #f8efef;
+}

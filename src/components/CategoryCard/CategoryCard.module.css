@@ -2,12 +2,12 @@
   width: 300px;
   border: 1px solid #b1b0b0;
   border-radius: 10px;
-  background-color: #2196F3;
+  background-color: #2196f3;
   /* margin: 5px 0; */
   padding: 5px 10px;
-  display: flex;  
+  display: flex;
   justify-content: center;
-  
+
   position: relative;
 }
 /* .tooltipContainer {
@@ -20,7 +20,7 @@
   left: 50%;
   transform: translateX(-50%);
   background-color: #a1c0e8;
-  color: #3a3a3a;  
+  color: #3a3a3a;
   padding: 8px 12px;
   border-radius: 4px;
   white-space: nowrap;
@@ -33,11 +33,51 @@
   align-items: center;
 }
 .nameCategoryBtn {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  position: relative;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+  transition: transform 1s ease;
 }
+.nameCategoryBtn:hover {
+  transform: rotateY(180deg);
+}
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.front {
+  /* opacity: 1; */
+  transition: opacity 0.5s ease;
+  /* background-color: #4169e1; */
+}
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+  /* transition: opacity 3s ease; */
+  transition: opacity 0.5s ease 0.3s; /* задержка 0.4s */
+  color: chocolate;
+  /* background-color: #f0f0f0; */
+  font-size: 20px;
+  background-color: #2196f3;
+  color: white;
+}
+
 .deleteButton {
   background-color: transparent;
   /* margin: 0 10px; */
@@ -45,13 +85,13 @@
   color: inherit;
   outline: none;
   padding: 0;
-  cursor: pointer; 
+  cursor: pointer;
 }
 /* .deleteButton {
   margin: 10px 10px;
 } */
 .deleteButton:focus {
-  background-color: transparent; 
+  background-color: transparent;
 }
 /* button:focus {  
   background-color: transparent;
@@ -60,7 +100,7 @@
   display: flex;
   justify-content: space-between;
   border: 1px solid #b1b0b0;
-  border-radius: 10px; 
+  border-radius: 10px;
   margin: 5px 0;
   padding: 5px 10px;
 }
@@ -77,9 +117,9 @@
 /* @media (max-width: 1199px) {
   .categoryItem {
     /* max-width: 300px ; */
-    /* width: 100%;
+/* width: 100%;
   }
 }  */
- .categoryItem {
+.categoryItem {
   width: 100%;
- } 
+}

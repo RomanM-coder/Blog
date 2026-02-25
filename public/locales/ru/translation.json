@@ -1,4 +1,4 @@
-{  
+{
   "zod": {
     "messageLowercase": "Пароль должен содержать строчные буквы",
     "messageUppercase": "Пароль должен содержать большие буквы",
@@ -15,8 +15,8 @@
     "messageDescCatShort": "Описание категории слишком короткое",
     "messageDescCatLong": "Описание категории слишком длинное",
     "messageTransDescCatShort": "Перевод описания категории слишком короткий",
-    "messageTransDescCatLong": "Перевод описания категории слишком длинный",   
-    
+    "messageTransDescCatLong": "Перевод описания категории слишком длинный",
+
     "messageNamePostShort": "Заголовок поста слишком короткий",
     "messageNamePostLong": "Заголовок поста слишком длинный",
     "messageTransNamePostShort": "Перевод заголовка поста слишком короткий",
@@ -25,11 +25,24 @@
     "messageDescPostLong": "Описание поста слишком длинное",
     "messageTransDescPostShort": "Перевод описания поста слишком короткий",
     "messageTransDescPostLong": "Перевод описания поста слишком длинный",
-    
-    "messageNameCommentLong": "Комментарий слишком длинный",      
-    "messageTransNameCommentLong": "Перевод комментария слишком длинный"
+
+    "messageNameCommentLong": "Комментарий слишком длинный",
+    "messageTransNameCommentLong": "Перевод комментария слишком длинный",
+    "firstName": {
+      "tooLong": "Имя не может быть длиннее 30 символов",
+      "invalidChars": "Имя может содержать только буквы, цифры, пробелы, дефисы и апострофы",
+      "doubleSpaces": "Уберите лишние пробелы"
     },
-  "auth": {     
+    "lastName": {
+      "tooLong": "Фамилия не может быть длиннее 30 символов",
+      "invalidChars": "Фамилия может содержать только буквы, цифры, пробелы, дефисы и апострофы",
+      "doubleSpaces": "Уберите лишние пробелы"
+    },
+    "bio": {
+      "tooLong": "Рассказ не может быть длиннее 100 символов"
+    }
+  },
+  "auth": {
     "form": {
       "title": "Авторизация",
       "siteTitle": "Простой блог",
@@ -40,45 +53,80 @@
       "placeholderFile": "Загрузить файл",
       "fieldFile": "Файл",
       "enter": "ВОЙТИ",
-      "registr": "РЕГИСТРАЦИЯ"
+      "registr": "РЕГИСТРАЦИЯ",
+      "emailConfirmed": "Email подтвержден",
+      "emailNotConfirmed": "Email не подтвержден",
+      "emailVerification": "Введите email для проверки",
+      "confirm": "подтвердить",
+      "login": "Логин",
+      "regin": "Регин"
     },
     "toast": {
-      "userAdd": "Пользователь добавлен",
-      "fileAdd": "Файл пользователя добавлен",
-      "userLogin": "Пользователь залогинен"
-    }        
+      "reg": {
+        "messageUserCreated": "Пользователь был создан",
+        "messageDataIncorrect": "Некорректные данные при регистрации",
+        "messageAlreadyExists": "Такой пользователь уже существует",
+        "fileAdd": "Файл пользователя успешно добавлен",
+        "registrationFailed": "Не удалось выполнить регистрацию",
+        "userNotFound": "Пользователь не найден",
+        "fileNotFound": "Файл не найден",
+        "fileExist": "Файл уже существует",
+        "invalidEmailFormat": "Некорректный email формат"
+      },
+      "login": {
+        "loginFailed": "Ошибка входа",
+        "userLogin": "Пользователь залогинен",
+        "messageDataIncorrect": "Некорректные данные при входе в систему",
+        "messageUserNotFound": "Пользователь не найден",
+        "messagePasswordIncorrect": "Неверный пароль, попробуйте снова",
+        "messageEmailToken": "Письмо с токеном отправлено на Вашу почту",
+        "messageLinkIncorrect": "Недействительная или просроченная ссылка для подтверждения",
+        "messageEmailConfirm": "Email успешно подтверждён"
+      },
+      "error": "Ошибка"
+    }
   },
   "adminLogin": {
     "login": "Админ залогинен"
   },
-  "catList": {   
+  "catList": {
     "searchInput": "Поиск категории по имени",
-    "header": "Страница списка категорий",
+    "header": "Страница списка категорий админа",
+    "category_one": "Одна категория",
+    "category_few": "{{count}} категории",
+    "category_many": "{{count}} категорий",
+    "category_other": "{{count}} категория",
+    "category_zero": "{{count}} категорий",
+    "categoryNo": "Категорий пока нет",
+    "categoryNotFound": "Категория не найдена",
+
+    "orderAsc": "по возр",
+    "orderDesc": "по убыв",
+    "byId": "по ID",
+    "byName": "по имени",
+    "mix": "Смешать",
+    "all": "Все",
+    "total": "Всего: ",
+    "next": "след >",
+    "prev": "< пред",
+    "error": "Ошибка",
+    "toast": {}
+  },
+  "adminCatList": {
+    "header": "Страница списка категорий админа",
     "category_one": "Одна категория",
     "category_few": "{{count}} категории",
     "category_many": "{{count}} категорий",
     "category_other": "{{count}} категория",
     "category_zero": "Категорий пока нет",
-    "orderAsc": "по возр",
-    "orderDesc": "по убыв",   
-    "byId": "по ID",
-    "byName": "по имени",
-    "mix": "Смешать",
-    "all": "Все",
-    "count": "Количество: ",
-    "next": "след >",
-    "prev": "< пред",        
+    "categoryNotFound": "Категория не найдена",
+    "total": "Всего: ",
     "toast": {
-     
+      "categoryAdded": "Категория была успешно добавлена",
+      "categoryUpdated": "Категория была успешно обновлена",
+      "categoryDeleted": "Категория была успешно удалена"
     }
   },
-  "adminCatList": {           
-    "toast": {
-      "categoryAdd": "Категория добавлена",      
-      "categoryUpdated": "Категория изменена",
-      "categoryDeleted": "Категория удалена"
-    }
-  }, 
   "addEditCatForm": {
     "titleAdd": "Добавление категории",
     "titleEdit": "Редактирование категории",
@@ -92,22 +140,94 @@
     "placeholderDescriptionRu": "Описание категории на русском",
     "addButton": "Добавить категорию",
     "saveCategory": "Сохранить категорию"
-  },  
+  },
   "postPage": {
+    "headerPosts": "Посты",
     "searchInput": "Поиск постов по имени",
-    "header": "Страница постов/ Категория ",    
+    "header": "Страница постов/ Категория ",
     "noPost": "Постов пока нет",
+    "total": "Всего ",
+    "post_one": "{{count}} пост",
+    "post_few": "{{count}} поста",
+    "post_many": "{{count}} постов",
+    "post_other": "{{count}} постов",
+    "post_zero": "Постов нет",
+    "errorLoading": "Ошибка загрузки.",
+    "refreshingPage": "Попробуйте обновить страницу.",
+    "refresh": "Обновить",
     "toast": {
-      "voteLike": "Ваш голос учтен"            
+      "voteLike": "Ваш голос учтен",
+      "postNotFound": "Пост не найден",
+      "voteError": "Ошибка при голосовании",
+      "incorrectPostID": "Неверный формат ID поста",
+      "ruPostNotFound": "Перевод поста не найден",
+      "error": "Ошибка",
+      "voteOnce": "Пользователь может проголосовать только один раз",
+      "errorLoad": "Ошибка загрузки",
+      "confirmEmail": "Проголосовать и делать комментарии могут пользователи подтвердившие свой email."
+    },
+    "sort": {
+      "fresh": "Свежие",
+      "month": "За месяц",
+      "year": "За год",
+      "all": "Все",
+      "popular": "Популярные"
+    }
+  },
+  "profilePage": {
+    "noProfile": "Профиль не найден",
+    "lastVisit": "Последний раз был(а)",
+    "profileHeader": {
+      "fileIsImage": "Файл должен быть изображением",
+      "fileSize": "Размер файла не должен превышать 2MB",
+      "errorEdit": "Ошибка при обновлении аватара",
+      "loading": "Загрузка...",
+      "changeAvatar": "Сменить аватар",
+      "user": "Пользователь",
+      "register": "Зарегистрирован",
+      "year": "года"
+    },
+    "profileInfo": {
+      "header": "Редактирование профиля",
+      "edit": "Редактировать",
+      "infoHeader": "Информация",
+      "name": "Имя: ",
+      "bio": "О себе: ",
+      "noInformation": "Информация не указана"
+    },
+    "form": {
+      "enter": "ОТПРАВИТЬ",
+      "cancel": "ОТМЕНА",
+      "fieldFirstName": "Имя",
+      "placeholderFirstName": "Введите имя",
+      "fieldLastName": "Фамилия",
+      "placeholderLastName": "Введите фамилию",
+      "bio": "Биография",
+      "placeholderBio": "Расскажите о себе..."
     }
   },
   "adminPostPage": {
-    "header": "Админстраница постов/ Категория ",    
-    "createPost": "Создать новый пост",  
-    "toast": {      
+    "header": "Админстраница постов/ Категория ",
+    "createPost": "Создать новый пост",
+    "noPost": "Постов пока нет",
+    "countPosts": "Количесво постов: ",
+    "showInFull": "Показать полностью",
+    "toast": {
       "addPost": "Пост добавлен",
       "editPost": "Пост изменен",
-      "deletePost": "Пост удален"      
+      "deletePost": "Пост удален",
+      "deleteComment": "Комментарий удалён",
+      "editComment": "Комментарий изменён",
+      "addComment": "Комментарий добавлен",
+      "deleteAllComments": "Все комментарии поста удалены",
+      "voteLike": "Ваш голос учтен",
+      "postNotFound": "Пост не найден",
+      "userNotFound": "Пользователь не найден",
+      "commentNotFound": "Комментарий не найден",
+      "commentsNotFound": "комментарии не найдены",
+      "error": "Ошибка",
+      "ErrorSaveFile": "Ошибка при сохранении файла",
+      "errorCreateFilesDirectory": "Не удается создать FilesDirectory"
     }
   },
   "addEditPostForm": {
@@ -115,8 +235,8 @@
     "titleEdit": "Редактирование поста",
     "placeholderName": "Заголовок поста",
     "titleIsRequired": "Заголовок необходим",
-    "placeholderNameRu": "Перевод названия на русский язык",    
-    "titleTransIsRequired": "Перевод заголовка необходим",    
+    "placeholderNameRu": "Перевод названия на русский язык",
+    "titleTransIsRequired": "Перевод заголовка необходим",
     "placeholderDescription": "Описание поста",
     "descIsRequired": "Описание поста необходимо",
     "placeholderDescriptionRu": "Описание поста на русском",
@@ -125,113 +245,387 @@
     "placeholderNoFavorite": "Не нравится",
     "savePost": "Сохранить пост",
     "addButton": "Добавить пост"
-  },  
+  },
   "singlePostPage": {
     "searchInput": "Поиск ком-ия по контексту",
-    "header": "Комментарии",    
+    "header": "Комментарии",
     "noComments": "Пока комментариев нет",
     "noPost": "Поста нет",
+    "popularComments": "Популярные комментарии",
+    "total": "Всего ",
+    "comment_one": "один комментарий",
+    "comment_two": "{{count}} комментария",
+    "comment_few": "{{count}} комментария",
+    "comment_many": "{{count}} комментариев",
+    "comment_other": "{{count}} комментариев",
+    "comment_zero": "Комментариев нет",
+    "showAllComments": "Показать все комментарии",
+    "rollUp": "Свернуть",
+    "response_one": "{{count}} ответ",
+    "response_few": "{{count}} ответа",
+    "response_many": "{{count}} ответов",
+    "response_other": "{{count}} ответов",
+    "response_zero": "{{count}} ответов",
+    "hide": "Скрыть",
+    "toAnswer": "Ответить",
+    "inPost": "в посте",
+    "errorLoading": "Ошибка загрузки.",
+    "refreshingPage": "Попробуйте обновить страницу.",
+    "refresh": "Обновить",
     "toast": {
-      "changeLike": "Лайк изменен",      
+      "changeLike": "Лайк изменен",
       "editPost": "Пост изменен",
       "deletePost": "Пост удален",
       "addComment": "Комментарий добавлен",
-      "detetedAllComments": "Комментарии поста удалены"   
+      "detetedAllComments": "Комментарии поста удалены",
+
+      "voteLike": "Ваш голос учтен",
+      "postNotFound": "Пост не найден",
+      "commentNotFound": "Комментарий не найден",
+      "voteError": "Ошибка при голосовании",
+      "incorrectPostID": "Неверный формат ID поста",
+      "ruPostNotFound": "Перевод поста не найден",
+      "error": "Ошибка",
+      "voteOnce": "Пользователь может проголосовать только один раз"
     }
   },
   "adminSinglePost": {
-    "header": "Комментарии",    
+    "header": "Комментарии",
     "noComments": "Пока комментариев нет",
     "noPost": "Поста нет",
+    "comment_one": "один комментарий",
+    "comment_few": "{{count}} комментария",
+    "comment_many": "{{count}} комментариев",
+    "comment_other": "{{count}} комментарий",
+    "comment_zero": "Комментариев нет",
     "deleteAllComments": "все ком-ии",
     "toast": {
-      "changeLikePost": "Лайк поста изменен",      
+      "changeLikePost": "Лайк поста изменен",
       "editPost": "Пост изменен",
       "deletePost": "Пост удален",
       "addComment": "Комментарий добавлен",
       "editComment": "Комментарий изменен",
       "deteteComment": "Комментарий удален",
-      "detetedAllComments": "Комментарии поста удалены"   
-    }    
-  },  
+      "detetedAllComments": "Комментарии поста удалены",
+      "error": "Ошибка",
+      "userNotFound": "Пользователь не найден",
+      "voteOnce": "Пользователь может проголосовать только один раз",
+      "voteLike": "Ваш голос учтен"
+    }
+  },
   "addEditCommentForm": {
     "titleAdd": "Добавление комментария",
     "titleEdit": "Редактирование комментария",
     "placeholderComment": "Комментарий поста",
     "commentIsRequired": "Комментарий поста необходим",
     "placeholderCommentRu": "Русский перевод комментария",
-    "commentTransIsRequired": "Русский перевод комментария необходим",    
-    "placeholderLike": "Лайки комментария",    
-    "placeholderDislike": "Дизлайки комментария",    
+    "commentTransIsRequired": "Русский перевод комментария необходим",
+    "placeholderLike": "Лайки комментария",
+    "placeholderDislike": "Дизлайки комментария",
     "addComment": "Добавить комментарий",
-    "saveComment": "Сохранить комментарий"      
+    "saveComment": "Сохранить комментарий"
   },
   "adminUser": {
-    "searchInput": "Поиск пользователя по email",    
+    "searchInput": "Поиск пользователя по email",
     "header": "Админлист  Пользователи",
-    "user_one": "{{count}} пользователь",    
+    "usersCount": "Всего пользователей:  ",
+    "user_one": "{{count}} пользователь",
     "user_other": "{{count}} пользователи",
-    "user_zero": "Пользователей нет",    
+    "user_zero": "Пользователей нет",
+    "error": "Ошибка",
     "count": "Количество: ",
     "next": "след >",
-    "prev": "< пред",      
+    "prev": "< пред",
+    "noProfile": "Профиль не найден",
+    "lastVisit": "Последний раз был(а)",
+    "profileHeader": {
+      "fileIsImage": "Файл должен быть изображением",
+      "fileSize": "Размер файла не должен превышать 2MB",
+      "errorEdit": "Ошибка при обновлении аватара",
+      "loading": "Загрузка...",
+      "changeAvatar": "Сменить аватар",
+      "user": "Пользователь",
+      "register": "Зарегистрирован",
+      "year": "года"
+    },
+    "profileInfo": {
+      "infoHeader": "Информация",
+      "name": "Имя: ",
+      "bio": "О себе: ",
+      "noInformation": "Информация не указана"
+    },
+    "table": {
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "bio": "О себе",
+      "role": "Роль",
+      "createdAt": "Создана",
+      "lastLogin": "Последний визит",
+      "confirmed": "Подтверждён",
+      "blocked": "Заблокирован",
+      "commentsCount": "Комментариев",
+      "action": "Действие",
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
     "toast": {
-      "userAdd": "Пользователь добавлен",      
+      "userAdded": "Пользователь добавлен",
       "userUpdated": "Пользователь изменен",
       "userDeleted": "Пользователь удален"
     }
   },
   "adminLog": {
-    "searchInput": "Поиск админа по id",    
+    "searchInput": "Поиск админа по id",
     "header": "лист админов",
-    "admin_one": "{{count}} админ",    
+    "admin_one": "{{count}} админ",
     "admin_other": "{{count}} админов",
-    "admin_zero": "Нет админов",    
-    "count": "Количество: ",
+    "admin_zero": "Нет админов",
+    "error": "Error",
+    "count": "Всего лог записей: ",
     "next": "след >",
-    "prev": "< пред"    
+    "prev": "< пред"
   },
   "addEditUserForm": {
     "titleAdd": "Добавление пользователя",
     "titleEdit": "Редактирование пользователя",
     "placeholderEmail": "Email пользователя",
     "emailIsRequired": "Email пользователя необходим",
-    "placeholderRole": "Роль пользователя",
-    "roleIsRequired": "Роль пользователя необходима",    
-    "placeholderVerified": "email пользователя верифицировано",    
+    "placeholderRole": "Роль пользователя: ",
+    "roleIsRequired": "Роль пользователя необходима",
+    "placeholderConfirmed": "email пользователя подтверждён",
     "placeholderBlocked": "Блокировка пользователя",
-    "placeholderCreatedAt": "Пользователь создан",
+    "placeholderCreatedAt": "Создан: ",
     "createdAtRequired": "Время создания пользователя необходимо",
-    "placeholderLastLogin": "Последнее посещение",
+    "placeholderLastLogin": "Послед. посещение: ",
     "lastLoginRequired": "Последнее посещение пользователя необходимо",
     "checkPosts": "Отметьте выбранные посты",
     "checkComments": "Отметьте выбранные комменты",
+    "commentsCount": "Количество комментариев",
+    "placeholderCommentsCount": "Введите количество комментариев",
+    "checkPostsPublishedId": "Отметьте опубликованные посты",
     "addUser": "Добавить пользователя",
-    "saveUser": "Сохранить пользователя"   
-  },  
+    "saveUser": "Сохранить пользователя"
+  },
   "deleteForm": {
     "doYouReally": "Вы действительно хотите удалить {{type}}: ",
-    "doYouReallyAllComm": "Вы действительно хотите удалить вск комментарии поста: ",   
+    "doYouReallyAllComm": "Вы действительно хотите удалить вск комментарии поста: ",
     "Ok": "Да",
     "Cancel": "Отменить"
-  },  
+  },
   "navBar": {
     "siteTitle": "Простой блог",
     "minSiteTitle": "Пб",
-    "home": "Дом",
+    "home": "Категории",
     "posts": "Посты",
     "users": "Пользователи",
+    "userProfile": "Профиль",
     "logs": "Логи",
     "about": "О нас",
     "landing": "Презентация",
     "exit": "Выйти",
     "auth": "Авторизация",
+    "posting": "Опубликование",
+    "adminLog": "Админ логи",
+    "sortButton": {
+      "popular": "Популярное",
+      "fresh": "Свежее",
+      "month": "За месяц",
+      "year": "За год",
+      "all": "За всё время"
+    },
     "toast": {
-      "keyboardLayout": "Пожалуйста, используйте русскую раскладку клавиатуры."
-    }   
+      "keyboardLayout": "Пожалуйста, используйте русскую раскладку клавиатуры.",
+      "keyboardSignLayout": "Используйте, пожалуйста, разрешённые знаки."
+    }
+  },
+  "sidebarLeft": {
+    "popular": "Популярное",
+    "fresh": "Свежее",
+    "month": "За месяц",
+    "year": "За год",
+    "all": "За всё время",
+    "rules": "Правила",
+    "theme": "Тема",
+    "information": "Информация"
+  },
+  "blogPost": {
+    "showInFull": "Показать полностью"
+  },
+  "commentForm": {
+    "comment": "Комментарий",
+    "reactions": "Реакции",
+    "cancel": "Отмена",
+    "submit": "Отправить"
+  },
+  "postPublication": {
+    "header": "Страница публикации "
+  },
+  "aboutPage": {
+    "header": "Страница о нас"
+  },
+  "rulesPage": {
+    "header": "Страница правил"
+  },
+  "lazyImages": {
+    "notLoading": "Не удалось загрузить: ",
+    "loading": "Загрузка..."
   },
   "footer": {
     "title": "© Реакт Блог",
-    "current_date": "Сегодня : {{date, MY_DATE}}"    
+    "current_date": "Сегодня : {{date, MY_DATE}}"
+  },
+  "headerLanding": {
+    "header": "Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol",
+    "context1": "Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq.",
+    "context2": "Mauqila omen isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida,  rutetcesnoc tema tis rolod muspi merol."
+  },
+  "variant2": {
+    "header": "Tis rolod muspi merol",
+    "header1": "Muspi merol",
+    "card1": "Mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq.Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "header2": "Merol",
+    "card2": "Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "header3": "Muspi merol",
+    "card3": "Erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov rutetcesnoc tema tis rolod seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "header4": "Rolod muspi merol",
+    "card4": "Mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq.Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "header5": "Merol",
+    "card5": "Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "header6": "Rutauqesnoc diuqila",
+    "card6": "Erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov rutetcesnoc tema tis rolod seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol."
+  },
+  "xCardStack": {
+    "context1": "Mauqila omen isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve.mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "context2": "Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb diuqila aiuq mauq. Tile gnicisipida, rutetcesnoctema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "context3": "Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa, rutetcesnoc tema tis rolod muspi merol. Mauqia omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "card1": {
+      "title": "Muspi merol",
+      "text": "Drac tsrif eht si siht. Drac tsrif eht si siht. Drac tsrif eht si siht. Drac tsrif eht si siht. Drac tsrif eht si siht."
+    },
+    "card2": {
+      "title": "Merol",
+      "text": "Drac dnoces eht si siht. Drac dnoces eht si siht. Drac dnoces eht si siht."
+    },
+    "card3": {
+      "title": "Tis rolod muspi merol",
+      "text": "Drac driht eht si siht. Drac driht eht si siht. Drac driht eht si siht. Drac driht eht si siht. Drac driht eht si siht. Drac driht eht si siht."
+    },
+    "card4": {
+      "title": "Rolod muspi merol",
+      "text": "Drac htruof eht si siht. Drac htruof eht si siht."
+    }
+  },
+  "imageStripes": {
+    "images1": {
+      "image1": "Yrevocer",
+      "image2": "Rotaluclac",
+      "image3": "Rellortnoc",
+      "image4": "Levart",
+      "image5": "Ecnanif",
+      "image6": "Ecnanif\nssenisub"
+    },
+    "images2": {
+      "image7": "Rellortnoc",
+      "image8": "Levart",
+      "image9": "Ecnanif",
+      "image10": "Ecnanif\nssenisub",
+      "image11": "Yrevocer",
+      "image12": "Rotaluclac"
+    },
+    "images3": {
+      "image13": "Ecnanif",
+      "image14": "Ecnanif\nssenisub",
+      "image15": "Rotaluclac",
+      "image16": "Yrevocer",
+      "image17": "Rellortnoc",
+      "image18": "Levart"
+    },
+    "images4": {
+      "image19": "Rotaluclac",
+      "image20": "Rellortnoc",
+      "image21": "Levart",
+      "image22": "Ecnanif",
+      "image23": "Ecnanif\nssenisub",
+      "image24": "Yrevocer"
+    },
+    "title": "Tile gnicisipida rutetcesnoc tema tis rolod muspi merol",
+    "paragraph1": "Tile gnicisipida rutetcesnoc tema tis rolod muspi merol.",
+    "paragraph2": "Etatpulov teineve mulli setatpulov tis mairepa !mauqmun mue euqilimis menoitaticrexe tis, xe mauqsiuq, orev aiciffo tnuicsen esse, satpulov mer euqati sumicud etatpulov matot euqta sutan muitnasucca itaceacbo tareauq sudnelleper atulos aiuq muitnadual erecaf !atidepxe mue, tido muspi sidneicier ingam seroirepsa orev itpurroc. Tile gnicisipida rutetcesnoc tema tis rolod muspi merol.",
+    "go": "OG"
+  },
+  "horizontalPlayer": {
+    "images1": {
+      "image1": "Yrevocer",
+      "image2": "Rotaluclac",
+      "image3": "Rellortnoc",
+      "image4": "Levart",
+      "image5": "Ecnanif",
+      "image6": "Ecnanif\nssenisub",
+      "image7": "Rellortnoc",
+      "image8": "Levart",
+      "image9": "Ecnanif",
+      "image10": "Ecnanif\nssenisub"
+    },
+    "images2": {
+      "image13": "Ecnanif",
+      "image14": "Ecnanif\nssenisub",
+      "image15": "Rotaluclac",
+      "image16": "Yrevocer",
+      "image17": "Rellortnoc",
+      "image18": "Levart",
+      "image19": "Rotaluclac",
+      "image20": "Rellortnoc",
+      "image21": "Levart",
+      "image22": "Ecnanif"
+    },
+    "title": "Tis rolod muspi merol",
+    "paragraph": "Etatpulov teineve mulli setatpulov tis mairepa !mauqmun mue euqilimis menoitaticrexe tis, xe mauqsiuq, orev aiciffo erecaf! Atidepxe mue, tido muspi sidneicier ingam seroirepsa orev itpurroc. Tile gnicisipida rutetcesnoc tema tis rolod muspi merol."
+  },
+  "frontReverseCard": {
+    "name1": "Tcudorp1",
+    "name2": "Tcudorp2",
+    "name3": "Tcudorp3",
+    "description1": "Tile gnicisipida ,rutetcesnoc tema tis rolod muspi merol.",
+    "description2": "Rerum fuga sint soluta!",
+    "description3": "Eum minima soluta voluptatibus nostrum vero quisquam porro omnis libero maxime quidem ex qui quos, vel laborum eos?"
+  },
+  "preserve3d": {
+    "title": "Merol"
+  },
+  "secondScreen": {
+    "card1": {
+      "name": "Rolod muspi merol",
+      "description": "Siitidnalb ouq tiredneherper tua douq ednu mairepa, idommoc tipicsus. Somissingid omen mallu eauq euqilimis tse. Tile gnicisipida rutetcesnoc tema tis rolod muspi merol."
+    },
+    "card2": {
+      "name": "Gnicisipida rutetcesnoc",
+      "description": "Sudnelleper olli muitnasucca, muc da siiciffo subitatissecen siitidnalb ouq tiredneherper tua douq ednu mairepa, idommoc tipicsus?"
+    },
+    "card3": {
+      "name": "Eauq euqilimis tse",
+      "description": "Idommoc tipicsus. Somissingid omen mallu eauq euqilimis tse."
+    },
+    "card4": {
+      "name": "Idommoc tipicsus",
+      "description": "Tile gnicisipida rutetcesnoc tema tis rolod muspi merol."
+    },
+    "card5": {
+      "name": "Siiciffo subitatissecen",
+      "description": "Muc da siiciffo subitatissecen siitidnalb ouq tiredneherper tua douq ednu mairepa, idommoc tipicsus."
+    },
+    "card6": {
+      "name": "Douq ednu mairepa",
+      "description": "Tile gnicisipida rutetcesnoc tema tis rolod muspi merol."
+    },
+    "card7": {
+      "name": "Gnicisipida rutetcesnoc",
+      "description": "Omen mallu eauq euqilimis tse. Tile gnicisipida rutetcesnoc tema tis rolod muspi merol."
+    },
+    "card8": {
+      "name": "Rolod muspi merol",
+      "description": "Siitidnalb ouq tiredneherper tua douq ednu mairepa, idommoc tipicsus."
+    },
+    "header": "Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.",
+    "end": "Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol.mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol. Mauqila omen non erotnevni etatpulov, seroirepsa isauq eataeb sudnelleper mutatpulov teineve atcid ednu sauq adnemussa atulos sitibed tis rutauqesnoc diuqila aiuq mauq. Tile gnicisipida, rutetcesnoc tema tis rolod muspi merol."
   }
 }

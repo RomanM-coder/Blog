@@ -1,0 +1,55 @@
+.profilePage {
+  width: clamp(350px, 45%, 600px);
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #b1b0b0;
+  margin-top: 18px;
+  padding: 0 20px;
+}
+
+.profileUser {
+  text-align: center;
+}
+.infoContent {
+  /* padding: 0 50px 20px 50px; */
+}
+.profileStats {
+  width: 100%;
+}
+.statsGrid {
+  width: 100%;
+}
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  width: 100%;
+}
+
+.infoHeader {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+/* skeleton */
+
+.profileHeader {
+  margin-top: 18px;
+  margin-bottom: 0px;
+}
+
+.avatarOverlay {
+  margin: 0 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  border-radius: 5px;
+}
+
+.btnEdit {
+  margin: 0 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  border-radius: 5px;
+  text-align: center;
+}

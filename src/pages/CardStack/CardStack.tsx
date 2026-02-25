@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { motion, useScroll, useMotionValue, useTransform, useMotionValueEvent, animate, useMotionTemplate } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import {useAnimatedCounter} from '../../components/Counter'
 import styles from './CardStack.module.css'
 
 export const CardStack: React.FC = () => {
-  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down')
+  const [, setScrollDirection] = useState<'up' | 'down'>('down')
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [cardRanges, setCardRanges] = useState<{ start: number, end: number }[]>([])
 
-  const [animated, setAnimated] = useState(false)
-  const number = useMotionValue(0)
+  // const [animated, setAnimated] = useState(false)
+  // const number = useMotionValue(0)
   const { scrollY } = useScroll()
 
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -19,7 +19,7 @@ export const CardStack: React.FC = () => {
 
   const counter = useAnimatedCounter(100, 0, 5)
 
-  const [activeHamb, setActiveHamb] = useState(false)  
+  // const [activeHamb, setActiveHamb] = useState(false)  
   // const scrollY = useMotionValue(0)
 
   // useMotionValueEvent(scrollY, "change", (latest) => {
@@ -33,11 +33,11 @@ export const CardStack: React.FC = () => {
   // const number = useTransform(shouldAnimate, [0, 1], [0, 100], {
   //   clamp: true
   // })
-  const maxScroll = Math.max(
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight
-  )
-  const maxNumber = 1000 // Максимальное значение числа
+  // const maxScroll = Math.max(
+  //     document.body.scrollHeight,
+  //     document.documentElement.scrollHeight
+  // )
+  // const maxNumber = 1000 // Максимальное значение числа
   // const numberValue = useMotionValue(0) // Начальное значение числа
   // const animatedNumber = useTransform(numberValue, (value) => Math.round(value))
  
@@ -189,7 +189,7 @@ export const CardStack: React.FC = () => {
     const calculateRanges = () => {
       const ranges: { start: number, end: number }[] = []
 
-      cardRefs.current.forEach((el, i) => {
+      cardRefs.current.forEach((el) => {
         if (el) {
           const { start, end } = positionElement(el)
           ranges.push({ start, end })

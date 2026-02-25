@@ -1,0 +1,103 @@
+/* info */
+.profileInfo {
+}
+.infoHeader {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.btnEdit {
+  margin: 0 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  border-radius: 5px;
+  height: 31px;
+  transition: color 0.25s;
+  transition: background-color 0.25s;
+}
+.btnEdit:hover {
+  background-color: #e2f2f7;
+  color: #0b5dd7;
+}
+.infoContent {
+  padding-bottom: 20px;
+}
+.infoItem {
+  /* display: flex;
+  justify-content: space-between; */
+  padding: 0 50px;
+}
+.noInfo {
+}
+.bg1 {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(226, 248, 255);
+  padding: 0 10px;
+}
+.bg2 {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8efef;
+  padding: 0 10px;
+}
+.strongField {
+  text-wrap: nowrap;
+  padding-right: 10px;
+}
+.field {
+}
+
+/* edit */
+.profileInfoEdit {
+}
+.profileHeaderEdit {
+  text-align: center;
+}
+.inputField {
+}
+.itemInput {
+  width: 100%;
+}
+.labelInput {
+}
+.inputField:last-child {
+  padding-bottom: 15px;
+}
+.profile_error {
+  color: red;
+}
+.formProfileEditAction {
+  padding-bottom: 20px;
+}
+.btnSubmit {
+  width: auto; /* или fit-content */
+  min-width: 100px;
+
+  margin: 0 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  background-color: #76a7f0;
+  border-radius: 5px;
+  height: 31px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+.btnSubmit:hover {
+  background-color: #4f8ae4;
+}
+.btnCancel {
+  width: auto; /* или fit-content */
+  min-width: 100px;
+
+  margin: 0 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  background-color: #e9e9ed;
+  border-radius: 5px;
+  height: 31px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+.btnCancel:hover {
+  background-color: #d2d2d6;
+}

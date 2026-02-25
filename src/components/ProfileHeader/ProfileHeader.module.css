@@ -1,0 +1,47 @@
+.profileHeader {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+.avatarSection {
+}
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.avatarImage {
+  width: 36px;
+  height: 36px;
+  margin: 0 20px;
+}
+.avatarOverlay {
+  margin: 0 20px;
+  padding: 3px 6px;
+  border: 1px solid #b1b0b0;
+  border-radius: 5px;
+  transition: color 0.25s;
+  transition: background-color 0.25s;
+}
+.avatarOverlay:hover {
+  background-color: #e2f2f7;
+  color: #0b5dd7;
+}
+.avatarUploadLabel {
+  cursor: pointer;
+}
+.profileIinfo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.profileName {
+}
+.footerHeader {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.profileEmail {
+}
+.profileJoinDate {
+}

@@ -1,0 +1,141 @@
+.landingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 50px 20px;
+
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  overflow: hidden;
+  width: 100%;
+  gap: 5px;
+}
+
+.screenWrapper {
+  /* margin: 2rem 0; */
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 80%;
+  text-align: center;
+
+  height: 175px;
+}
+
+.active {
+  background-color: #f0f0f0;
+  border-color: #007bff;
+
+  /* animation: rotate-animation 1s ease forwards; */
+  transform-origin: 50% 50% -35px;
+}
+
+.active.scrollDown {
+  animation: rotate-animation-down 1s ease forwards;
+}
+
+.active.scrollUp {
+  animation: rotate-animation-up 1s ease forwards;
+}
+
+.array2Description {
+  font-style: italic;
+  color: #f3911b;
+  margin-top: 0.5rem;
+}
+
+/* Анимация для скролла вниз */
+@keyframes rotate-animation-down {
+  0% {
+    transform: rotateX(0deg) translateY(-100px);
+  }
+  20% {
+    transform: rotateX(60deg) translateY(50px);
+  }
+  40% {
+    transform: rotateX(-40deg) translateY(-10px);
+  }
+  60% {
+    transform: rotateX(20deg);
+  }
+  80% {
+    transform: rotateX(-10deg);
+  }
+  90% {
+    transform: rotateX(3deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* Анимация для скролла вверх */
+@keyframes rotate-animation-up {
+  0% {
+    transform: rotateX(0deg) translateY(100px);
+  }
+  20% {
+    transform: rotateX(-60deg) translateY(-50px);
+  }
+  40% {
+    transform: rotateX(40deg) translateY(10px);
+  }
+  60% {
+    transform: rotateX(-20deg);
+  }
+  80% {
+    transform: rotateX(10deg);
+  }
+  90% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* @keyframes rotate-animation {
+  0% {
+    transform: rotateX(0deg);
+  }
+  20% {
+    transform: rotateX(60deg);
+  }
+  40% {
+    transform: rotateX(-40deg);
+  }
+  60% {
+    transform: rotateX(20deg);
+  }
+  80% {
+    transform: rotateX(-10deg);
+  }
+  90% {
+    transform: rotateX(3deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  } */
+
+/* @keyframes rotate-animation {
+  0% {
+    transform: rotateX(0deg) translateY(60px);
+  }
+  20% {
+    transform: rotateX(60deg) translateY(-30px);
+  }
+  40% {
+    transform: rotateX(-40deg) translateY(30px);
+  }
+  60% {
+    transform: rotateX(20deg) translateY(-20px);
+  }
+  80% {
+    transform: rotateX(-10deg) translateY(20px);
+  }
+  90% {
+    transform: rotateX(3deg) translateY(-5px);
+  }
+  100% {
+    transform: rotateX(0deg) translateY(0);
+  } */

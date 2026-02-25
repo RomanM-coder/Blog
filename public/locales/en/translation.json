@@ -1,35 +1,51 @@
-{ 
+{
   "zod": {
-      "messageLowercase": "The password must contain lowercase",
-      "messageUppercase": "The password must contain uppercase",
-      "messageSymbols": "The password must contain symbols",
-      "messageNumber": "The password must contain number",
-      "messageShort": "The password is too short",
-      "messageLong": "The password is too long",
-      "messageEmailUncorrect": "Incorrect email",
-      "messageNameCatShort": "The category name is too short",
-      "messageNameCatLong": "The category name is too long",
-      "messageTransNameCatShort": "The translation of the category description is too short",
-      "messageTransNameCatLong": "The translation of the category description is too long",
-      "messageDescCatShort": "The category description is too short",
-      "messageDescCatLong": "The category description is too long",
-      "messageTransDescCatShort": "The translation of the category description is too short",
-      "messageTransDescCatLong": "The translation of the category description is too long",
-      
-      "messageNamePostShort": "The post name is too short",
-      "messageNamePostLong": "The post name is too long",
-      "messageTransNamePostShort": "The translation of the post description is too short",
-      "messageTransNamePostLong": "The translation of the post description is too long",
-      "messageDescPostShort": "The post description is too short",
-      "messageDescPostLong": "The post description is too long",
-      "messageTransDescPostShort": "The translation of the post description is too short",
-      "messageTransDescPostLong": "The translation of the post description is too long",
-      
-      "messageNameCommentLong": "The comment is too long",      
-      "messageTransNameCommentLong": "The translation of the comment description is too long"
-      
+    "messageLowercase": "The password must contain lowercase",
+    "messageUppercase": "The password must contain uppercase",
+    "messageSymbols": "The password must contain symbols",
+    "messageNumber": "The password must contain number",
+    "messageShort": "The password is too short",
+    "messageLong": "The password is too long",
+    "messageEmailUncorrect": "Incorrect email",
+    "messageNameCatShort": "The category name is too short",
+    "messageNameCatLong": "The category name is too long",
+    "messageTransNameCatShort": "The translation of the category description is too short",
+    "messageTransNameCatLong": "The translation of the category description is too long",
+    "messageDescCatShort": "The category description is too short",
+    "messageDescCatLong": "The category description is too long",
+    "messageTransDescCatShort": "The translation of the category description is too short",
+    "messageTransDescCatLong": "The translation of the category description is too long",
+
+    "messageNamePostShort": "The post name is too short",
+    "messageNamePostLong": "The post name is too long",
+    "messageTransNamePostShort": "The translation of the post description is too short",
+    "messageTransNamePostLong": "The translation of the post description is too long",
+    "messageSectionContentRequired": "The content is required",
+    "messageSectionContentLong": "The content is too long",
+    "messageImageRequired": "Image is required",
+    "messageImageAltRequired": "Alt is required",
+    "messageSectionRuContentRequired": "The translation of the content is required",
+    "messageSectionRuContentLong": "The translation of the content is too long",
+    "messageImageRuRequired": "Image is required",
+    "messageImageRuAltRequired": "Alt Ru is required",
+    "messageNameCommentLong": "The comment is too long",
+    "messageTransNameCommentLong": "The translation of the comment description is too long",
+
+    "firstName": {
+      "tooLong": "The name cannot be longer than 30 characters",
+      "invalidChars": "A name can only contain letters, numbers, spaces, hyphens, and apostrophes",
+      "doubleSpaces": "Remove the extra spaces"
     },
-  "auth": {    
+    "lastName": {
+      "tooLong": "The last name cannot be longer than 30 characters.",
+      "invalidChars": "A surname can only contain letters, numbers, spaces, hyphens, and apostrophes",
+      "doubleSpaces": "Remove the extra spaces"
+    },
+    "bio": {
+      "tooLong": "A story cannot be longer than 100 characters"
+    }
+  },
+  "auth": {
     "form": {
       "title": "Authorization",
       "siteTitle": "Simple blog",
@@ -40,46 +56,80 @@
       "placeholderFile": "Upload a file",
       "fieldFile": "File",
       "enter": "ENTER",
-      "registr": "REGISTRATION"
+      "registr": "REGISTRATION",
+      "emailConfirmed": "Email confirmed",
+      "emailNotConfirmed": "Email has not been confirmed",
+      "emailVerification": "Enter the email address for verification",
+      "confirm": "confirm",
+      "login": "Login",
+      "regin": "Regin"
     },
     "toast": {
-      "userAdd": "The user has been added",
-      "fileAdd": "The user's file has been added",
-      "userLogin": "The user is logged in"
+      "reg": {
+        "messageUserCreated": "The user has been created",
+        "messageDataIncorrectReg": "Incorrect data during registration",
+        "messageAlreadyExists": "Such a user already exists",
+        "fileAdd": "The user's file has been successfully added ",
+        "registrationFailed": "Registration failed",
+        "userNotFound": "User not found",
+        "fileNotFound": "File not found",
+        "fileExist": "File already exist",
+        "invalidEmailFormat": "Invalid email format"
+      },
+      "login": {
+        "userLogin": "The user is logged in",
+        "loginFailed": "Login failed",
+        "messageDataIncorrectLog": "Incorrect data to log in to the system",
+        "messageUserNotFound": "The user was not found",
+        "messagePasswordIncorrect": "Invalid password, try again",
+        "messageEmailToken": "A token-based email has been sent to your email address",
+        "messageLinkIncorrect": "Invalid or expired confirmation link",
+        "messageEmailConfirm": "Email cofirmed successfully"
+      },
+      "error": "Error"
     }
   },
   "adminLogin": {
     "login": "The admin is logged in"
   },
   "catList": {
-    "searchInput": "Search for a category by name",    
-    "header": "Category list page",
-    "category_one": "{{count}} category",    
+    "searchInput": "Search for a category by name",
+    "header": "Admin Category list page",
+    "category_one": "{{count}} category",
     "category_other": "{{count}} categories",
-    "category_zero": "There are no categories",
-    "orderAsc": "asc order",
+    "category_zero": "{{count}} categories",
+    "categoryNo": "There are no categories yet",
+    "categoryNotFound": "Category not found",
+
+    "asc": "asc",
     "orderDesc": "desc order",
+    "order": "order",
     "byId": "by ID",
     "byName": "by name",
     "mix": "Shuffle",
     "all": "All",
-    "count": "Quantity: ",
+    "total": "In total: ",
     "next": "next >",
-    "prev": "< prev",      
-    "toast": {
-      
-    }
+    "prev": "< prev",
+    "error": "Error",
+    "toast": {}
   },
-  "adminCatList": {           
+  "adminCatList": {
+    "header": "Admin Category list page",
+    "total": "In total: ",
+    "category_one": "{{count}} category",
+    "category_other": "{{count}} categories",
+    "category_zero": "There are no categories",
+    "categoryNotFound": "Category not found",
     "toast": {
-      "categoryAdd": "Category added",      
-      "categoryUpdated": "The category has been changed",
-      "categoryDeleted": "Category deleted"
+      "categoryAdded": "The category has been added successfully",
+      "categoryUpdated": "The category has been updated successfully",
+      "categoryDeleted": "The category has been added successfully"
     }
   },
   "addEditCatForm": {
     "titleAdd": "Adding a category",
-    "titleEdit": "Edit a category",   
+    "titleEdit": "Edit a category",
     "placeholderName": "Category title",
     "placeholderNameRu": "Russian translation of the category name",
     "placeholderUploadFile": "Upload a file",
@@ -90,22 +140,92 @@
     "placeholderDescriptionRu": "Description of the category in Russian",
     "addCategory": "Add a category",
     "saveCategory": "Save a category"
-  },  
+  },
   "postPage": {
+    "headerPosts": "Posts",
     "searchInput": "Search for a post by name",
-    "header": "Page posts/ Category ",   
+    "header": "Page posts/ Category ",
     "noPost": "There are no posts yet",
+    "total": "Total ",
+    "post_one": "{{count}} post",
+    "post_other": "{{count}} posts",
+    "post_zero": "There are no posts",
+    "errorLoading": "Download error.",
+    "refreshingPage": "Try refreshing the page.",
+    "refresh": "Refresh",
     "toast": {
-      "voteLike": "Your vote is counted"            
+      "voteLike": "Your vote is counted",
+      "postNotFound": "Post not found",
+      "voteError": "Voting error",
+      "incorrectPostID": "Incorrect Post ID format",
+      "ruPostNotFound": "RuPost not found",
+      "error": "Error",
+      "voteOnce": "The user can vote only once",
+      "errorLoad": "Error load",
+      "confirmEmail": "Users who have verified their email can vote and leave comments."
+    },
+    "sort": {
+      "fresh": "Fresh",
+      "month": "Per month",
+      "year": "For the year",
+      "all": "All",
+      "popular": "Popular"
+    }
+  },
+  "profilePage": {
+    "noProfile": "Profile not found",
+    "lastVisit": "The last time was",
+    "profileHeader": {
+      "fileIsImage": "The file must be an image",
+      "fileSize": "The file size should not exceed 2MB",
+      "errorEdit": "Error updating the avatar",
+      "loading": "Loading...",
+      "changeAvatar": "Change your avatar",
+      "user": "User",
+      "register": "Registered",
+      "year": "year"
+    },
+    "profileInfo": {
+      "header": "Profile editing",
+      "edit": "Edit",
+      "infoHeader": "Information",
+      "name": "Name: ",
+      "bio": "About me: ",
+      "noInformation": "No information is provided"
+    },
+    "form": {
+      "enter": "ENTER",
+      "cancel": "CANCEL",
+      "fieldFirstName": "First name",
+      "placeholderFirstName": "Input first name",
+      "fieldLastName": "Last name",
+      "placeholderLastName": "Input last name",
+      "bio": "Bio",
+      "placeholderBio": "Tell us about yourself..."
     }
   },
   "adminPostPage": {
-    "header": "Admin page posts/ Category ",   
-    "createPost": "Create new post",    
-    "toast": {      
+    "header": "Admin page posts/ Category ",
+    "createPost": "Create new post",
+    "noPost": "There is no post",
+    "countPosts": "Number of posts: ",
+    "showInFull": "Show in full",
+    "toast": {
       "addPost": "Post added",
       "editPost": "Post edited",
-      "deletePost": "Post deleted"      
+      "deletePost": "Post deleted",
+      "deleteComment": "Comment deleted",
+      "editComment": "Commemt edited",
+      "addComment": "Comment added",
+      "deleteAllComments": "All comments post`s deleted",
+      "voteLike": "Your vote is counted",
+      "postNotFound": "Post not found",
+      "userNotFound": "User not found",
+      "commentNotFound": "Comment not found",
+      "commentsNotFound": "Comments not found",
+      "error": "Error",
+      "ErrorSaveFile": "Error saving file",
+      "errorCreateFilesDirectory": "Cannot create FilesDirectory"
     }
   },
   "addEditPostForm": {
@@ -114,42 +234,89 @@
     "placeholderName": "Title post`s",
     "titleIsRequired": "Title is required",
     "placeholderNameRu": "The Russian translation of the title",
-    "titleTransIsRequired": "The Russian translation is required",    
-    "placeholderDescription": "Description post`s",
-    "descIsRequired": "Description is required",
-    "placeholderDescriptionRu": "Translation description post`s",
-    "descRuIsRequired": "Translation description is required",
+    "titleTransIsRequired": "The Russian translation is required",
     "placeholderFavorite": "Favorite",
     "placeholderNoFavorite": "No Favorite",
     "addPost": "Add post",
-    "savePost": "Save post"   
-  },  
+    "savePost": "Save post",
+    "sectionsEn": "sections",
+    "addTextSection": "add text section",
+    "addImageSection": "add image section",
+    "textSection": "text section",
+    "imageSection": "image section",
+    "order": "order",
+    "removeSection": "remove section",
+    "placeholderSectionContent": "Content section",
+    "imageFile": "File:",
+    "altText": "Alt:",
+    "placeholderAltText": "Alt text",
+    "currentImage": "Current image",
+    "sectionsRu": "Ru-section",
+    "placeholderSectionContentRu": "Ru content section",
+    "placeholderViews": "Views",
+    "viewsIsRequired": "Vievs is required",
+    "removeImage": "Remove image",
+    "newImage": "New image",
+    "chooseFile": "Choose file"
+  },
   "singlePostPage": {
     "searchInput": "Search for a comment by context",
-    "header": "Comments",    
+    "header": "Comments",
     "noComments": "There are no comments yet",
     "noPost": "There is no post",
+    "popularComments": "Popular comments",
+    "total": "Total ",
+    "comment_one": "{{count}} comment",
+    "comment_other": "{{count}} comments",
+    "comment_zero": "There are no comments",
+    "showAllComments": "Show all comments",
+    "rollUp": "Roll up",
+    "response_one": "{{count}} answer",
+    "response_other": "{{count}} responses",
+    "response_zero": "{{count}} responses",
+    "hide": "Hide",
+    "toAnswer": "To answer",
+    "inPost": "in post",
+    "errorLoading": "Download error.",
+    "refreshingPage": "Try refreshing the page.",
+    "refresh": "Refresh",
     "toast": {
-      "changeLike": "The like has been changed",     
+      "changeLike": "The like has been changed",
       "editPost": "Post edited",
       "deletePost": "Post deleted",
       "addComment": "Comment added",
-      "detetedAllComments": "Comments on the post have been deleted"      
+      "detetedAllComments": "Comments on the post have been deleted",
+
+      "voteLike": "Your vote is counted",
+      "postNotFound": "Post not found",
+      "commentNotFound": "Comment not found",
+      "voteError": "Voting error",
+      "incorrectPostID": "Incorrect Post ID format",
+      "ruPostNotFound": "RuPost not found",
+      "error": "Error",
+      "voteOnce": "The user can vote only once"
     }
   },
   "adminSinglePost": {
-    "header": "Comments",    
+    "header": "Comments",
     "noComments": "There are no comments yet",
     "noPost": "There is no post",
+    "comment_one": "{{count}} comment",
+    "comment_other": "{{count}} comments",
+    "comment_zero": "There are no comments",
     "deleteAllComments": "all comments",
     "toast": {
-      "changeLikePost": "The like post has been changed",     
+      "changeLikePost": "The like post has been changed",
       "editPost": "Post edited",
-      "deletePost": "Post deleted",      
+      "deletePost": "Post deleted",
       "addComment": "Comment added",
       "editComment": "Comment edited",
       "deteteComment": "Comment deleted",
-      "detetedAllComments": "Comments on the post have been deleted"      
+      "detetedAllComments": "Comments on the post have been deleted",
+      "error": "Error",
+      "userNotFound": "User not found",
+      "voteOnce": "The user can vote only once",
+      "voteLike": "Your vote is counted"
     }
   },
   "addEditCommentForm": {
@@ -158,84 +325,314 @@
     "placeholderComment": "Comment post`s",
     "commentIsRequired": "Comment post`s is required",
     "placeholderCommentRu": "The Russian translation of the comment",
-    "commentTransIsRequired": "The Russian translation comment is required",    
-    "placeholderLike": "Like post`s",    
-    "placeholderDislike": "Dislike post`s",    
+    "commentTransIsRequired": "The Russian translation comment is required",
+    "placeholderLike": "Like post`s",
+    "placeholderDislike": "Dislike post`s",
     "addComment": "Add comment",
-    "saveComment": "Save comment"   
+    "saveComment": "Save comment"
   },
   "adminUser": {
-    "searchInput": "Search for a user email",    
+    "searchInput": "Search for a user email",
     "header": "Admin list user",
-    "user_one": "{{count}} user",    
+    "usersCount": "Total users:  ",
+    "user_one": "{{count}} user",
     "user_other": "{{count}} users",
     "user_zero": "There are no users",
-    "orderAsc": "asc order",
-    "orderDesc": "desc order",
-    "byId": "by ID",
-    "byName": "by name",
-    "mix": "Shuffle",
-    "all": "All",
+    "userNo": "There are no users",
+    "error": "Error",
     "count": "Quantity: ",
     "next": "next >",
-    "prev": "< prev",      
+    "prev": "< prev",
+    "noProfile": "Profile not found",
+    "lastVisit": "The last time was",
+    "profileHeader": {
+      "fileIsImage": "The file must be an image",
+      "fileSize": "The file size should not exceed 2MB",
+      "errorEdit": "Error updating the avatar",
+      "loading": "Loading...",
+      "changeAvatar": "Change your avatar",
+      "user": "User",
+      "register": "Registered",
+      "year": "year"
+    },
+    "profileInfo": {
+      "infoHeader": "Information",
+      "name": "Name: ",
+      "bio": "About me: ",
+      "noInformation": "No information is provided"
+    },
+    "table": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "bio": "About me",
+      "role": "Role",
+      "createdAt": "Created at",
+      "lastLogin": "Last visit",
+      "confirmed": "Confirmed",
+      "blocked": "Blocked",
+      "commentsCount": "Comments",
+      "action": "Action",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
     "toast": {
-      "userAdd": "User added",      
+      "userAdded": "User added",
       "userUpdated": "The user has been changed",
       "userDeleted": "User deleted"
     }
   },
   "adminLog": {
-    "searchInput": "Search for a admin by id",    
+    "searchInput": "Search for a admin by id",
     "header": "Admin list",
-    "admin_one": "{{count}} admin",    
+    "admin_one": "{{count}} admin",
     "admin_other": "{{count}} admins",
-    "admin_zero": "There are no admins",    
-    "count": "Quantity: ",
+    "admin_zero": "There are no admins",
+    "error": "Error",
+    "count": "Total log record: ",
     "next": "next >",
-    "prev": "< prev"    
+    "prev": "< prev"
   },
   "addEditUserForm": {
     "titleAdd": "Adding a user",
     "titleEdit": "Editing a user",
     "placeholderEmail": "Email user`s",
     "emailIsRequired": "Email user`s is required",
-    "placeholderRole": "Role user`s",
-    "roleIsRequired": "Role user`s is required",    
-    "placeholderVerified": "Verified email user`s",    
+    "placeholderRole": "Role user`s: ",
+    "roleIsRequired": "Role user`s is required",
+    "placeholderConfirmed": "Cofirmed email user`s",
     "placeholderBlocked": "Blocked user",
-    "placeholderCreatedAt": "User created at",
+    "placeholderCreatedAt": "Created at: ",
     "createdAtRequired": "User`s created at is required",
-    "placeholderLastLogin": "Last login",
+    "placeholderLastLogin": "Last login: ",
     "lastLoginRequired": "User`s last login is required",
     "checkPosts": "Mark the selected posts",
     "checkComments": "Mark the selected comments",
+    "commentsCount": "Number of comments",
+    "placeholderCommentsCount": "Enter the number of comments",
+    "checkPostsPublishedId": "Mark the published posts",
     "addUser": "Add user",
-    "saveUser": "Edit user"   
-  },   
+    "saveUser": "Edit user"
+  },
   "deleteForm": {
     "doYouReally": "Do you really want to delete a {{type}}: ",
-    "doYouReallyAllComm": "Do you really want to delete all comments post: ",  
+    "doYouReallyAllComm": "Do you really want to delete all comments post: ",
     "Ok": "Ok",
     "Cancel": "Cancel"
   },
   "navBar": {
     "siteTitle": "Simple blog",
     "minSiteTitle": "Sb",
-    "home": "Home",
+    "home": "Categories",
     "posts": "Posts",
     "users": "Users",
+    "userProfile": "Profile",
     "logs": "Logs",
     "about": "About us",
     "landing": "Presentation page",
     "exit": "Exit",
     "auth": "Authorization",
+    "posting": "Posting",
+    "adminLog": "Admin logs",
+    "sortButton": {
+      "popular": "Popular",
+      "fresh": "Fresh",
+      "month": "Per month",
+      "year": "For the year",
+      "all": "For all the time"
+    },
     "toast": {
-      "keyboardLayout": "Please use the English keyboard layout."
-    }    
+      "keyboardLayout": "Please use the English keyboard layout.",
+      "keyboardSignLayout": "Please use the permitted signs."
+    }
+  },
+  "sidebarLeft": {
+    "popular": "Popular",
+    "fresh": "Fresh",
+    "month": "Per month",
+    "year": "For the year",
+    "all": "For all the time",
+    "rules": "Rules",
+    "theme": "Theme",
+    "information": "Information"
+  },
+  "blogPost": {
+    "showInFull": "Show in full"
+  },
+  "commentForm": {
+    "comment": "Comment",
+    "reactions": "Reactions",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "postPublication": {
+    "header": "Publication page"
+  },
+  "aboutPage": {
+    "header": "About page"
+  },
+  "rulesPage": {
+    "header": "Rules page"
+  },
+  "lazyImages": {
+    "notLoading": "Failed to upload: ",
+    "loading": "Loading..."
   },
   "footer": {
     "title": "© React Blog",
-    "current_date": "Today is : {{date, MY_DATE}}"    
+    "current_date": "Today is : {{date, MY_DATE}}"
+  },
+  "headerLanding": {
+    "header": "Lorem ipsum dolor sit amet consectetur, adipisicing elit",
+    "context1": "Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam.Lorem ipsum dolor sit amet consectetur, adipisicing elit voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam.",
+    "context2": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi nemo aliquam."
+  },
+  "variant2": {
+    "header": "Lorem ipsum dolor sit",
+    "header1": "Lorem ipsum",
+    "card1": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum.",
+    "header2": "Lorem",
+    "card2": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    "header3": "Lorem ipsum",
+    "card3": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores dolor sit amet consectetur voluptatum repellendus beatae quasi asperiores, voluptate inventore.",
+    "header4": "Lorem ipsum dolor",
+    "card4": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum.",
+    "header5": "Lorem",
+    "card5": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    "header6": "Aliquid consequatur",
+    "card6": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores dolor sit amet consectetur voluptatum repellendus beatae quasi asperiores, voluptate inventore."
+  },
+  "xCardStack": {
+    "context1": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta sit debitis soluta assumenda quas unde dicta eveniet luptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam.eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi nemo aliquam.",
+    "context2": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit ametconsectetur, adipisicing elit. Quam quia aliquid beatae quasi asperiores, voluptate inventore non nemo aliquam.",
+    "context3": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aiquam.Lorem ipsum dolor sit amet consectetur, asperiores, voluptate inventore non nemo aliquam.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam.",
+    "card1": {
+      "title": "Lorem ipsum",
+      "text": "This is the first card. This is the first card. This is the first card. This is the first card. This is the first card."
+    },
+    "card2": {
+      "title": "Lorem",
+      "text": "This is the second card. This is the second card. This is the second card."
+    },
+    "card3": {
+      "title": "Lorem ipsum dolor sit",
+      "text": "This is the third card. This is the third card. This is the third card. This is the third card. This is the third card. This is the third card."
+    },
+    "card4": {
+      "title": "Lorem ipsum dolor",
+      "text": "This is the fourth card. This is the fourth card."
+    }
+  },
+  "imageStripes": {
+    "images1": {
+      "image1": "Recovery",
+      "image2": "Calculator",
+      "image3": "Controller",
+      "image4": "Travel",
+      "image5": "Finance",
+      "image6": "Business\nfinance"
+    },
+    "images2": {
+      "image7": "Controller",
+      "image8": "Travel",
+      "image9": "Finance",
+      "image10": "Business\nfinance",
+      "image11": "Recovery",
+      "image12": "Calculator"
+    },
+    "images3": {
+      "image13": "Finance",
+      "image14": "Business\nfinance",
+      "image15": "Calculator",
+      "image16": "Recovery",
+      "image17": "Controller",
+      "image18": "Travel"
+    },
+    "images4": {
+      "image19": "Calculator",
+      "image20": "Controller",
+      "image21": "Travel",
+      "image22": "Finance",
+      "image23": "Business\nfinance",
+      "image24": "Recovery"
+    },
+    "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "paragraph1": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "paragraph2": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vero asperiores magni reiciendis ipsum odit, eum expedita! Facere laudantium quia soluta repellendus quaerat obcaecati accusantium natus atque totam voluptate ducimus itaque rem voluptas, esse nesciunt officia vero, quisquam ex, sit exercitationem similique eum numquam! Aperiam sit voluptates illum eveniet voluptate.",
+    "go": "GO"
+  },
+  "horizontalPlayer": {
+    "images1": {
+      "image1": "Recovery",
+      "image2": "Calculator",
+      "image3": "Controller",
+      "image4": "Travel",
+      "image5": "Finance",
+      "image6": "Business\nfinance",
+      "image7": "Controller",
+      "image8": "Travel",
+      "image9": "Finance",
+      "image10": "Business\nfinance"
+    },
+    "images2": {
+      "image13": "Finance",
+      "image14": "Business\nfinance",
+      "image15": "Calculator",
+      "image16": "Recovery",
+      "image17": "Controller",
+      "image18": "Travel",
+      "image19": "Calculator",
+      "image20": "Controller",
+      "image21": "Travel",
+      "image22": "Finance"
+    },
+    "title": "Lorem ipsum dolor sit",
+    "paragraph": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti vero asperiores magni reiciendis ipsum odit, eum expedita! Facere officia vero, quisquam ex, sit exercitationem similique eum numquam! Aperiam sit voluptates illum eveniet voluptate."
+  },
+  "frontReverseCard": {
+    "name1": "Product1",
+    "name2": "Product2",
+    "name3": "Product3",
+    "description1": "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    "description2": "Atulos tnis aguf murer!",
+    "description3": "Soe murobal lev, souq iuq xe mediuq emixam orebil sinmo orrop mauqsiuq orev murtson subitatpulov atulos aminim mue?"
+  },
+  "preserve3d": {
+    "title": "Lorem"
+  },
+  "secondScreen": {
+    "card1": {
+      "name": "Lorem ipsum dolor",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est similique quae ullam nemo dignissimos. Suscipit commodi, aperiam unde quod aut reprehenderit quo blanditiis."
+    },
+    "card2": {
+      "name": "Consectetur adipisicing",
+      "description": "Suscipit commodi, aperiam unde quod aut reprehenderit quo blanditiis necessitatibus officiis ad cum, accusantium illo repellendus?"
+    },
+    "card3": {
+      "name": "Est similique quae",
+      "description": "Est similique quae ullam nemo dignissimos. Suscipit commodi."
+    },
+    "card4": {
+      "name": "Suscipit commodi",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    "card5": {
+      "name": "Necessitatibus officiis",
+      "description": "Suscipit commodi, aperiam unde quod aut reprehenderit quo blanditiis necessitatibus officiis ad cum."
+    },
+    "card6": {
+      "name": "Aperiam unde quod",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    "card7": {
+      "name": "Consectetur adipisicing",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est similique quae ullam nemo."
+    },
+    "card8": {
+      "name": "Lorem ipsum dolor",
+      "description": "Suscipit commodi, aperiam unde quod aut reprehenderit quo blanditiis."
+    },
+    "header": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    "end": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quia aliquid consequatur sit debitis soluta assumenda quas unde dicta eveniet voluptatum repellendus beatae quasi asperiores, voluptate inventore non nemo aliquam."
   }
 }

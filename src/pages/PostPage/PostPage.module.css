@@ -1,23 +1,91 @@
-.posts {
-  max-width: 900px;
+/* .posts {  
+  width: 100%;
   margin: 0 auto;
+} */
+.subsite_feed_sorting {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
 }
-.posts h4 {
+/* .posts h4 {
   margin: 10px 5px;
-}
+} */
 .divAddPost {
   text-align: center;
 }
-.blogPage {
-  /* position: relative; */
-  flex-grow: 1;
+/* .blogPage { */
+/* position: relative; */
+/* flex-grow: 1;
+} */
+/* .allPosts { */
+/* display: grid; */
+/* grid-template-columns: auto; */
+/* grid-auto-rows: auto; */
+/* grid-auto-rows: min-content; */
+/* display: flex;
+  flex-direction: column;
+  gap: 5px;
+} */
+.subsite_feed {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-.allPosts {
-  display: grid; 
-  grid-template-columns: auto;
-  grid-auto-rows: 160px; 
-  padding: 0 10px;
+
+.subsite_dropdown {
+  display: flex;
+  /* align-items: center; */
+  font-size: 16px;
+  height: 30px;
+  padding: 0 24px;
+  margin-top: 15px;
 }
+.dropdown_label {
+}
+.subsite_feed_content {
+}
+.content_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.listWrapper {
+  position: absolute;
+  top: 56px;
+  left: 20px;
+  z-index: 5;
+}
+
+.context_list {
+  /* position: absolute; */
+  top: 551px;
+  left: 273px;
+  border-radius: 12px;
+  border: 1px solid black;
+  background-color: white;
+  padding: 6px;
+}
+
+.sort_link {
+  padding: 6px 10px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+}
+.sort_link:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+.sort_link:last-child {
+  margin-bottom: 0px;
+}
+
+.sort_div {
+}
+.sort_span {
+  font-size: 14px;
+  color: inherit;
+}
+
 .postWrapper {
   display: flex;
   flex-direction: column;
@@ -27,12 +95,18 @@
 .postContainer {
   border: 1px solid #b1b0b0;
   border-radius: 10px;
+  background-color: white;
 }
 
 @media (max-width: 480px) {
   .divAddPost {
     font-size: 14px;
   }
+}
+
+.loadMore {
+  cursor: pointer;
+  margin-bottom: 100px;
 }
 
 /* .blogPage .postLoader {
@@ -47,3 +121,12 @@
   border-radius: 10px;
   color: white;
 } */
+
+.skeleton {
+  width: 100%;
+}
+
+.skeletonInner {
+  border-radius: 10px;
+  margin: 5px 0;
+}

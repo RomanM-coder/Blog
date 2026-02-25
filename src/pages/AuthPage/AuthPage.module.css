@@ -1,7 +1,12 @@
 .row {
-  width: min-content;
+  /* width: min-content; */
+  width: 100%;
   margin: 0 auto;
-  padding-top: 60px;  
+  padding-top: 60px;
+  min-height: calc(100vh - 60px);
+  background-color: #c8d3da;
+  display: flex;
+  justify-content: center;
 }
 .collectionInput {
   margin-bottom: 30px;
@@ -14,25 +19,27 @@
   border-radius: 3px;
 }
 .cardContent {
- 
 }
 .cardAction {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .cardTitle {
   font-size: 24px;
-  color: white;  
+  color: white;
 }
-.inputField { 
-  width: 324px;
+.inputField {
+  width: 349px;
+  padding-top: 10px;
 }
-.labelInput {
+.labelInputPassword,
+.labelInputEmail {
   display: block;
   text-align: left;
-  font-size: 16px; 
+  font-size: 16px;
 }
 .btnYellow {
+  width: 80%;
   font-size: 17px;
   /* width: 18%;   */
   background-color: #f57f17;
@@ -42,10 +49,13 @@
   cursor: pointer;
   box-shadow: -2px 2px 4px -0.5px #000;
   text-align: center;
-  border: none;     
+  border: none;
+  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .btnGray {
+  width: 80%;
   font-size: 17px;
   /* width: 36%; */
   background-color: #bdbdbd;
@@ -54,17 +64,17 @@
   cursor: pointer;
   box-shadow: -2px 2px 4px -0.5px #000;
   text-align: center;
+  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .btnGray:hover {
   background-color: #adadad;
   color: #e6e6e6;
-  transition: all 0.3s
 }
 .btnYellow:hover {
   background-color: #e27515;
   color: #e6e6e6;
-  transition: all 0.3s
 }
 input:hover {
   /* border: none!important; */
@@ -84,7 +94,7 @@ input:focus {
   /* color: #ffffff!important; */
   font-size: 16px;
   background-color: inherit;
-  width: 300px;
+  width: 325px;
   cursor: auto;
   display: block;
   opacity: 1;
@@ -95,20 +105,22 @@ input:focus {
   /* border: 1px solid #fff!important; */
   /* border-bottom: 1px solid #fff; */
 }
-.yellowInput:focus, .labelInput:focus {
+.yellowInput:focus,
+.labelInput:focus {
   /* border: none;
   border-bottom: 1px solid #fff; */
-  color: #000!important;
+  color: #000 !important;
 }
 /* .yellowInput {
   color: #ffeb3b!important;
 } */
 .error {
-  color: #ff1744; 
+  color: #ff1744;
 }
 
 .col {
-  position: relative;
+  /* position: relative; */
+  width: 375px;
 }
 
 .authLoader {
@@ -118,71 +130,83 @@ input:focus {
   color: blue;
 }
 
-.fileAddAuth {
+/* .fileAddAuth {
   opacity: 0;
-  position: absolute; 
+  position: absolute;
   left: 0;
   top: 0;
   cursor: pointer;
   width: 115px;
-}
+} */
 
-.fileUpload {
+/* .fileUpload {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
-}
-.labelFile {
-  /* cursor: pointer; */
-}
-.fileName {
+} */
+/* .labelFile { */
+/* cursor: pointer; */
+/* } */
+/* .fileName {
   cursor: default;
-}
+} */
 .imgPng {
-  width: 25px; 
+  width: 25px;
   height: 25px;
 }
 .emailVefify {
   border-bottom: 1px solid #fff;
-  color: white;  
+  color: white;
 }
-.emailVefify:hover {  
-  color: black;  
+.emailVefify:hover {
+  color: black;
 }
 
 /* .yellowInput, .fileAddAuth {
   outline: none;
   all: unset; */
-  /* border: 1px solid rgb(129, 129, 129); */
-  /* background-color: unset; */
-  /* cursor: pointer; */
-  /* font-size: 16px;
+/* border: 1px solid rgb(129, 129, 129); */
+/* background-color: unset; */
+/* cursor: pointer; */
+/* font-size: 16px;
 }  */
+.auth_error {
+  color: red;
+}
 
+.emailCofirmed {
+  text-align: start;
+  margin-bottom: 10px;
+}
 
+.containerVisibilityIcon {
+  display: flex;
+  align-items: center;
+}
 
+.passwordVisibilityOffIcon,
+.passwordVisibilityIcon {
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+}
 
-
-
-
-
-
-
-
-.emailClearIcon:hover, .passwordVisibilityOffIcon:hover, .passwordVisibilityIcon:hover {
+.emailClearIcon:hover,
+.passwordVisibilityOffIcon:hover,
+.passwordVisibilityIcon:hover {
   color: #000;
   cursor: pointer;
 }
 
 button:disabled {
   /* background: #ddd; */
-  background: transparent;
-  cursor: default;
+  /* background: transparent;
+  cursor: default; */
 }
 
-input[type="button"]:active,
-input[type="submit"]:active {
+input[type='button']:active,
+input[type='submit']:active {
   transition: 0.3s all;
   transform: translateY(3px);
   border: 1px solid transparent;
@@ -202,7 +226,6 @@ input[type="button"],
 input[type="submit"] {
   -webkit-appearance: none;
 } */
-
 
 /* .popover__wrapper {
   position: relative;
@@ -257,3 +280,20 @@ li.line {
   padding-left: 15px; 
   margin-bottom: 5px;
 } */
+.modeChoice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.activeMode {
+  border: 1px solid #f57f17;
+  background-color: #2d9dff;
+}
+.buttonMode {
+  width: 50%;
+}
+.captcha {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}

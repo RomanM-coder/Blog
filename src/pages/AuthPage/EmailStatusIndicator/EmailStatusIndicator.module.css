@@ -1,0 +1,6 @@
+.emailStatus {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 20px;
+}

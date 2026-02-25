@@ -1,243 +1,192 @@
-import { useCallback, useState, useContext } from "react"
-import { useGlobalState, getGlobalStateValue } from '../../useGlobalState.ts'
-import { AuthContext } from '../../context/AuthContext'
-import { ICategory } from "../../utilita/modelCategory"
-import { ICategoryForm } from "../../utilita/modelCategoryForm.ts"
-import axios, { RawAxiosRequestHeaders, AxiosRequestConfig, AxiosError, InternalAxiosRequestConfig } from "axios"
+import { useCallback, useState } from 'react'
+import { useGlobalState } from '../../useGlobalState.ts'
+import { ICategory } from '../../utilita/modelCategory'
+import axios, { AxiosRequestConfig } from 'axios'
 import axiosIC from '../../utilita/axiosIC.ts'
-// import { useQuery } from '@tanstack/react-query'
-import { basicUrl } from "../../utilita/defauit"
+import { basicUrl } from '../../utilita/default.ts'
 import { useTranslation } from 'react-i18next'
 
-export const useCategoryes = (
-  setCategoryesCount: (resServer: number) => void, 
-  setCurrentItems: (resServer: ICategory[]) => void,
-  sort: string 
-) => {   
-  const [isLoading, setIsLoading] = useGlobalState('isLoading')
-  // const [language, setLanguage] = useGlobalState('language')
-  const [categoryList, setCategoryList] = useGlobalState('categoryList') // для NavBar Link  
-  const [error, setError] = useState('')
-  const {token, logout} = useContext(AuthContext)
-  const { i18n: {language} } = useTranslation()   
+export const useCategoryes = () => {
+  const [, setSelectedCategory] = useGlobalState('selectedCategory')
+  const [, setIsEmailConfirm] = useGlobalState('isEmailConfirm')
+  const [loadingState, setLoadingState] = useState<
+    'loading' | 'loaded' | 'empty' | 'error'
+  >('loading')
+  const [categoryList, setCategoryList] = useState<ICategory[]>([])
+  const {
+    i18n: { language },
+  } = useTranslation()
 
-  // const headers = {    
+  // const headers = {
   //   'Content-Type': 'application/json',//'Content-Type': 'multipart/form-data',
   //   // 'Access-Control-Allow-Origin': '*',
   //   authorization: `Bearer ${token}`,
   //   'Accept-Language' : `${language}`
-  // } as RawAxiosRequestHeaders 
-  
-  const useGetCategoryListCount = useCallback(async (itemPerPage: number, setPageCount: (pc: number) => void, signal?: AbortSignal) => { 
-    setIsLoading(true)    
-    const config = {
-      method: 'GET',
-      url: `${basicUrl.urlCategory}/count`,
-      signal,       
-      // headers: headers
-    } as AxiosRequestConfig 
-    // headers['Accept-Language'] = `${language}`
-    // const key = [config.method, config.url, language].filter(Boolean).join('&')   
-    // const cachedData = sessionStorage.getItem(key)    
-    // console.log('JSON.parse(cachedData)=', JSON.parse(cachedData!))
-    
-    // if (cachedData) {
-    //   // return Promise.resolve(JSON.parse(cachedData))
-    //   setCategoryesCount(JSON.parse(cachedData))
-    //   const pc = Math.ceil(JSON.parse(cachedData) / itemPerPage)
-    //   setPageCount(pc)
-    //   console.log('useGetCategoryListCount----Cashe')           
-    //   setIsLoading(false) 
-    // } else { 
+  // } as RawAxiosRequestHeaders
 
-    axiosIC<number>(config)
-      .then((response) => {
-        console.log('Количество категорий получено ', response.data)
-        const resServer = response.data 
-        setCategoryesCount(resServer)
-        const pc = Math.ceil(resServer / itemPerPage)
-        setPageCount(pc)
-        // sessionStorage.setItem(key, JSON.stringify(response.data))                
-        setIsLoading(false)                   
-      })   
-      .catch((error: AxiosError) => {
+  const useGetSelectedCategory = useCallback(
+    async (
+      categoryId: string,
+    ): Promise<{ success: boolean; message?: string; data?: ICategory }> => {
+      const abortController = new AbortController()
+      try {
+        // setLoadingState('loading')
+        const config = {
+          method: 'GET',
+          url: `${basicUrl.urlCategory}/${categoryId}`,
+          signal: abortController.signal,
+        } as AxiosRequestConfig
+        console.log('config=', config)
+
+        const response = await axiosIC<{
+          success: boolean
+          category?: ICategory
+          message?: string
+        }>(config)
+        console.log(
+          'useGetSelectedCategory - Лист категорий получен ',
+          response.data,
+        )
+        const { success, category, message } = response.data
+
+        // ✅ Проверяем abort ДО обработки данных
+        if (abortController.signal.aborted) {
+          return { success: false, message: 'Request aborted' }
+        }
+        // ✅ УСПЕХ
+        if (success && category) {
+          setSelectedCategory(category!)
+          // setLoadingState('loaded')
+          return { success: true, data: category }
+          // ✅ ЛОГИЧЕСКИЕ ОШИБКИ ОТ СЕРВЕРА
+        } else if (message) {
+          // setLoadingState('error')
+          return { success: false, message }
+        }
+        // ✅ НЕОЖИДАННЫЙ ОТВЕТ (нет ни success, ни message)
+        // setLoadingState('error')
+        return { success: false, message: 'Unexpected response format' }
+      } catch (error: unknown) {
+        // setLoadingState('error')
+        // ✅ Проверяем abort в начале catch
+        if (abortController.signal.aborted) {
+          console.log('Request was aborted')
+          return { success: false, message: 'Request aborted' }
+        }
         if (axios.isAxiosError(error)) {
-          // const err = JSON.stringify(error.response?.data.message) && err === 'Нет авторизации.'
-          axiosErrors(error)
+          console.log('📨 Axios error details:', {
+            status: error.response?.status,
+            data: error.response?.data,
+            message: error.response?.data?.message,
+          })
+
+          const errorMessage = error.response?.data?.message || 'Unknown error'
+          return { success: false, message: errorMessage }
         } else {
-          setIsLoading(false)
-          setError('Glob error')
-        }       
-      })
-    // }       
-  }, [])
+          return { success: false, message: 'Global error: ' + String(error) }
+        }
+      } finally {
+      }
+    },
+    [setSelectedCategory],
+  )
 
-  const useGetCategoryList = useCallback(async () => {     
-    setIsLoading(true)    
-    const config = {
-      method: 'GET',
-      url: `${basicUrl.urlCategory}/`,            
-      // headers: headers
-    } as AxiosRequestConfig 
-    // headers['Accept-Language'] = `${language}`
-    console.log('config=', config)
-    
-    axiosIC<ICategory[]>(config)
-      .then((response) => {
-        console.log('Лист категорий получен ', response.data)
-        const resServer = response.data 
-        setCurrentItems(resServer)                
-        setIsLoading(false)                     
-      })   
-      .catch((error: AxiosError) => {
-        if (axios.isAxiosError(error)) {
-          // const err = JSON.stringify(error.response?.data.message) && err === 'Нет авторизации.'
-          axiosErrors(error)
-        } else {
-          setIsLoading(false)
-          setError('Glob error')
-        }       
-      })           
-  }, [])
+  const useGetCategoryForNavBar = useCallback(async (): Promise<{
+    success: boolean
+    message?: string
+    data?: ICategory[]
+  }> => {
+    const abortController = new AbortController()
+    try {
+      setLoadingState('loading')
+      const config = {
+        method: 'GET',
+        url: `${basicUrl.urlCategory}/`,
+        signal: abortController.signal,
+      } as AxiosRequestConfig
 
-// function generateCacheKey(method: string, url:string, language: string): string {
-//   return [method, url, language].filter(Boolean).join('&')
-// }
-
-  const useGetCategoryForNavBar = useCallback(async () => {     
-    setIsLoading(true)    
-    const config = {
-      method: 'GET',
-      url: `${basicUrl.urlCategory}/`,       
-      // headers: headers
-    } as AxiosRequestConfig 
-    // console.log('language',language);    
-    // headers['Accept-Language'] = `${language}`
-    // const key = [config.method, config.url, language].filter(Boolean).join('&')   
-    // const cachedData = sessionStorage.getItem(key)    
-    // console.log('JSON.parse(cachedData)=', JSON.parse(cachedData!))
-    
-    // if (cachedData) {
-    //   // return Promise.resolve(JSON.parse(cachedData))
-    //   setCategoryList(JSON.parse(cachedData))
-    //   console.log('useGetCategoryForNavBar----Cashe')
-    //   setIsLoading(false) 
-    // } else {
       console.log('config=', config)
-      axiosIC<ICategory[]>(config)
-        .then((response) => {
-          console.log('Лист категорий получен for NavBar', response.data)
-          const resServer = response.data 
-          setCategoryList(resServer)          
-          // sessionStorage.setItem(key, JSON.stringify(response.data))         
-          // setCurrentItems(resServer)                
-          setIsLoading(false)                     
-        })   
-        .catch((error: AxiosError) => {
-          if (axios.isAxiosError(error)) {
-            // const err = JSON.stringify(error.response?.data.message) && err === 'Нет авторизации.'
-            axiosErrors(error)
-          } else {
-            setIsLoading(false)
-            setError('Glob error')
-          }       
-        })
-      // }     
-  }, [language])
-  
-  const useGetCategoryListPagination = useCallback( async (
-    itemPerPage: number, 
-    skip: number,
-    sort: string = '+name',   
-    signal?: AbortSignal
-  ) => { 
-    setIsLoading(true)
-    let sortParam
-    if (sort.slice(0,1) === '+') sortParam = true
-    if (sort.slice(0,1) === '-') sortParam = false    
-    const config = {
-      method: 'GET',
-      url: `${basicUrl.urlCategory}/pagination/?limit=${itemPerPage}&skip=${skip}&sortfield=${sort.slice(1)}&sortparam=${sortParam}`,
-      signal,       
-      // headers: headers
-    } as AxiosRequestConfig
-    // headers['Accept-Language'] = `${language}`    
-    console.log('configPag=', config)
-    
-    // const key = [config.method, config.url, language].filter(Boolean).join('&') 
-    // console.log('key=', key)  
-    // const cachedData = sessionStorage.getItem(key)
-    // console.log('cachedData=', cachedData)
-    // if (cachedData) {
-    //   // return Promise.resolve(cachedData)
-    //   setCurrentItems(JSON.parse(cachedData))
-    //   console.log('useGetCategoryListPagination----Cashe')
-    //   setIsLoading(false) 
-    // } else {
-      axiosIC<ICategory[]>(config)
-        .then((response) => {
-          console.log('Лист категорий получен pagination ', response.data)
-          const resServer = response.data       
-          setCurrentItems(resServer)
-          // sessionStorage.setItem(key, JSON.stringify(response.data))        
-          setIsLoading(false)              
-        })   
-        .catch((error: AxiosError) => {
-          if (axios.isAxiosError(error)) {
-            // const err = JSON.stringify(error.response?.data.message) && err === 'Нет авторизации.'
-            axiosErrors(error)
-          } else {
-            setIsLoading(false)
-            setError('Glob error')
-          }
-        })
-    // }
-  }, [language])
+      const response = await axiosIC<{
+        success: boolean
+        outCategories: ICategory[]
+      }>(config)
 
-  
-  const axiosErrors = (error: AxiosError) => {
-    setIsLoading(false)
-    setError(error.message)       
-    console.log(error.status)
-    console.error(error.response)
-    if (error.status === 401 ) {            
-      logout()
+      console.log('Кол-во постов получено=', response.data)
+      if (abortController.signal.aborted) {
+        return { success: false, message: 'Request aborted' }
+      }
+      if (response.data && response.data.outCategories) {
+        setCategoryList(response.data.outCategories)
+        setLoadingState(
+          response.data.outCategories.length === 0 ? 'empty' : 'loaded',
+        )
+        return { success: true, data: response.data.outCategories }
+      } else {
+        setLoadingState('empty')
+        return { success: false, message: 'There are no outCategories' }
+      }
+    } catch (error: unknown) {
+      setLoadingState('error')
+      if (abortController.signal.aborted) {
+        console.log('Request was aborted')
+        return { success: false, message: 'Request aborted' }
+      }
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Unknown error'
+        return { success: false, message: errorMessage }
+      } else {
+        return { success: false, message: 'Global error: ' + String(error) }
+      }
+    } finally {
     }
-  }   
+  }, [language])
 
-  const useGetSearch = useCallback(async (query: string, signal?: AbortSignal) => { 
-    setIsLoading(true)    
-    const config = {
-      method: 'GET',
-      url: `${basicUrl.urlCategory}/search/?query=${query}`,
-      signal,       
-      // headers: headers
-    } as AxiosRequestConfig   
+  const useGetUserEmailConfirm = useCallback(async () => {
+    const abortController = new AbortController()
+    try {
+      setLoadingState('loading')
+      const config = {
+        method: 'GET',
+        url: `${basicUrl.urlCategory}/user/confirmed`,
+        signal: abortController.signal,
+        // headers: headers
+      } as AxiosRequestConfig
+      // headers['Accept-Language'] = `${language}`
 
-    axiosIC<ICategory[]>(config)
-      .then((response) => {
-        console.log('Лист категорий получен ', response.data)
-        const resServer = response.data
-        if (resServer.length === 0) {
-          setCurrentItems([])
-          // setCategoryesCount(0)
-        } else {       
-        setCurrentItems(resServer)         
-        }
-        setIsLoading(false)                     
-      })   
-      .catch((error: AxiosError) => {
-        if (axios.isAxiosError(error)) {
-          // const err = JSON.stringify(error.response?.data.message) && err === 'Нет авторизации.'
-          axiosErrors(error)
-        } else {
-          setIsLoading(false)
-          setError('Glob error')
-        }
-      })           
-  }, []) 
+      const response = await axiosIC<{ success: boolean; confirmed: boolean }>(
+        config,
+      )
 
-  const clearError = useCallback(() => setError(''), [])
+      console.log('user confirmed получен ', response.data)
 
-  return {useGetCategoryList, useGetCategoryForNavBar, useGetCategoryListCount, useGetSearch, useGetCategoryListPagination, error, clearError}
-} 
+      if (abortController.signal.aborted) {
+        return { success: false, message: 'Request aborted' }
+      }
+
+      const { success, confirmed } = response.data
+      if (success) setIsEmailConfirm(confirmed)
+      else setIsEmailConfirm(false)
+    } catch (error: unknown) {
+      if (abortController.signal.aborted) {
+        console.log('Request was aborted')
+        return { success: false, message: 'Request aborted' }
+      }
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || 'Unknown error'
+        return { success: false, message: errorMessage }
+      } else {
+        return { success: false, message: 'Global error: ' + String(error) }
+      }
+    } finally {
+      setLoadingState('loaded')
+    }
+  }, [])
+
+  return {
+    useGetSelectedCategory,
+    useGetCategoryForNavBar,
+    useGetUserEmailConfirm,
+    categoryList,
+    loadingState,
+  }
+}

@@ -1,0 +1,66 @@
+.sidebar_left {
+  display: block;
+}
+@media (max-width: 925px) {
+  .sidebar_left {
+    display: none;
+  }
+}
+
+.sidebar {
+  display: grid;
+  overflow-y: auto;
+  /* #e9e6e6 */
+  scrollbar-color: #bdbdc0 transparent;
+  scrollbar-width: thin;
+  /* scrollbar-width: auto; */
+  /* max-height: 900px; */
+  max-height: calc(100vh - 80px);
+  position: sticky;
+  top: 20px;
+
+  /* 🔑 КЛЮЧЕВОЕ: не растягиваться по высоте грида */
+  /* align-self: start; */
+}
+
+.sidebar_section {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+.sidebar_item_text {
+}
+.sidebar_item {
+  display: flex;
+  height: 46px;
+  width: 98%;
+  text-align: center;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.sidebar_item:hover {
+  /* #edf1f1 */
+  background-color: white;
+}
+.img_item {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+.sidebar_themes {
+  display: flex;
+  justify-content: start;
+  padding-left: 12px;
+  padding-top: 20px;
+  height: 46px;
+}
+.sidebar-right {
+}
+
+/* @media (max-width: 480px) {
+  .title {
+    font-size: 20px;
+  }
+} */
