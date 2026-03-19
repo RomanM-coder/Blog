@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { basicUrl } from '../../utilita/default.ts'
-import { useGlobalState } from '../../useGlobalState.ts'
 import { useTranslation } from 'react-i18next'
 
 interface UseGetConfirmProps {
@@ -13,17 +12,13 @@ interface UseGetConfirmProps {
   setIsRealUser: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-// посылает письмо
 export const useGetInformConfirmEmail = ({
-  // myToast,
-  // catchErrors,
   checkedEmail,
   setIsEmailConfirmed,
   setCheckedEmail,
   noUserConfirmTimerRef,
   setIsRealUser,
 }: UseGetConfirmProps) => {
-  const [, setIsLoading] = useGlobalState('isLoading')
   const { i18n } = useTranslation()
 
   const getInformConfirmEmail = async (email: string) => {
@@ -40,10 +35,8 @@ export const useGetInformConfirmEmail = ({
       noUserConfirmTimerRef.current = null
     }
 
-    setIsLoading(true)
     const getConfirmHeaders = {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
       'Accept-Language': i18n.language,
     }
 
@@ -108,7 +101,6 @@ export const useGetInformConfirmEmail = ({
       setIsEmailConfirmed(false)
       setCheckedEmail('')
     } finally {
-      setIsLoading(false)
     }
   }
 

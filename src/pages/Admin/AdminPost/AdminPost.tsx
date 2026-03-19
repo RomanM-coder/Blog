@@ -1,13 +1,19 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, Suspense } from 'react'
 import { useGlobalState } from '../../../useGlobalState.ts'
+import { lazyWithNamedExport } from '../../../utilita/lazyWithNamedExport.ts'
 import { AdminBlogPost } from '../../../components/AdminBlogPost/AdminBlogPost.tsx'
 import { ReactPagination } from '../../../components/Pagination/ReactPagination.tsx'
 import { handleApiError } from '../../../utilita/errorHandler.ts'
-import { ICategory } from '../../../utilita/modelCategory.ts'
-import { IPostFull } from '../../../utilita/modelPostFull.ts'
-import { IUser } from '../../../utilita/modelUser.ts'
-import { AddEditPostForm } from '../AddEditPostForm/AddEditPostForm.tsx'
-import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
+// import { AddEditPostForm } from '../AddEditPostForm/AddEditPostForm.tsx'
+const AddEditPostForm = lazyWithNamedExport(
+  () => import('../AddEditPostForm/AddEditPostForm.tsx'),
+  'AddEditPostForm',
+)
+// import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
+const DeleteForm = lazyWithNamedExport(
+  () => import('../DeleteForm/DeleteForm.tsx'),
+  'DeleteForm',
+)
 import { useAdminPosts } from './adminPost.hook.ts'
 import { useParams } from 'react-router-dom'
 import { SearchContext } from '../../../context/SearchContext.ts'
@@ -18,7 +24,11 @@ import { basicColor } from '../../../utilita/default.ts'
 import { useTranslation } from 'react-i18next'
 import { SocketContext } from '../../../context/SocketContext.ts'
 import Skeleton from 'react-loading-skeleton'
+import { ICategory } from '../../../utilita/modelCategory.ts'
+import { IPostFull } from '../../../utilita/modelPostFull.ts'
+import { IUser } from '../../../utilita/modelUser.ts'
 import { ICommentFull } from '../../../utilita/modelCommentFull.ts'
+import { LoadingSpinner } from '../../LoadingSpinner/LoadingSpinner.tsx'
 import 'react-loading-skeleton/dist/skeleton.css'
 import styles from './AdminPost.module.css'
 
@@ -212,7 +222,6 @@ export const AdminPost: React.FC = () => {
       )),
       empty: listPostEmpty(),
       error: renderErrorState(),
-      // loaded: currentItem.map((post) => (
       loaded: postsFull.map((post) => (
         <div
           key={post._id}
@@ -232,6 +241,7 @@ export const AdminPost: React.FC = () => {
             handleDeleteFormShow={handleDeleteFormShow}
             handleSelectPost={handleSelectPost}
             categoryId={catId}
+            category={category}
           />
         </div>
       )),
@@ -393,22 +403,26 @@ export const AdminPost: React.FC = () => {
         style={{ opacity: postsOpacity, pointerEvents: pointerEvents }}
       >
         {showAddEditForm && (
-          <AddEditPostForm
-            handleAddEditPostFormHide={handleAddEditFormHide}
-            modePost={modePost}
-            extendedSelectedPost={extendedSelectedPost}
-            addBlogPost={addBlogPost}
-            editBlogPost={editBlogPost}
-            categoryId={catId}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <AddEditPostForm
+              handleAddEditPostFormHide={handleAddEditFormHide}
+              modePost={modePost}
+              extendedSelectedPost={extendedSelectedPost}
+              addBlogPost={addBlogPost}
+              editBlogPost={editBlogPost}
+              categoryId={catId}
+            />
+          </Suspense>
         )}
         {showDeleteForm && (
-          <DeleteForm
-            type={'post'}
-            handleDeleteFormHide={handleDeleteFormHide}
-            selectedItem={selectedPost}
-            onDelete={deletePost}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <DeleteForm
+              type={'post'}
+              handleDeleteFormHide={handleDeleteFormHide}
+              selectedItem={selectedPost}
+              onDelete={deletePost}
+            />
+          </Suspense>
         )}
         <>
           <div className={styles.posts}>

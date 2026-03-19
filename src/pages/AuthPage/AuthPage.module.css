@@ -9,7 +9,7 @@
   justify-content: center;
 }
 .collectionInput {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-top: 10px;
 }
 .cardBlue {
@@ -23,6 +23,7 @@
 .cardAction {
   display: flex;
   justify-content: center;
+  padding-top: 20px;
 }
 .cardTitle {
   font-size: 24px;
@@ -114,10 +115,11 @@ input:focus {
 /* .yellowInput {
   color: #ffeb3b!important;
 } */
-.error {
-  color: #ff1744;
-}
 
+.errorCaptcha {
+  color: #ff1744;
+  padding: 0 20px;
+}
 .col {
   /* position: relative; */
   width: 375px;
@@ -129,28 +131,6 @@ input:focus {
   top: 50%;
   color: blue;
 }
-
-/* .fileAddAuth {
-  opacity: 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-  cursor: pointer;
-  width: 115px;
-} */
-
-/* .fileUpload {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-} */
-/* .labelFile { */
-/* cursor: pointer; */
-/* } */
-/* .fileName {
-  cursor: default;
-} */
 .imgPng {
   width: 25px;
   height: 25px;
@@ -158,19 +138,12 @@ input:focus {
 .emailVefify {
   border-bottom: 1px solid #fff;
   color: white;
+  transition: color 0.25s ease;
 }
 .emailVefify:hover {
   color: black;
 }
 
-/* .yellowInput, .fileAddAuth {
-  outline: none;
-  all: unset; */
-/* border: 1px solid rgb(129, 129, 129); */
-/* background-color: unset; */
-/* cursor: pointer; */
-/* font-size: 16px;
-}  */
 .auth_error {
   color: red;
 }
@@ -207,7 +180,7 @@ button:disabled {
 
 input[type='button']:active,
 input[type='submit']:active {
-  transition: 0.3s all;
+  transition: all 0.3s;
   transform: translateY(3px);
   border: 1px solid transparent;
   opacity: 0.8;
@@ -291,9 +264,26 @@ li.line {
 }
 .buttonMode {
   width: 50%;
+  transition: opacity 0.25s ease;
+}
+.buttonMode:hover {
+  opacity: 0.6;
 }
 .captcha {
   display: flex;
   justify-content: center;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
+}
+.forget {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  padding: 0 0 30px 0;
+}
+.forgetPassword {
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+.forgetPassword:hover {
+  opacity: 0.7;
 }

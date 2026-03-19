@@ -1,4 +1,5 @@
 import React from 'react'
+import { usePrefetch } from '../../utilita/usePrefetch.ts'
 import { IUser } from '../../utilita/modelUser'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
@@ -31,6 +32,10 @@ export const AdminUserCard: React.FC<IUserCardProps> = ({
 
   const navigate = useNavigate()
 
+  const prefetchAdminProfileUser = usePrefetch(
+    () => import('../../pages/Admin/AdminUser/AdminProfileUser.tsx'),
+  )
+
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     user: IUser,
@@ -55,6 +60,8 @@ export const AdminUserCard: React.FC<IUserCardProps> = ({
       <div className={styles.userItem} style={{ maxWidth: maxWidth }}>
         <button
           onClick={(event) => handleClick(event, user)}
+          onMouseEnter={prefetchAdminProfileUser}
+          onTouchStart={prefetchAdminProfileUser}
           className={styles.nameUserBtn}
         >
           <strong>{user.email}</strong> - (<strong>role:</strong> {user.role},{' '}
@@ -78,11 +85,23 @@ export const AdminUserCard: React.FC<IUserCardProps> = ({
         <div className={styles.containerAction}>
           <button className={styles.deleteButton} onClick={handleEdit}>
             <div className={styles.wrapperPencil}>
-              <img src={pencil} width={20} height={20} loading="lazy" />
+              <img
+                src={pencil}
+                width={20}
+                height={20}
+                alt="pencil"
+                loading="lazy"
+              />
             </div>
           </button>
           <button className={styles.deleteButton} onClick={handleDelete}>
-            <img src={basket} width={24} height={24} loading="lazy" />
+            <img
+              src={basket}
+              width={24}
+              height={24}
+              alt="basket"
+              loading="lazy"
+            />
           </button>
         </div>
       </div>

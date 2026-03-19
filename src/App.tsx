@@ -13,7 +13,7 @@ import { useAxiosMonitor } from './utilita/useAxiosMonitor.hook'
 import { motion } from 'framer-motion'
 import { Toaster } from 'react-hot-toast'
 import { ActiveLine } from './components/NavBar/ActiveLine'
-import { SimpleSpinner } from './pages/SimpleSpinner/SimpleSpinner'
+import { LoadingSpinner } from './pages/LoadingSpinner/LoadingSpinner'
 import useScreenSize from './utilita/useScreenSize'
 import './App.css'
 
@@ -35,7 +35,7 @@ const App: React.FC = () => {
 
   if (userId) {
     if (!ready) {
-      return <SimpleSpinner />
+      return <LoadingSpinner />
     }
   }
 
@@ -66,9 +66,9 @@ const App: React.FC = () => {
     setIsNavBarHamburgerAnimationComplete,
   ] = useState(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState(false)
-  const menuItemsRefs = useRef<Map<number, HTMLDivElement>>(new Map())
+  const menuItemsRefs = useRef<Map<number, HTMLLIElement>>(new Map())
 
-  const setMenuItemRef = (index: number, el: HTMLDivElement | null) => {
+  const setMenuItemRef = (index: number, el: HTMLLIElement | null) => {
     if (el) {
       menuItemsRefs.current.set(index, el)
     } else {

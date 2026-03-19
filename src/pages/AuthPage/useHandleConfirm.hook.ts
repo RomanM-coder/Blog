@@ -25,7 +25,7 @@ export const useHandleConfirm = ({
 
     const handleConfirmHeaders = {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      //'Access-Control-Allow-Origin': '*',
       'Accept-Language': i18n.language,
     }
 
@@ -48,9 +48,9 @@ export const useHandleConfirm = ({
         myToast(t('auth.toast.login.messageEmailToken'), basicColor.green)
       } else {
         switch (message) {
-          case 'The user was not found':
-            myToast(t('auth.toast.login.messageUserNotFound'), basicColor.red)
-            break
+          // case 'The user was not found':
+          //   myToast(t('auth.toast.login.messageUserNotFound'), basicColor.red)
+          //   break
           default:
             myToast(`${t('postPage.toast.error')}, ${message}`, basicColor.red)
         }

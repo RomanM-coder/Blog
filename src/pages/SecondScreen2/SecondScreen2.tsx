@@ -72,21 +72,28 @@ export const SecondScreen2: React.FC<ISecondScreen2> = ({ readyLoad }) => {
     let closestIndex = -1
     let minDistance = Infinity
 
+    // Кэшируем window.innerHeight
+    const innerHeight = window.innerHeight
+
     refs.current.forEach((el, index) => {
       if (!el) return
 
       const rect = el.getBoundingClientRect()
+      const rectTop = rect.top
+      const rectBottom = rect.bottom
+      const rectHeight = rect.height
+
       // Убедимся, что элемент хотя бы частично в видимой области
-      if (rect.top > window.innerHeight || rect.bottom < 0) {
+      if (rectTop > innerHeight || rectBottom < 0) {
         return
       }
 
       // Условие: элемент полностью в пределах viewport
       const isFullyVisible =
-        rect.top >= 0 && // верх не скрыт
-        rect.bottom <= window.innerHeight // низ не скрыт
+        rectTop >= 0 && // верх не скрыт
+        rectBottom <= innerHeight // низ не скрыт
 
-      const elementCenter = rect.top + rect.height / 2
+      const elementCenter = rectTop + rectHeight / 2
       const distance = Math.abs(elementCenter - viewportCenter)
 
       // Проверяем, что элемент в пределах ±150px от центра

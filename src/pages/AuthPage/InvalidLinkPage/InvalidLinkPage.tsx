@@ -1,16 +1,17 @@
-// import styles from './InvalidLinkPage.module.css'
+import { useTranslation } from 'react-i18next'
+import styles from './InvalidLinkPage.module.css'
 
-export const InvalidLinkPage: React.FC = () => {  
-
+export const InvalidLinkPage: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <>
-      <div className='pageContainer'>
-        <div className="page-content">            
-          <p className="page-message">
-            Error:  Ошибка статус 400, undefined AuthPage Invalid link
-          </p>          
+      <div className={styles.pageContainer}>
+        <div className={styles.pageContent}>
+          <p className={styles.pageMessage}>
+            {t('invalidLinkPage.errorInvalidLink')}
+          </p>
         </div>
-      </div>      
-  </>
+      </div>
+    </>
   )
 }

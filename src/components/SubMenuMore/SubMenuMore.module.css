@@ -36,20 +36,20 @@
   text-decoration: none;
   color: black;
 }
-.dropdownContent div[aria-checked='true'] {
+.dropdownContent li[aria-checked='true'] {
   pointer-events: none !important;
   cursor: default !important;
 }
-.dropdownContent > div[aria-checked='true'] li a {
+.dropdownContent > li[aria-checked='true'] a {
   pointer-events: none !important;
   cursor: default !important;
   font-weight: 700;
 }
 
-.dropdownContent div[aria-checked='false'] li a {
+.dropdownContent li[aria-checked='false'] a {
   pointer-events: auto;
   cursor: pointer;
 }
-.dropdownContent > div[aria-checked='false'] li a {
+.dropdownContent > li[aria-checked='false'] a {
   font-weight: 400;
 }

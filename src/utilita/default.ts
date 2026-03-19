@@ -4,13 +4,19 @@ export const basicColor = {
   orange: '#ffc107', // orange
   red: '#e53935', // red darken-1
 }
-// local
-const preposition = 'http:'
-const address = '//localhost:5000'
+export const production = false
+let preposition = ''
+let address = ''
 
-// beget
-// const preposition = 'https:'
-// const address = '//splinterblog.ru'
+if (production) {
+  // beget
+  preposition = 'https:'
+  address = '//splinterblog.ru'
+} else {
+  // local
+  preposition = 'http:'
+  address = '//localhost:5000'
+}
 
 export const basicUrl = {
   urlSocket: `${preposition}${address}`,

@@ -1,10 +1,9 @@
-import React, { MutableRefObject, useEffect, useContext } from 'react'
+import React, { MutableRefObject, useContext } from 'react'
 import { motion, Variants } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import { useGlobalState } from '../../useGlobalState'
 import { SearchContext } from '../../context/SearchContext.ts'
 import { ICategory } from '../../utilita/modelCategory.ts'
-import { useTranslation } from 'react-i18next'
 import styles from './SubMenu.module.css'
 
 interface ISubMenuProps {
@@ -36,8 +35,6 @@ export const SubMenu: React.FC<ISubMenuProps> = ({
 }) => {
   const [isAdmin] = useGlobalState('isAdmin')
   const search = useContext(SearchContext)
-  const { i18n } = useTranslation()
-  // const navigate = useNavigate()
 
   const ulVariants2: Variants = {
     dropdownOpen: {
@@ -78,14 +75,7 @@ export const SubMenu: React.FC<ISubMenuProps> = ({
     },
   }
 
-  const toggleDropdown = (
-    // event: React.MouseEvent<HTMLAnchorElement>,
-    categoryId: string,
-  ) => {
-    // event.preventDefault()
-    // event.stopPropagation()
-
-    console.log('toggleChild')
+  const toggleDropdown = (categoryId: string) => {
     if (categoryId !== activeSubPage) {
       if (categoryId) {
         setActiveSubPage(categoryId)
@@ -110,26 +100,13 @@ export const SubMenu: React.FC<ISubMenuProps> = ({
     }
   }
 
-  useEffect(() => {
-    console.log('🔧 SubMenu debug:', {
-      positionLeft: position.left,
-      isOpenHamburger,
-      calculated: position.left - (isOpenHamburger ? 115 : 0),
-      windowWidth: window.innerWidth,
-      language: i18n.language,
-    })
-  }, [position.left, isOpenHamburger, i18n.language])
-
   return (
     <motion.div
       className={styles.postDropdown}
       key={`postDropdown-${isOpenHamburger}`}
       ref={motionElemRef} // для клика вне области списка
-      // exit={{ opacity: 0, y: 20 }}
-      // transition={{ duration: 0.3 }}
       initial="dropdownClose"
       animate={isOpen ? 'dropdownOpen' : 'dropdownClose'}
-      // animate="dropdownOpen"
       exit="dropdownClose"
       variants={ulVariants2}
       onAnimationComplete={(definition) => {
@@ -138,7 +115,6 @@ export const SubMenu: React.FC<ISubMenuProps> = ({
           setIsOpenHamburger(false)
         }
       }}
-      // style={{ top: `${position.top + 12}px`, left: `${position.left}px` }}
       style={{
         top: `${position.top + 12}px`,
         left: `${position.left - (isOpenHamburger ? 115 : 0)}px`,
@@ -147,12 +123,6 @@ export const SubMenu: React.FC<ISubMenuProps> = ({
       <ul className={styles.dropdownContent}>
         {categoryList?.length &&
           categoryList.map((category) => {
-            // Определяем путь заранее
-            // const linkTo =
-            //   isAdmin === true
-            //     ? `/admin/posts/${category._id}`
-            //     : `/category/${category._id}`
-            // const isAdminBool = Boolean(isAdmin)
             return (
               <motion.li
                 key={`${category._id}`}
@@ -176,12 +146,6 @@ export const SubMenu: React.FC<ISubMenuProps> = ({
                       {category.name}
                     </NavLink>
                   ))}
-                {/* <NavLink
-                to={`/category/${category._id}`}
-                onClick={() => toggleDropdown(category._id!)}
-              >
-                {category.name}
-              </NavLink> */}
               </motion.li>
             )
           })}

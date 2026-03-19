@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { BlogPost } from '../../components/BlogPost/BlogPost.tsx'
 import { InsertInPostList } from '../../pages/InsertInPostList/InsertInPostList.tsx'
 import { IPostFull } from '../../utilita/modelPostFull.ts'
+import { ICategory } from '../../utilita/modelCategory.ts'
 import styles from './PostList.module.css'
 
 interface IPostListProps {
@@ -15,6 +16,7 @@ interface IPostListProps {
   activeCommentId: string
   setActiveCommentId: (commId: string | null) => void
   handleUseGetPost_AfterAddNewComment: () => void
+  categoryList: ICategory[]
 }
 
 export const PostList: React.FC<IPostListProps> = memo(
@@ -29,6 +31,7 @@ export const PostList: React.FC<IPostListProps> = memo(
     activeCommentId,
     setActiveCommentId,
     handleUseGetPost_AfterAddNewComment,
+    categoryList,
   }) => {
     // const { commentId } = useParams()
 
@@ -48,6 +51,9 @@ export const PostList: React.FC<IPostListProps> = memo(
                     setNoFavorite={setNoFavorite}
                     likeDislikePost={likeDislikePost}
                     handleIncreaseViewPost={handleIncreaseViewPost}
+                    categoryS={categoryList.find(
+                      (category) => category._id === postFull.categoryId,
+                    )}
                   />
                 </div>
               </div>

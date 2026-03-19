@@ -25,7 +25,7 @@ export const XCardStack5: React.FC<XCardStack5Props> = ({ readyLoad }) => {
     offset: ['end start', 'start end'],
   }) // Отслеживаем положение скролла
 
-  console.log('🔴 XCardStack4 rendered')
+  console.log('🔴 XCardStack5 rendered')
 
   const cards = [
     {
@@ -55,10 +55,13 @@ export const XCardStack5: React.FC<XCardStack5Props> = ({ readyLoad }) => {
   const positionElement = (index: number) => {
     const element = elementRefs.current[index].current
     if (element && containerRef.current) {
-      const rect = element.getBoundingClientRect()
-      const elementTop = rect.top + window.scrollY
+      // const rect = element.getBoundingClientRect()
+      // const elementTop = rect.top + window.scrollY
+      const elementTop = element.offsetTop
+      const height = element.offsetHeight
+
       const start = elementTop - 500
-      const end = start + rect.height
+      const end = start + height //rect.height
 
       return { start, end }
     }
@@ -70,56 +73,53 @@ export const XCardStack5: React.FC<XCardStack5Props> = ({ readyLoad }) => {
       // lastScrollY: lastScrollYRef.current,
     })
     let lastScrollY = window.scrollY
+    let rafId: number | null = null
     // let lastScrollY = lastScrollYRef.current
 
     const updateScreenWidth = () => {
-      const innerWidth = Math.max(
-        document.body.scrollWidth,
-        document.documentElement.scrollWidth,
-        document.body.offsetWidth,
-        document.documentElement.offsetWidth,
-        document.body.clientWidth,
-        document.documentElement.clientWidth,
-      )
-      setXScreen(innerWidth)
+      // const innerWidth = window.innerWidth
+      setXScreen(window.innerWidth)
     }
 
-    const getInitialActiveIndex = (): number => {
-      const threshold = window.innerHeight / 3 // Пороговая линия на 1/3 от верха
-      let closestIndex = 0
-      let minDistance = Infinity
+    const getInitialActiveIndex = (): Promise<number> => {
+      return new Promise((resolve) => {
+        const threshold = window.innerHeight / 3 // Пороговая линия на 1/3 от верха
+        let closestIndex = 0
+        let minDistance = Infinity
 
-      for (let i = 0; i < elementRefs.current.length; i++) {
-        const element = elementRefs.current[i].current
-        if (!element) continue
+        rafId = requestAnimationFrame(() => {
+          for (let i = 0; i < elementRefs.current.length; i++) {
+            const element = elementRefs.current[i].current
+            if (!element) continue
 
-        const rect = element.getBoundingClientRect()
-        const distance = Math.abs(rect.top - threshold)
+            const rect = element.getBoundingClientRect()
+            const distance = Math.abs(rect.top - threshold)
 
-        if (distance < minDistance) {
-          minDistance = distance
-          closestIndex = i
-        }
-      }
-
-      return closestIndex
+            if (distance < minDistance) {
+              minDistance = distance
+              closestIndex = i
+            }
+          }
+          resolve(closestIndex) // ← Возвращаем результат
+        })
+      })
     }
 
-    const handleScroll = () => {
+    const handleScroll = async () => {
       // console.log('🔄 handleScroll called', {
       //   // isMenuVisible,
       //   lastScrollY: lastScrollY,
       //   windowScrollY: window.scrollY,
       // })
-      console.log('🎯 XCardStack4 handleScroll called')
+      console.log('🎯 XCardStack5 handleScroll called')
       const currentScrollY = window.scrollY
       setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up')
       lastScrollY = currentScrollY
       // setScrollDirection(isMenuVisible ? 'up' : 'down')
       // lastScrollY = lastScrollYRef.current
 
-      const activeElementIndex = getInitialActiveIndex()
-      console.log('🎯 XCardStack4 Active element:', activeElementIndex)
+      const activeElementIndex = await getInitialActiveIndex()
+      console.log('🎯 XCardStack5 Active element:', activeElementIndex)
 
       // 🔹 Логика обновления состояний
       if (scrollDirection === 'down') {
@@ -138,52 +138,43 @@ export const XCardStack5: React.FC<XCardStack5Props> = ({ readyLoad }) => {
       }
     }
 
-    // 🔹 Инициализация при загрузке
-    // const init = () => {
-    //   updateScreenWidth()
-
-    //   // 🔹 Определяем активный элемент
-    //   const initialIndex = getInitialActiveIndex()
-    //   setLastActiveIndex(initialIndex)
-    //   setActiveIndex(initialIndex)
-
-    //   // Запускаем обработчик скролла
-    //   // handleScroll()
-    // }
-
-    // const timeoutId = setTimeout(() => {
-    //   // requestAnimationFrame(init)
-    //   init()
-    // }, 500)
+    updateScreenWidth()
 
     // Запускаем инициализацию после полной загрузки страницы
     if (readyLoad) {
-      updateScreenWidth()
-
       // 🔹 Определяем активный элемент
-      const initialIndex = getInitialActiveIndex()
-      setLastActiveIndex(initialIndex)
-      setActiveIndex(initialIndex)
+      // const initialIndex = getInitialActiveIndex()
+      // setLastActiveIndex(initialIndex)
+      // setActiveIndex(initialIndex)
+
+      // Инициализация с правильным await
+      ;(async () => {
+        const initialIndex = await getInitialActiveIndex()
+        setLastActiveIndex(initialIndex)
+        setActiveIndex(initialIndex)
+        handleScroll()
+      })()
 
       // Запускаем обработчик скролла
-      handleScroll()
+      // handleScroll()
     }
 
     window.addEventListener('scroll', handleScroll)
-    console.log('✅ XCardStack4 event listener added')
+    console.log('✅ XCardStack5 event listener added')
     window.addEventListener('resize', updateScreenWidth)
 
     return () => {
       //   // if (timeoutId) clearTimeout(timeoutId)
       window.removeEventListener('scroll', handleScroll)
-      console.log('❌ XCardStack4 event listener removed')
+      console.log('❌ XCardStack5 event listener removed')
       window.removeEventListener('resize', updateScreenWidth)
+      if (rafId) cancelAnimationFrame(rafId)
     }
   }, [readyLoad])
 
   useEffect(() => {
     const unsubscribe = scrollY.on('change', (latest) => {
-      console.log('📜 XCardStack4 scrollY:', latest)
+      console.log('📜 XCardStack5 scrollY:', latest)
     })
     return () => unsubscribe()
   }, [scrollY])
@@ -295,7 +286,7 @@ export const XCardStack5: React.FC<XCardStack5Props> = ({ readyLoad }) => {
                     width:
                       index % 2 === 0
                         ? '100vw'
-                        : `${xScreen - translateX.get() - 41}px`,
+                        : `${xScreen - translateX.get() - 54}px`, // исправил 41 на 54
                     zIndex: index % 2 === 0 ? 1 : 2,
                   }}
                 >

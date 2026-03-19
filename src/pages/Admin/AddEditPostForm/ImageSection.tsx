@@ -1,5 +1,5 @@
 import React from 'react'
-import { basicUrl } from '../../../utilita/default.ts'
+import { basicUrl, production } from '../../../utilita/default.ts'
 import styles from './ImageSection.module.css'
 
 type ImageState = {
@@ -54,13 +54,17 @@ export const ImageSection: React.FC<ImageSectionProps> = ({
       </p>
       <div className={styles.imageContainer}>
         <img
-          src={imageState.url}
+          src={
+            production ? `/postFiles/${imageState.fileName}` : imageState.url
+          }
           alt={imageState.alt || ''}
           className={styles.imagePreview}
           loading="lazy"
           onError={(e) => {
             // Если изображение не загрузилось, показываем заглушку
-            e.currentTarget.src = `${basicUrl.urlFilePlug}?nameImagePlug=image-black.svg`
+            e.currentTarget.src = production
+              ? '/plug/image-black.svg'
+              : `${basicUrl.urlFilePlug}?nameImagePlug=image-black.svg`
           }}
         />
         <div className={styles.imageInfo}>

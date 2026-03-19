@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useGlobalState } from '../../useGlobalState.ts'
 import { ICategory } from '../../utilita/modelCategory'
 import { useNavigate } from 'react-router-dom'
-import { basicUrl } from '../../utilita/default.ts'
+import { basicUrl, production } from '../../utilita/default.ts'
 import styles from './CategoryCard.module.css'
 
 interface ICategoryCard {
@@ -64,14 +64,19 @@ export const CategoryCard: React.FC<ICategoryCard> = ({
           ></div> */}
           <div>
             <img
-              src={`${basicUrl.urlDownload}?id=${category._id}`}
+              //src={`${basicUrl.urlDownload}?id=${category._id}`}
+              src={
+                production
+                  ? `/categoryFiles/${category.name}/${category.link}`
+                  : `${basicUrl.urlDownload}?id=${category._id}`
+              }
               width={25}
               height={25}
+              alt={category.name}
               loading="lazy"
             />
           </div>
         </div>
-        {/* {isHovered && ( */}
         <div
           className={styles.back}
           style={{
@@ -82,10 +87,7 @@ export const CategoryCard: React.FC<ICategoryCard> = ({
             opacity: isHovered ? 1 : 0,
           }}
         >{`${category.description}`}</div>
-        {/* )} */}
-        {/* <img src={`${basicUrl.urlDownload}?id=${category._id}`} style={{width: '25px', height: '25px'}}/>             */}
       </button>
-      {/* {isHovered && (<div className={styles.tooltip}>{`${category.description}`}</div>)}  */}
     </div>
   )
 }

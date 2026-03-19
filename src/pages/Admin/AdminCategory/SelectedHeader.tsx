@@ -66,6 +66,7 @@ export const SelectedHeader: React.FC<SelectedHeaderProps> = ({
             src={caret_up}
             width={20}
             height={20}
+            alt="caret"
             style={{ rotate: '180deg' }}
             loading="lazy"
           />
@@ -80,12 +81,24 @@ export const SelectedHeader: React.FC<SelectedHeaderProps> = ({
                 {'  '}
                 {t('catList.asc')} {t('catList.order')}
               </p>
-              <img src={caret_up} width={20} height={20} loading="lazy" />
+              <img
+                src={caret_up}
+                width={20}
+                height={20}
+                alt="caret"
+                loading="lazy"
+              />
             </>
           ) : (
             <>
               <p className={styles.withSVG}>{t('catList.orderAsc')}</p>
-              <img src={caret_up} width={20} height={20} loading="lazy" />
+              <img
+                src={caret_up}
+                width={20}
+                height={20}
+                alt="caret"
+                loading="lazy"
+              />
             </>
           )}
         </>
@@ -97,7 +110,13 @@ export const SelectedHeader: React.FC<SelectedHeaderProps> = ({
     return (
       <>
         <p className={styles.withSVG}>-------</p>
-        <img src={chevron_expand} width={20} height={20} loading="lazy" />
+        <img
+          src={chevron_expand}
+          width={20}
+          height={20}
+          alt="chevron"
+          loading="lazy"
+        />
       </>
     )
   }
@@ -135,6 +154,7 @@ export const SelectedHeader: React.FC<SelectedHeaderProps> = ({
               src={plus}
               width={24}
               height={24}
+              alt="plus"
               style={{ fontSize: '2rem' }}
               loading="lazy"
             />

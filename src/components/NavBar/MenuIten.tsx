@@ -10,7 +10,7 @@ interface IMenuItemProps {
   getKey: string
   width: number | undefined
   itemlength?: number
-  setMenuItemRef: (index: number, el: HTMLDivElement | null) => void
+  setMenuItemRef: (index: number, el: HTMLLIElement | null) => void
 }
 
 export const MenuItem: React.FC<IMenuItemProps> = ({
@@ -23,7 +23,7 @@ export const MenuItem: React.FC<IMenuItemProps> = ({
   itemlength,
   setMenuItemRef,
 }) => {
-  const itemRef = useRef<HTMLDivElement>(null)
+  const itemRef = useRef<HTMLLIElement>(null)
 
   const itemVariants: Variants = {
     open: {
@@ -73,7 +73,7 @@ export const MenuItem: React.FC<IMenuItemProps> = ({
   }, [index, setMenuItemRef])
 
   return (
-    <motion.div
+    <motion.li
       ref={itemRef}
       key={getKey}
       className={
@@ -84,7 +84,6 @@ export const MenuItem: React.FC<IMenuItemProps> = ({
             : styles.mainMenu
       }
       style={{
-        // margin: width! < 850 ? '0 0.1rem' : '0 0.5rem',
         margin: marginWidth(),
         textAlign: 'center',
         position: 'relative',
@@ -93,6 +92,6 @@ export const MenuItem: React.FC<IMenuItemProps> = ({
       variants={itemVariants}
     >
       {item}
-    </motion.div>
+    </motion.li>
   )
 }

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import axiosIC from '../../utilita/axiosIC.ts'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
-import { basicUrl, basicColor } from '../../utilita/default.ts'
+import { basicUrl, basicColor, production } from '../../utilita/default.ts'
 import { IUser } from '../../utilita/modelUser.ts'
 import styles from './ProfileHeader.module.css'
 
@@ -16,7 +16,6 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   loadUserProfile,
 }) => {
   const [isUploading, setIsUploading] = useState(false)
-  const userId = JSON.parse(localStorage.getItem('userData')!).userId
   const { t, i18n } = useTranslation()
 
   const myToast = useCallback((message: string, backgroundColor: string) => {
@@ -54,35 +53,23 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         success: boolean
         avatar?: string
         message: string
-        forUserId: string
       }>(`${basicUrl.urlUser}/change-avatar`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       const resServer = response.data
-      if (resServer.forUserId && resServer.forUserId === userId) {
-        if (resServer.success) {
-          myToast(response.data.message, basicColor.green) // Аватар успешно обновлен
-          loadUserProfile() // Перезагружаем профиль
-        } else {
-          myToast(response.data.message, basicColor.red)
-        }
+      if (resServer.success) {
+        myToast(t(response.data.message), basicColor.green) // Аватар успешно обновлен
+        loadUserProfile() // Перезагружаем профиль
+      } else {
+        myToast(t(response.data.message), basicColor.red)
       }
     } catch (error: any) {
       // ✅ Проверяем, есть ли ответ от сервера (ошибка 500, 400 и т.д.)
-      if (
-        error.response?.data?.forUserId &&
-        error.response?.data?.forUserId === userId
-      ) {
-        const errorData = error.response.data
-        console.error('Ошибка загрузки аватара:', errorData.message)
-        myToast(errorData.message, basicColor.red)
-      } else {
-        // Сетевая ошибка или другая проблема
-        console.error('Сетевая ошибка:', error)
-        myToast(t('profilePage.profileHeader.errorEdit'), basicColor.red)
-      }
+      const errorData = error.response.data
+      console.error('Ошибка загрузки аватара:', errorData.message)
+      myToast(errorData.message, basicColor.red)
     } finally {
       setIsUploading(false)
     }
@@ -94,7 +81,12 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         <div className={styles.avatarContainer}>
           <img
             // src={profile.avatar || '/default-avatar.png'}
-            src={`${basicUrl.urlUserFiles}?id=${profile._id}&nameImage=${profile.avatar}`}
+            //src={`${basicUrl.urlUserFiles}?id=${profile._id}&nameImage=${profile.avatar}`}
+            src={
+              production
+                ? `/uploads/avatars/${profile.avatar}`
+                : `${basicUrl.urlUserFiles}?id=${profile._id}&nameImage=${profile.avatar}`
+            }
             alt="avatar"
             className={styles.avatarImage}
             loading="lazy"

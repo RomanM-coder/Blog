@@ -343,6 +343,7 @@ export const AddEditUserForm: React.FC<AddEditUserFormProps> = ({
             src={x}
             width={20}
             height={20}
+            alt="X"
             style={{ margin: '3px 0 0 0' }}
             loading="lazy"
           />

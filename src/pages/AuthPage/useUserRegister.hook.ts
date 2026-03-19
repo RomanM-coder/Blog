@@ -24,22 +24,20 @@ interface Inputs {
   email: string
   password: string
   captchaToken: string
-  // file: File | undefined
 }
 
 const headers = {
   'Content-Type': 'multipart/form-data',
-  'Access-Control-Allow-Origin': '*',
+  //'Access-Control-Allow-Origin': '*',
 } as RawAxiosRequestHeaders
 
-// посылает письмо
+// регистрирует user
 export const useUserRegister = ({
   setEmailStatus,
   myToast,
   catchErrorsWithReturn,
   recaptchaRef,
 }: UseUserRegisterProps) => {
-  // const [, setIsLoading] = useGlobalState('isLoading')
   const { t, i18n } = useTranslation()
 
   const userRegister = async (
@@ -49,7 +47,6 @@ export const useUserRegister = ({
 
     try {
       const formData = new FormData()
-      // formData.append('file', authForm.file!)
       formData.append('email', authForm.email)
       formData.append('password', authForm.password)
       formData.append('captchaToken', authForm.captchaToken)

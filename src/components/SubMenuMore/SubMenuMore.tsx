@@ -65,32 +65,10 @@ export const SubMenuMore: React.FC<ISubMenuMoreProps> = ({
     },
   }
 
-  const toggleDropdownMore = (
-    // event: React.MouseEvent<HTMLLIElement>,
-    index: number,
-  ) => {
-    //event.preventDefault()
-    // const nameCat = event.currentTarget.textContent
-
-    // console.log('event type:', event?.type)
-    // // console.log('event target:', event?.target?.tagName);
-    // console.log('event currentTarget:', event?.currentTarget?.tagName)
-
-    // // Проверим, есть ли href у элемента
-    // const hasHref = event?.currentTarget?.hasAttribute?.('href')
-    // console.log('has href:', hasHref)
-
-    // // Только если есть href И это не NavLink
-    // if (hasHref && !event?.currentTarget?.className?.includes?.('navLink')) {
-    //   event.preventDefault()
-    //   console.log('preventDefault вызван')
-    // }
-
-    console.log('toggleChild')
+  const toggleDropdownMore = (index: number) => {
     if (typeof index === 'number' && index + 2 !== activePage) {
       setActivePage(index + 2)
       if (isMoreOpen) {
-        console.log('toggleChild-2')
         setIsMoreOpen(false)
       }
       search.clearSearch()
@@ -102,11 +80,8 @@ export const SubMenuMore: React.FC<ISubMenuMoreProps> = ({
       className={styles.moreDropdown}
       key={`moreDropdownMore-${isMoreOpen}`}
       ref={motionElemMoreRef} // для клика вне области списка
-      // exit={{ opacity: 0, y: 20 }}
-      // transition={{ duration: 0.3 }}
       initial="dropdownCloseMore"
       animate={isMoreOpen ? 'dropdownOpenMore' : 'dropdownCloseMore'}
-      // animate="dropdownOpenMore"
       exit="dropdownCloseMore"
       variants={ulVariants2}
       // onAnimationComplete={(definition) => {
@@ -129,7 +104,7 @@ export const SubMenuMore: React.FC<ISubMenuMoreProps> = ({
       <ul className={styles.dropdownContent}>
         {hiddenItems.length > 0 &&
           hiddenItems.map((item, index) => (
-            <motion.div
+            <motion.li
               key={`hidden-${index}`}
               variants={itemVariants2}
               aria-checked={activePage === index + 2}
@@ -155,7 +130,7 @@ export const SubMenuMore: React.FC<ISubMenuMoreProps> = ({
                 />
               )}
               {item}
-            </motion.div>
+            </motion.li>
           ))}
       </ul>
     </motion.div>

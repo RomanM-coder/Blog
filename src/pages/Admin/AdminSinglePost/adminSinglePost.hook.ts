@@ -4,6 +4,7 @@ import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios'
 import axiosIC from '../../../utilita/axiosIC.ts'
 import { useSearchParams } from 'react-router-dom'
 import { IPost } from '../../../utilita/modelPost.ts'
+import { ICategory } from '../../../utilita/modelCategory.ts'
 import { IPostFull } from '../../../utilita/modelPostFull.ts'
 import { IPostForm } from '../../../utilita/modelPostForm.ts'
 import { basicUrl } from '../../../utilita/default.ts'
@@ -44,6 +45,9 @@ export const useAdminSingle = (
   const [selectedPost, setSelectedPost] = useState<IPostFull>({} as IPostFull)
   const [comments, setComments] = useState<ICommentFull[]>([])
   const [countComments, setCountComments] = useState(0)
+  const [singleCategory, setSingleCategory] = useState<ICategory>(
+    {} as ICategory,
+  )
   const {
     i18n: { language },
   } = useTranslation()
@@ -372,6 +376,7 @@ export const useAdminSingle = (
               outComments: ICommentFull[]
               count: number
               outPost: IPost
+              outCategory: ICategory
             }
           | { success: false; message: string }
 
@@ -383,6 +388,7 @@ export const useAdminSingle = (
           setCountComments(fetchedComment.count)
           const pc = Math.ceil(fetchedComment.count / itemPerPage)
           setPageCount(pc)
+          setSingleCategory(fetchedComment.outCategory)
           setLoadingState('loaded')
           return { success: true, outComments: fetchedComment.outComments }
         } else {
@@ -852,5 +858,6 @@ export const useAdminSingle = (
     extendedSelectedComment,
     loadingState,
     countComments,
+    singleCategory,
   }
 }

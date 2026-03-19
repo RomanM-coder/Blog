@@ -9,7 +9,6 @@ interface Inputs {
   email: string
   password: string
   captchaToken: string
-  // file: File | undefined
 }
 
 interface UseConfirmByTokenProps {
@@ -20,7 +19,7 @@ interface UseConfirmByTokenProps {
   setValue: UseFormSetValue<Inputs>
 }
 
-// верифицирует email по токену из письма
+// записывает в базу users поле confirmed=true по токену из письма
 export const useConfirmByToken = ({
   myToast,
   catchErrors,
@@ -33,12 +32,11 @@ export const useConfirmByToken = ({
   const navigate = useNavigate()
 
   const confirmByToken = async () => {
-    console.log('-------ConfirmByToken----------')
     setIsLoading(true)
 
     const confirmByTokenHeaders = {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      //'Access-Control-Allow-Origin': '*',
       'Accept-Language': i18n.language,
     }
 
@@ -66,11 +64,23 @@ export const useConfirmByToken = ({
         })
       } else {
         switch (message) {
+          case 'Token is required':
+            myToast(t('auth.toast.login.messageTokenRequired'), basicColor.red)
+            break
+          case 'Invalid token format':
+            myToast(
+              t('auth.toast.login.messageInvalidTokenFormat'),
+              basicColor.red,
+            )
+            break
           case 'The user was not found':
             myToast(t('auth.toast.login.messageLinkIncorrect'), basicColor.red)
             break
           case 'Invalid or expired confirmation link':
             myToast(t('auth.toast.login.messageUserNotFound'), basicColor.red)
+            break
+          case 'Confirmation link has expired':
+            myToast(t('auth.toast.login.messageLinkExpired'), basicColor.red)
             break
           default:
             myToast(`${t('postPage.toast.error')}, ${message}`, basicColor.red)

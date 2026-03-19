@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { usePrefetch } from '../../utilita/usePrefetch.ts'
 import { ICategory } from '../../utilita/modelCategory'
 import { ICategoryForm } from '../../utilita/modelCategoryForm.ts'
 import { useNavigate } from 'react-router-dom'
-import { basicUrl } from '../../utilita/default.ts'
 import { useGlobalState } from '../../useGlobalState.ts'
+import { basicUrl, production } from '../../utilita/default.ts'
 import pencil from '../../assets/static/pencil-fill.svg'
 import basket from '../../assets/static/trash-bin-sharp.svg'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -38,6 +39,10 @@ export const AdminCategoryCard: React.FC<ICategoryCard> = ({
   const [, setActiveSubPage] = useGlobalState('activeSubPage') // подменю - подстраницы
   const [isHovered, setIsHovered] = useState(false)
   const navigate = useNavigate()
+
+  const prefetchAdminPost = usePrefetch(
+    () => import('../../pages/Admin/AdminPost/AdminPost.tsx'),
+  )
 
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -79,6 +84,8 @@ export const AdminCategoryCard: React.FC<ICategoryCard> = ({
       >
         <button
           onClick={(event) => handleClick(event, category)}
+          onMouseEnter={prefetchAdminPost}
+          onTouchStart={prefetchAdminPost}
           className={styles.nameCategoryBtn}
         >
           <h3
@@ -113,10 +120,16 @@ export const AdminCategoryCard: React.FC<ICategoryCard> = ({
               }}
             /> */}
             <img
-              src={`${basicUrl.urlDownload}?id=${category._id}`}
+              //src={`${basicUrl.urlDownload}?id=${category._id}`}
+              src={
+                production
+                  ? `/categoryFiles/${category.name}/${category.link}`
+                  : `${basicUrl.urlDownload}?id=${category._id}`
+              }
               width={70}
               height={70}
-              loading="lazy"
+              alt={category.name}
+              // loading="lazy"
             />
           </div>
         </button>
@@ -134,7 +147,13 @@ export const AdminCategoryCard: React.FC<ICategoryCard> = ({
                 }}
               /> */}
               {/* <img src={pencil} width={20} height={20} /> */}
-              <img src={pencil} width={20} height={20} loading="lazy" />
+              <img
+                src={pencil}
+                width={20}
+                height={20}
+                alt="pensil"
+                // loading="lazy"
+              />
             </div>
           </button>
           <button className={styles.buttonButton} onClick={handleDelete}>
@@ -149,27 +168,17 @@ export const AdminCategoryCard: React.FC<ICategoryCard> = ({
                 }}
               /> */}
               {/* <img src={basket} width={24} height={24} /> */}
-              <img src={basket} width={24} height={24} loading="lazy" />
+              <img
+                src={basket}
+                width={24}
+                height={24}
+                alt="basket"
+                //  loading="lazy"
+              />
             </div>
           </button>
         </div>
       </div>
     </>
   )
-}
-
-{
-  /* <img
-  src={`${basicUrl.urlDownload}?id=${category._id}`}
-  style={{
-    width: '25px',
-    height: '25px',
-    objectFit: 'cover',
-  }}
-  loading="lazy" // ⬅ ленивая загрузка
-  onError={(e) => {
-    // fallback при ошибке
-    e.currentTarget.style.display = 'none'
-  }}
-/> */
 }

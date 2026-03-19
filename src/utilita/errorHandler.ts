@@ -58,10 +58,10 @@ export const handleApiError = (
     'Comments not found': 'adminSinglePost.toast.commentsNotFound',
 
     // HTTP errors (автоматически определяются из сообщения)
-    '401': 'adminSinglePost.toast.unauthorized',
-    '403': 'adminSinglePost.toast.forbidden',
-    '404': 'adminSinglePost.toast.notFound',
-    '500': 'adminSinglePost.toast.serverError',
+    '401': 'adminLogin.unauthorized',
+    '403': 'adminLogin.forbidden',
+    '404': 'adminLogin.notFound',
+    '500': 'adminLogin.serverError',
   }
 
   let message = result.message

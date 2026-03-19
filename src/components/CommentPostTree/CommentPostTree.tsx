@@ -6,7 +6,7 @@ import { useGlobalState } from '../../useGlobalState.ts'
 import heartGrey from '../../assets/static/heart-fill-grey.svg'
 import heartRed from '../../assets/static/heart-fill-red.svg'
 import toast from 'react-hot-toast'
-import { basicUrl, basicColor } from '../../utilita/default.ts'
+import { basicColor, basicUrl, production } from '../../utilita/default.ts'
 import { IComment } from '../../utilita/modelComment'
 import { ICommentTree } from '../../utilita/modelCommentTree'
 import { CommentForm } from '../../components/CommentForm/CommentForm'
@@ -169,7 +169,13 @@ export const CommentPostTree: React.FC<ICommentPostTreeProps> = ({
             className={styles.authorAvatar}
             width={'36px'}
             height={'36px'}
-            src={`${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`}
+            //src={`${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`}
+            src={
+              production
+                ? `/uploads/avatars/${comment.user.avatar}`
+                : `${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`
+            }
+            alt={`avatar-${comment.user.email}`}
             loading="lazy"
           />
           {/* </div> */}
@@ -204,11 +210,23 @@ export const CommentPostTree: React.FC<ICommentPostTreeProps> = ({
         </p>
         <div className={styles.reactions}>
           <button className={styles.likedButton} onClick={handleLike}>
-            <img src={heartRed} width={21} height={21} loading="lazy" />
+            <img
+              src={heartRed}
+              width={21}
+              height={21}
+              alt="heart-red"
+              loading="lazy"
+            />
             <p className={styles.likeComment}>{comment.like}</p>
           </button>
           <button className={styles.dislikedButton} onClick={handleDislike}>
-            <img src={heartGrey} width={21} height={21} loading="lazy" />
+            <img
+              src={heartGrey}
+              width={21}
+              height={21}
+              alt="heart-grey"
+              loading="lazy"
+            />
             <p className={styles.likeComment}>{comment.dislike}</p>
           </button>
         </div>
@@ -249,15 +267,21 @@ export const CommentPostTree: React.FC<ICommentPostTreeProps> = ({
           {showChild && (
             <motion.div
               key="child-comments"
-              initial={{ opacity: 0, height: 0 }}
+              initial={{
+                opacity: 0,
+                //height: 0,
+                // maxHeight: 0,
+              }}
               animate={{
                 opacity: 1,
-                height: 'auto',
+                //height: 'auto',
+                //maxHeight: 1000,
                 transition: { duration: 1, ease: 'easeInOut' },
               }}
               exit={{
                 opacity: 0,
-                height: 0,
+                //height: 0,
+                // maxHeight: 0,
                 transition: { duration: 0.5, ease: 'easeInOut' },
               }}
               // transition={{ duration: 0.3, ease: 'easeInOut' }}

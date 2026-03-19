@@ -88,6 +88,7 @@
 }
 .classImage {
   color: transparent;
+  position: relative;
 }
 .h2Header,
 .h3Header,

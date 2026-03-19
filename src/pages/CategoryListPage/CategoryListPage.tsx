@@ -7,7 +7,7 @@ import { useCategoryes } from './category.hook.ts'
 import { ICategory } from '../../utilita/modelCategory.ts'
 import { useParams } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { basicColor, basicUrl } from '../../utilita/default.ts'
+import { basicColor, basicUrl, production } from '../../utilita/default.ts'
 import { useTranslation } from 'react-i18next'
 import { SocketContext } from '../../context/SocketContext.ts'
 import styles from './CategoryListPage.module.css'
@@ -207,8 +207,13 @@ export const CategoryListPage: React.FC = () => {
                         <div className={styles.subsite_card_header}>
                           <img
                             className={styles.subsite_card_avatar}
-                            src={`${basicUrl.urlDownload}?id=${selectedCategory._id}`}
-                            alt={'avatar'}
+                            //src={`${basicUrl.urlDownload}?id=${selectedCategory._id}`}
+                            src={
+                              production
+                                ? `/categoryFiles/${selectedCategory.name}/${selectedCategory.link}`
+                                : `${basicUrl.urlDownload}?id=${selectedCategory._id}`
+                            }
+                            alt="category"
                             loading="lazy"
                           />
                         </div>
@@ -255,7 +260,7 @@ export const CategoryListPage: React.FC = () => {
                       </div>
                     </div>
                   )}
-                  <PostPage />
+                  <PostPage categoryList={categoryList} />
                 </div>
               </div>
               {/*  популярные комментарии  */}

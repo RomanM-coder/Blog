@@ -130,6 +130,7 @@ export const AddEditCommentForm: React.FC<AddEditCommentFormProps> = ({
             src={'/src/assets/static/media/close_big.svg'}
             width={24}
             height={24}
+            alt="close"
             loading="lazy"
           />
         </button>

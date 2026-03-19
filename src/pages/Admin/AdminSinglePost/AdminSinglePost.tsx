@@ -1,9 +1,26 @@
-import { useEffect, useState, useContext, useRef } from 'react'
+import { useEffect, useState, useContext, useRef, Suspense } from 'react'
+import { lazyWithNamedExport } from '../../../utilita/lazyWithNamedExport.ts'
 import ReactPaginate from 'react-paginate'
-import { AddEditPostForm } from '../AddEditPostForm/AddEditPostForm.tsx'
-import { AddEditCommentForm } from '../AddEditCommentForm/AddEditCommentForm.tsx'
-import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
-import { DeleteAllCommentForm } from '../DeleteForm/DeleteAllCommentForm.tsx'
+//import { AddEditPostForm } from '../AddEditPostForm/AddEditPostForm.tsx'
+const AddEditPostForm = lazyWithNamedExport(
+  () => import('../AddEditPostForm/AddEditPostForm.tsx'),
+  'AddEditPostForm',
+)
+//import { AddEditCommentForm } from '../AddEditCommentForm/AddEditCommentForm.tsx'
+const AddEditCommentForm = lazyWithNamedExport(
+  () => import('../AddEditCommentForm/AddEditCommentForm.tsx'),
+  'AddEditCommentForm',
+)
+//import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
+const DeleteForm = lazyWithNamedExport(
+  () => import('../DeleteForm/DeleteForm.tsx'),
+  'DeleteForm',
+)
+//import { DeleteAllCommentForm } from '../DeleteForm/DeleteAllCommentForm.tsx'
+const DeleteAllCommentForm = lazyWithNamedExport(
+  () => import('../DeleteForm/DeleteAllCommentForm.tsx'),
+  'DeleteAllCommentForm',
+)
 import { AdminComment } from '../../../components/AdminComment/AdminComment.tsx'
 import { AdminBlogPostForSinglePost } from '../../../components/AdminBlogPostForSinglePost/AdminBlogPostForSinglePost.tsx'
 import { handleApiError } from '../../../utilita/errorHandler.ts'
@@ -25,6 +42,7 @@ import { SortContext } from '../../../context/SortContext.ts'
 import { SocketContext } from '../../../context/SocketContext.ts'
 import { useDebounce } from '../../../utilita/useDebounce.ts'
 import { basicColor } from '../../../utilita/default.ts'
+import { LoadingSpinner } from '../../LoadingSpinner/LoadingSpinner.tsx'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import styles from './AdminSinglePost.module.css'
@@ -113,6 +131,7 @@ export const AdminSinglePost: React.FC = () => {
     extendedSelectedComment,
     loadingState,
     countComments,
+    singleCategory,
   } = useAdminSingle(userId!, setPageCount, itemPerPage, userId)
 
   // const prevCurrentPageRef = useRef<number | null>(null)
@@ -423,6 +442,7 @@ export const AdminSinglePost: React.FC = () => {
         <AdminBlogPostForSinglePost
           post={selectedPost}
           handleLikeDislikePost={handleLikeDislikePost}
+          singleCategory={singleCategory}
         />
       ),
     }
@@ -583,47 +603,57 @@ export const AdminSinglePost: React.FC = () => {
       <div className={styles.singlePostPage}>
         <div>
           {showAddEditPostForm && (
-            <AddEditPostForm
-              handleAddEditPostFormHide={handleAddEditPostFormHide}
-              modePost={modePost}
-              extendedSelectedPost={extendedSelectedPost}
-              addBlogPost={addBlogPost}
-              editBlogPost={editBlogPost}
-              categoryId={categoryId}
-            />
+            <Suspense fallback={<LoadingSpinner />}>
+              <AddEditPostForm
+                handleAddEditPostFormHide={handleAddEditPostFormHide}
+                modePost={modePost}
+                extendedSelectedPost={extendedSelectedPost}
+                addBlogPost={addBlogPost}
+                editBlogPost={editBlogPost}
+                categoryId={categoryId}
+              />
+            </Suspense>
           )}
           {showDeletePostForm && (
-            <DeleteForm
-              type={'post'}
-              handleDeleteFormHide={handleDeletePostFormHide}
-              selectedItem={selectedPost}
-              onDelete={deletePost}
-            />
+            <Suspense fallback={<LoadingSpinner />}>
+              <DeleteForm
+                type={'post'}
+                handleDeleteFormHide={handleDeletePostFormHide}
+                selectedItem={selectedPost}
+                onDelete={deletePost}
+              />
+            </Suspense>
           )}
           {showDeleteAllCommentForm && (
-            <DeleteAllCommentForm
-              handleDeleteAllCommentFormHide={handleDeleteAllCommentFormHide}
-              selectedPost={selectedPost}
-              deleteAllCommentPost={deleteAllCommentPost}
-            />
+            <Suspense fallback={<LoadingSpinner />}>
+              <DeleteAllCommentForm
+                handleDeleteAllCommentFormHide={handleDeleteAllCommentFormHide}
+                selectedPost={selectedPost}
+                deleteAllCommentPost={deleteAllCommentPost}
+              />
+            </Suspense>
           )}
           {showAddEditCommentForm && (
-            <AddEditCommentForm
-              handleAddEditCommentFormHide={handleAddEditCommentFormHide}
-              modeComment={modeComment}
-              extendedSelectedComment={extendedSelectedComment}
-              addNewComment={addNewComment}
-              editComment={editComment}
-              postId={postId!}
-            />
+            <Suspense fallback={<LoadingSpinner />}>
+              <AddEditCommentForm
+                handleAddEditCommentFormHide={handleAddEditCommentFormHide}
+                modeComment={modeComment}
+                extendedSelectedComment={extendedSelectedComment}
+                addNewComment={addNewComment}
+                editComment={editComment}
+                postId={postId!}
+              />
+            </Suspense>
           )}
           {showDeleteCommentForm && (
-            <DeleteForm
-              type={'comment'}
-              handleDeleteFormHide={handleDeleteCommentFormHide}
-              selectedItem={selectedComment}
-              onDelete={deleteComment}
-            />
+            <Suspense fallback={<LoadingSpinner />}>
+              <DeleteForm
+                type={'comment'}
+                handleDeleteFormHide={handleDeleteCommentFormHide}
+                selectedItem={selectedComment}
+                onDelete={deleteComment}
+              />
+            </Suspense>
           )}
 
           <div className={styles.postWrapper}>
@@ -636,21 +666,39 @@ export const AdminSinglePost: React.FC = () => {
                     onClick={handleEditPost}
                   >
                     <div className={styles.wrapperPencil}>
-                      <img src={pencil} width={20} height={20} loading="lazy" />
+                      <img
+                        src={pencil}
+                        width={20}
+                        height={20}
+                        alt="pencil"
+                        loading="lazy"
+                      />
                     </div>
                   </button>
                   <button
                     className={styles.deleteButton}
                     onClick={handleDeletePost}
                   >
-                    <img src={basket} width={24} height={24} loading="lazy" />
+                    <img
+                      src={basket}
+                      width={24}
+                      height={24}
+                      alt="basket"
+                      loading="lazy"
+                    />
                   </button>
                   <div className={styles.deleteAllComment}>
                     <button
                       className={styles.deleteAllButton}
                       onClick={handleDeleteAllComment}
                     >
-                      <img src={basket} width={24} height={24} loading="lazy" />
+                      <img
+                        src={basket}
+                        width={24}
+                        height={24}
+                        alt="basket"
+                        loading="lazy"
+                      />
                       <p style={{ fontSize: '10px' }}>
                         {t('adminSinglePost.deleteAllComments')}
                       </p>
@@ -668,7 +716,13 @@ export const AdminSinglePost: React.FC = () => {
             </h3>
 
             <button className={styles.addButton} onClick={handleAddComment}>
-              <img src={plus} width={24} height={24} loading="lazy" />
+              <img
+                src={plus}
+                width={24}
+                height={24}
+                alt="plus"
+                loading="lazy"
+              />
             </button>
           </div>
 

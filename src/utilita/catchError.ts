@@ -10,7 +10,7 @@ type outCatchError = {
 
 export const catchError = (error: unknown): outCatchError => {
   const userId: string = JSON.parse(localStorage.getItem('userData')!)
-    .userId as string
+    .userId as string | ''
 
   if (axios.isAxiosError(error)) {
     console.log('📨 Axios error details:', {

@@ -74,12 +74,19 @@ export const SortableTable = <T extends Record<string, any>>({
 
   const getSortIcon = (key: keyof T) => {
     if (sortConfig.key !== key)
-      return <img src={chevron_expand} loading="lazy" />
+      return <img src={chevron_expand} alt="chevron" loading="lazy" />
     if (sortConfig.direction === 'asc')
-      return <img src={caret_up} loading="lazy" />
+      return <img src={caret_up} alt="caret" loading="lazy" />
     if (sortConfig.direction === 'desc')
-      return <img src={caret_up} style={{ rotate: '180deg' }} loading="lazy" />
-    return <img src={chevron_expand} loading="lazy" />
+      return (
+        <img
+          src={caret_up}
+          style={{ rotate: '180deg' }}
+          alt="caret"
+          loading="lazy"
+        />
+      )
+    return <img src={chevron_expand} alt="chevron" loading="lazy" />
   }
 
   return (

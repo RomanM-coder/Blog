@@ -74,11 +74,14 @@ export const InputWithClearButton: React.FC<IInputProps> = ({
   const listTrigger = () => {
     if (!visibleList) {
       if (triggerRef.current) {
-        const rect = triggerRef.current.getBoundingClientRect()
-        // const delta = isOpenHamburger ? 115 : 50
-        setPosition({
-          top: rect.bottom + 12, //+ window.scrollY,
-          left: rect.left + window.scrollX - 10,
+        // Используем requestAnimationFrame для оптимизации
+        requestAnimationFrame(() => {
+          const rect = triggerRef.current!.getBoundingClientRect()
+          // const delta = isOpenHamburger ? 115 : 50
+          setPosition({
+            top: rect.bottom + 12, //+ window.scrollY,
+            left: rect.left + window.scrollX - 10,
+          })
         })
       }
     }
@@ -154,7 +157,13 @@ export const InputWithClearButton: React.FC<IInputProps> = ({
     <div className={styles.searchWrapper}>
       <div className={styles.containerSearch}>
         <div className={styles.searchIcon}>
-          <img src={search_icon} width={22} height={22} loading="lazy" />
+          <img
+            src={search_icon}
+            width={22}
+            height={22}
+            alt="icon-search"
+            loading="lazy"
+          />
         </div>
         <motion.input
           type="text"
@@ -174,6 +183,7 @@ export const InputWithClearButton: React.FC<IInputProps> = ({
               animate={{ opacity: 1, rotate: 90, x: 0 }}
               exit={{ opacity: 0, rotate: 0, x: -50 }}
               transition={{ duration: 0.3 }}
+              style={{ willChange: 'transform, opacity' }}
             >
               ✕ {/* Крестик */}
             </motion.button>
@@ -209,6 +219,7 @@ export const InputWithClearButton: React.FC<IInputProps> = ({
                 style={{
                   top: position.top,
                   left: position.left,
+                  willChange: 'transform, opacity',
                 }}
               >
                 {options.map((option) => (

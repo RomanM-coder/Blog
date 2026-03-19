@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import heartGrey from '../../assets/static/heart-fill-grey.svg'
 import heartRed from '../../assets/static/heart-fill-red.svg'
-import { basicUrl } from '../../utilita/default'
+import { basicUrl, production } from '../../utilita/default.ts'
 import { ICommentFull } from '../../utilita/modelCommentFull'
 import styles from './CommentPost.module.css'
 
@@ -34,7 +34,13 @@ export const CommentPost: React.FC<ICommentPostProps> = ({ tab, comment }) => {
           className={styles.authorAvatar}
           width={'36px'}
           height={'36px'}
-          src={`${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`}
+          //src={`${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`}
+          src={
+            production
+              ? `/uploads/avatars/${comment.user.avatar}`
+              : `${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`
+          }
+          alt={`avatar-${comment.user.email}`}
           loading="lazy"
         />
         {/* </div> */}
@@ -57,11 +63,23 @@ export const CommentPost: React.FC<ICommentPostProps> = ({ tab, comment }) => {
       </p>
       <div className={styles.reactions}>
         <button className={styles.likedButton}>
-          <img src={heartRed} width={21} height={21} loading="lazy" />
+          <img
+            src={heartRed}
+            width={21}
+            height={21}
+            alt="heart-red"
+            loading="lazy"
+          />
           <p className={styles.likeComment}>{comment.like}</p>
         </button>
         <button className={styles.dislikedButton}>
-          <img src={heartGrey} width={21} height={21} loading="lazy" />
+          <img
+            src={heartGrey}
+            width={21}
+            height={21}
+            alt="heart-grey"
+            loading="lazy"
+          />
           <p className={styles.likeComment}>{comment.dislike}</p>
         </button>
       </div>

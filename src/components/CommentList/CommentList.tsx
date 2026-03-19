@@ -94,18 +94,38 @@ export const CommentList: React.FC<ICommentListProps> = memo(
       setCountCommentShow(1)
     }
 
+    // const calculateHeight = useCallback(() => {
+    //   const visibCommentsTree = commentsTreeToDisplay.slice(0, visibleCount)
+
+    //   const totalHeight = visibCommentsTree.reduce((sum, comment) => {
+    //     const el = document.getElementById(`comment-${comment._id}`)
+    //     if (el) {
+    //       const rect = el.getBoundingClientRect()
+    //       return sum + rect.height // Только высота элемента
+    //     }
+    //     return sum //+ 80
+    //     // return sum + (el?.scrollHeight || 80)
+    //   }, 0)
+    //   setContainerHeight(totalHeight)
+    // }, [visibleCount, commentsTreeToDisplay])
+
     const calculateHeight = useCallback(() => {
       const visibCommentsTree = commentsTreeToDisplay.slice(0, visibleCount)
-      const totalHeight = visibCommentsTree.reduce((sum, comment) => {
-        const el = document.getElementById(`comment-${comment._id}`)
-        if (el) {
-          const rect = el.getBoundingClientRect()
-          return sum + rect.height // Только высота элемента
-        }
-        return sum //+ 80
-        // return sum + (el?.scrollHeight || 80)
-      }, 0)
-      setContainerHeight(totalHeight)
+      let totalHeight = 0
+
+      // Используем requestAnimationFrame для группировки операций
+      requestAnimationFrame(() => {
+        visibCommentsTree.forEach((comment) => {
+          const el = document.getElementById(`comment-${comment._id}`)
+          if (el) {
+            // Используем offsetHeight вместо getBoundingClientRect (быстрее)
+            totalHeight += el.offsetHeight
+          } //else {
+          //totalHeight += 80 // fallback
+          //}
+        })
+        setContainerHeight(totalHeight)
+      })
     }, [visibleCount, commentsTreeToDisplay])
 
     // Пересчет после изменений состояний комментариев

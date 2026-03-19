@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { IPostForm } from '../../../utilita/modelPostForm'
-import { basicUrl } from '../../../utilita/default.ts'
+import { basicUrl, production } from '../../../utilita/default.ts'
 import { useSectionsManagement } from '../AddEditPostForm/hooks/useSectionsManagement.ts'
 import { createFormData } from '../AddEditPostForm/utils/createFormData.ts'
 import { useFormChanges } from '../AddEditPostForm/hooks/useFormChanges.ts'
@@ -296,7 +296,9 @@ export const AddEditPostForm: React.FC<AddEditPostFormProps> = ({
           extendedSelectedPost.sections.map(async (section, index) => {
             if (section.type === 'image' && section.path) {
               const key = `${index}_en`
-              const url = `${basicUrl.urlPostFiles}?id=${extendedSelectedPost._id}&nameImage=${section.path}`
+              const url = production
+                ? `${basicUrl.urlPostFiles}?id=${extendedSelectedPost._id}&nameImage=${section.path}`
+                : `/postFiles/${section.path}`
 
               try {
                 const file = await fetchFileFromUrl(url, section.path)
@@ -326,7 +328,9 @@ export const AddEditPostForm: React.FC<AddEditPostFormProps> = ({
           extendedSelectedPost.sections_ru?.map(async (section, index) => {
             if (section.type === 'image' && section.path) {
               const key = `${index}_ru`
-              const url = `${basicUrl.urlPostFiles}?id=${extendedSelectedPost._id}&nameImage=${section.path}`
+              const url = production
+                ? `${basicUrl.urlPostFiles}?id=${extendedSelectedPost._id}&nameImage=${section.path}`
+                : `/postFiles/${section.path}`
 
               try {
                 const file = await fetchFileFromUrl(url, section.path)
@@ -404,7 +408,7 @@ export const AddEditPostForm: React.FC<AddEditPostFormProps> = ({
           className={styles.deleteButton}
           onClick={() => handleAddEditPostFormHide()}
         >
-          <img src={close} width={24} height={24} loading="lazy" />
+          <img src={close} width={24} height={24} alt="close" loading="lazy" />
         </button>
         <h2>
           {modePost === 'add'

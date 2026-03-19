@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 interface ActiveLineProps {
   activePage: number
-  menuItemsRefs: React.MutableRefObject<Map<number, HTMLDivElement>>
+  menuItemsRefs: React.MutableRefObject<Map<number, HTMLLIElement>>
   isVisible?: boolean
   isOpenHamburger: boolean
   width: number
@@ -28,7 +28,6 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
     width: 0,
     top: 0,
   })
-  // const [shouldAnimate, setShouldAnimate] = useState(false)
 
   const isUpdatingRef = useRef(false)
   // const hasMountedRef = useRef(false)
@@ -63,21 +62,6 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
 
         if (activeElement) {
           const rect = activeElement.getBoundingClientRect()
-          // offsetWidth возвращает исходную ширину БЕЗ учёта transform
-          // const originalWidth = activeElement.offsetWidth
-          // const originalHeight = activeElement.offsetHeight
-          // const originalLeft = activeElement.offsetLeft
-          // const originalTop = activeElement.offsetTop
-
-          // console.log(
-          //   'ActiveLine --------------------------- позиция элемента:',
-          //   {
-          //     left: rect.left,
-          //     width: rect.width,
-          //     top: rect.top,
-          //     page: activePage,
-          //   },
-          // )
 
           // 2. Учитываем скролл страницы
           const scrollX =
@@ -90,12 +74,6 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
           const absoluteTop = rect.top + scrollY
 
           if (width < 768) {
-            // setPositionHamb({
-            //   left: rect.left + rect.width * 0.1,
-            //   width: rect.width, // * 0.8,
-            //   top: rect.top,
-            // })
-
             const lineWidth = rect.width // * 0.8
             const lineLeft = absoluteLeft + (rect.width - lineWidth) / 2
 
@@ -112,19 +90,7 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
               left: lineLeft,
               width: lineWidth,
             })
-
-            // setPosition({
-            //   left: rect.left + rect.width * 0.1,
-            //   width: rect.width, //* 0.8,
-            // })
           }
-          // Включаем анимацию только после первого обновления позиции
-          // if (!hasMountedRef.current) {
-          // setTimeout(() => {
-          // setShouldAnimate(true)
-          // hasMountedRef.current = true
-          // }, 400) // время анимации появления NavBar
-          // }
         } else {
           console.warn(
             'ActiveLine - элемент не найден для страницы:',
@@ -208,6 +174,7 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
     return null
   }
   if (width < 768)
+    // Мобильник
     return (
       <motion.div
         layoutId="activeItem-hamb"
@@ -216,7 +183,6 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
           left: positionHamb.left,
           width: positionHamb.width,
           top: positionHamb.top,
-          // opacity: shouldAnimate ? 1 : 0,
         }}
         style={{
           position: 'absolute',
@@ -234,6 +200,7 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
       />
     )
   else
+    // Десктоп
     return (
       <motion.div
         layoutId="activeItem"
@@ -241,7 +208,6 @@ export const ActiveLine: React.FC<ActiveLineProps> = ({
         animate={{
           left: position.left,
           width: position.width,
-          // opacity: shouldAnimate ? 1 : 0,
         }}
         style={{
           position: 'fixed',

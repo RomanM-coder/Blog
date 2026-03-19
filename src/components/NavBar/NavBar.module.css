@@ -133,10 +133,11 @@
   color: white;
   height: 24px;
   margin: 5px 0;
+  transition: color 0.25s ease;
 }
-.buttonLocale:hover {
+/* .buttonLocale:hover {
   color: rgb(211, 211, 211);
-}
+} */
 .bleskTeksta {
   margin-left: 5px;
   padding: 0 30px;
@@ -149,6 +150,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 7s infinite linear;
+  will-change: background-position;
+  transform: translateZ(0);
 }
 @keyframes shine {
   0% {

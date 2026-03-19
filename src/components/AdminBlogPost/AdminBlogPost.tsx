@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
+import { usePrefetch } from '../../utilita/usePrefetch.ts'
 import { MorphShapesCSS } from '../../components/MorphShapesCSS/MorphShapesCSS.tsx'
 import { useTranslation } from 'react-i18next'
 import { LazyImage } from '../../components/LazyImage/LazyImage.tsx'
 import { IPostFull } from '../../utilita/modelPostFull.ts'
-import { basicUrl } from '../../utilita/default.ts'
 import eye from '../../assets/static/eye.svg'
 import pencil from '../../assets/static/pencil-fill.svg'
 import basket from '../../assets/static/trash-bin-sharp.svg'
 import heartGrey from '../../assets/static/heart-fill-grey.svg'
 import heartRed from '../../assets/static/heart-fill-red.svg'
+import { basicUrl, production } from '../../utilita/default.ts'
 import { IPostForm } from '../../utilita/modelPostForm'
+import { IUser } from '../../utilita/modelUser.ts'
+import { ICategory } from '../../utilita/modelCategory.ts'
 import { useNavigate } from 'react-router-dom'
 import styles from './AdminBlogPost.module.css'
-import { IUser } from '../../utilita/modelUser.ts'
 
 interface IUpdatedPost {
   _id: string
@@ -37,6 +39,7 @@ interface IAdminBlogPostProps {
   handleAddEditFormShow: () => void
   handleDeleteFormShow: () => void
   categoryId: string
+  category: ICategory
 }
 
 export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
@@ -50,6 +53,7 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
   handleAddEditFormShow,
   handleDeleteFormShow,
   categoryId,
+  category,
 }) => {
   const [showFullPost, setShowFullPost] = useState(false)
   // const [isHovered, setIsHovered] = useState(false)
@@ -57,6 +61,10 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
   const initialSectionsCount = 2
 
   const { t } = useTranslation()
+
+  const prefetchAdminSinglePost = usePrefetch(
+    () => import('../../pages/Admin/AdminSinglePost/AdminSinglePost.tsx'),
+  )
 
   const handleFavorite = async () => {
     const updatedPost = {} as IUpdatedPost
@@ -93,7 +101,7 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
     loadPost()
     // await new Promise((resolve) => setTimeout(resolve, 300))
   }
-  const handlePostTitle = () => {
+  const handleClickPostTitle = () => {
     handleSelectPost(post)
     navigate(`/admin/post/${post._id}?categoryId=${categoryId}`)
   }
@@ -139,9 +147,15 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
                       <MorphShapesCSS />
                     ) : (
                       <img
-                        src={`${basicUrl.urlUserFiles}?id=${post.user._id}&nameImage=${post.user.avatar}`}
+                        //src={`${basicUrl.urlUserFiles}?id=${post.user._id}&nameImage=${post.user.avatar}`}
+                        src={
+                          production
+                            ? `/uploads/avatars/${post.user.avatar}`
+                            : `${basicUrl.urlUserFiles}?id=${post.user._id}&nameImage=${post.user.avatar}`
+                        }
                         height={'40px'}
                         width={'40px'}
+                        alt={`avatar-${post.user.email}`}
                         style={{
                           // position: 'relative',
                           // top: '0px',
@@ -155,8 +169,14 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
 
                     {/* Миниатюра категории */}
                     <img
-                      src={`${basicUrl.urlDownload}?id=${post.categoryId}`}
+                      //src={`${basicUrl.urlDownload}?id=${post.categoryId}`}
+                      src={
+                        production
+                          ? `/categoryFiles/${category.name}/${category.link}`
+                          : `${basicUrl.urlDownload}?id=${post.categoryId}`
+                      }
                       className={styles.category_badge}
+                      alt={category.name}
                       loading="lazy"
                     />
                   </div>
@@ -170,18 +190,35 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
             <div className={styles.containerAction}>
               <button className={styles.buttonButton} onClick={handleEdit}>
                 <div className={styles.wrapperPencil}>
-                  <img src={pencil} width={20} height={20} loading="lazy" />
+                  <img
+                    src={pencil}
+                    width={20}
+                    height={20}
+                    alt="pencil"
+                    loading="lazy"
+                  />
                 </div>
               </button>
               <button className={styles.buttonButton} onClick={handleDelete}>
                 <div className={styles.wrapperBasket}>
-                  <img src={basket} width={24} height={24} loading="lazy" />
+                  <img
+                    src={basket}
+                    width={24}
+                    height={24}
+                    alt="basket"
+                    loading="lazy"
+                  />
                 </div>
               </button>
             </div>
           </div>
 
-          <h3 className={styles.h3Header} onClick={handlePostTitle}>
+          <h3
+            className={styles.h3Header}
+            onClick={handleClickPostTitle}
+            onMouseEnter={prefetchAdminSinglePost}
+            onTouchStart={prefetchAdminSinglePost}
+          >
             {post.title}
           </h3>
         </div>
@@ -218,7 +255,12 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
                     // key={`section-${post._id}-${index}`}
                   >
                     <LazyImage
-                      src={`${basicUrl.urlPostFiles}?id=${post._id}&nameImage=${item.path}`}
+                      //src={`${basicUrl.urlPostFiles}?id=${post._id}&nameImage=${item.path}`}
+                      src={
+                        production
+                          ? `/postFiles/${item.path}`
+                          : `${basicUrl.urlPostFiles}?id=${post._id}&nameImage=${item.path}`
+                      }
                       alt={item.alt!}
                       className={styles.content_block_img}
                     />
@@ -263,7 +305,13 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
                 }}
               /> */}
               {/* <img src={heartRed} width={21} height={21} /> */}
-              <img src={heartRed} width={21} height={21} loading="lazy" />
+              <img
+                src={heartRed}
+                width={21}
+                height={21}
+                alt="heart-red"
+                loading="lazy"
+              />
               <span className={styles.reaction_button_counter}>
                 {post.favorite}
               </span>
@@ -279,7 +327,13 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
                 }}
               /> */}
               {/* <img src={heartGrey} width={21} height={21} /> */}
-              <img src={heartGrey} width={21} height={21} loading="lazy" />
+              <img
+                src={heartGrey}
+                width={21}
+                height={21}
+                alt="heart-grey"
+                loading="lazy"
+              />
               <span className={styles.reaction_button_counter}>
                 {post.nofavorite}
               </span>
@@ -295,7 +349,13 @@ export const AdminBlogPost: React.FC<IAdminBlogPostProps> = ({
                 }}
               /> */}
               {/* <img src={eye} width="20px" height="20px" /> */}
-              <img src={eye} width="20px" height="20px" loading="lazy" />
+              <img
+                src={eye}
+                width="20px"
+                height="20px"
+                alt="eye"
+                loading="lazy"
+              />
               <span className={styles.reaction_button_counter}>
                 {post.views}
               </span>

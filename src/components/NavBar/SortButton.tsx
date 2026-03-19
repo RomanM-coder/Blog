@@ -117,21 +117,26 @@ export const SortButton: React.FC = () => {
         )
 
         if (parentWithRelative) {
-          const buttonRect = triggerRef.current.getBoundingClientRect()
-          const parentRect = parentWithRelative.getBoundingClientRect()
+          // const buttonRect = triggerRef.current.getBoundingClientRect()
+          // const parentRect = parentWithRelative.getBoundingClientRect()
+
+          // offsetTop/offsetLeft не вызывают reflow!
+          const relativeTop =
+            triggerRef.current.offsetTop + triggerRef.current.offsetHeight
+          const relativeLeft = triggerRef.current.offsetLeft
 
           // Вычисляем координаты ОТНОСИТЕЛЬНО родителя
-          const relativeTop = buttonRect.bottom - parentRect.top
-          const relativeLeft = buttonRect.left - parentRect.left
+          // const relativeTop = buttonRect.bottom - parentRect.top
+          // const relativeLeft = buttonRect.left - parentRect.left
 
-          console.log('Относительные координаты:', {
-            buttonBottom: buttonRect.bottom,
-            parentTop: parentRect.top,
-            relativeTop,
-            buttonLeft: buttonRect.left,
-            parentLeft: parentRect.left,
-            relativeLeft,
-          })
+          // console.log('Относительные координаты:', {
+          //   buttonBottom: buttonRect.bottom,
+          //   parentTop: parentRect.top,
+          //   relativeTop,
+          //   buttonLeft: buttonRect.left,
+          //   parentLeft: parentRect.left,
+          //   relativeLeft,
+          // })
 
           setPosition({
             top: relativeTop + 13, // Относительно верха родителя
@@ -203,6 +208,7 @@ export const SortButton: React.FC = () => {
                   src={option.icon_white}
                   width={28}
                   height={28}
+                  alt={option.value}
                   loading="lazy"
                 />
               </button>
@@ -234,6 +240,7 @@ export const SortButton: React.FC = () => {
                     src={option.icon}
                     width={28}
                     height={28}
+                    alt={option.value}
                     loading="lazy"
                   />
                 </button>

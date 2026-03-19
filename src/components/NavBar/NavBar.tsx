@@ -25,7 +25,7 @@ interface userData {
 }
 
 interface NavBarProps {
-  setMenuItemRef: (index: number, el: HTMLDivElement | null) => void
+  setMenuItemRef: (index: number, el: HTMLLIElement | null) => void
   isOpenHamburger: boolean
   setIsOpenHamburger: React.Dispatch<React.SetStateAction<boolean>>
   setIsNavBarHamburgerAnimationComplete: React.Dispatch<
@@ -53,6 +53,8 @@ export const NavBar: React.FC<NavBarProps> = ({
   const motionElemRef = useRef<HTMLDivElement>(null)
   const motionElemMoreRef = useRef<HTMLDivElement>(null)
   const motionElemHamburgerRef = useRef<HTMLDivElement>(null)
+  const [enHovered, setEnHovered] = useState(false)
+  const [ruHovered, setRuHovered] = useState(false)
 
   const auth = useContext(AuthContext)
 
@@ -63,7 +65,7 @@ export const NavBar: React.FC<NavBarProps> = ({
       token = data.token
     }
   }
-  const renderCount = useRef(0)
+  // const renderCount = useRef(0)
 
   const search = useContext(SearchContext)
   const { t, i18n } = useTranslation()
@@ -80,6 +82,22 @@ export const NavBar: React.FC<NavBarProps> = ({
   const [showRedLine, setShowRedLine] = useState(false)
   const [isNewPage, setIsNewPage] = useState(false)
 
+  const routeMap = {
+    '/auth': () => import('../../pages/AuthPage/AuthPage.tsx'),
+    '/about': () => import('../../pages/AboutPage.tsx'),
+
+    '/': () => import('../../pages/CategoryListPage/CategoryListPage.tsx'),
+    '/publicationPost': () =>
+      import('../../pages/PostPublished/PostPublication.tsx'),
+    '/userProfile': () => import('../../pages/ProfilePage/ProfilePage.tsx'),
+
+    '/admin': () => import('../../pages/Admin/AdminCategory/AdminCategory.tsx'),
+    '/admin/posts': () => import('../../pages/Admin/AdminPost/AdminPost.tsx'),
+    '/admin/users': () => import('../../pages/Admin/AdminUser/AdminUser.tsx'),
+    '/admin/log': () => import('../../pages/Admin/AdminLog/AdminLog.tsx'),
+  } as const // 👈 as const делает ключи литеральными типами
+
+  type RoutePaths = keyof typeof routeMap
   console.log('🔍 NavBar render, isAdmin:', isAdmin, 'type:', typeof isAdmin)
 
   interface ObjectKeys {
@@ -137,30 +155,18 @@ export const NavBar: React.FC<NavBarProps> = ({
   }
 
   // клик на главном элементе меню кроме posts
-  const handleMainClick = (
-    // event: React.MouseEvent<HTMLLIElement>,
-    index: number,
-  ) => {
-    // event.preventDefault()
-    console.log('handleMainClick')
-
+  const handleMainClick = (index: number) => {
     setActivePage(index)
     setActiveSubPage('')
     setIsOpen(false)
-    // if (isOpenHamburger) setIsOpenHamburger(false)
     setIsOpenHamburger(false)
     search.setQuery('')
   }
 
   // клик на главном элементе меню posts
-  const toggleDropdownParent = (index: number) =>
-    // event:
-    //   | React.MouseEvent<HTMLAnchorElement>
-    //   | React.MouseEvent<HTMLDivElement>,
-    // index: number,
-    {
-      // event.preventDefault()
-      console.log('toggleDropdownParent')
+  const toggleDropdownParent = (index: number) => {
+    console.log('toggleDropdownParent')
+    requestAnimationFrame(() => {
       if (triggerRef.current) {
         const rect = triggerRef.current.getBoundingClientRect()
         const delta = isOpenHamburger ? 115 : 50
@@ -169,38 +175,61 @@ export const NavBar: React.FC<NavBarProps> = ({
           left: rect.left + window.scrollX - delta,
         })
       }
-      setActivePage(index)
-      // setIsOpen(!isOpen)
-      setIsOpen((prev) => !prev)
-      console.log('toggleDropdownParent')
-    }
+    })
+    setActivePage(index)
+    // setIsOpen(!isOpen)
+    setIsOpen((prev) => !prev)
+    console.log('toggleDropdownParent')
+  }
 
   // клик на главном элементе меню "ещё"
   const toggleDropdownMore = () => {
-    // event.preventDefault()
-    console.log('toggleDropdownMore-1')
-    if (moreButtonRef.current) {
-      const rect = moreButtonRef.current.getBoundingClientRect()
+    requestAnimationFrame(() => {
+      if (moreButtonRef.current) {
+        const rect = moreButtonRef.current.getBoundingClientRect()
 
-      setPositionMore({
-        top: rect.bottom, // + window.scrollY,
-        left: rect.left + window.scrollX - 30,
-      })
-    }
+        setPositionMore({
+          top: rect.bottom, // + window.scrollY,
+          left: rect.left + window.scrollX - 30,
+        })
+      }
+    })
     setIsMoreOpen((prev) => !prev)
     setIsOpen(false)
     console.log('toggleDropdownMore-2')
   }
 
-  const createNavItem_unAuth = (to: string, text: string, queue: number) => {
+  const createNavItem_unAuth = (
+    to: RoutePaths,
+    text: string,
+    queue: number,
+  ) => {
     return (
-      <motion.li
+      <motion.div
+        className={styles.elemMainMenu}
+        onClick={() => handleMainClick(queue)}
+        onMouseEnter={routeMap[to]}
+        onTouchStart={routeMap[to]}
+        whileTap={{ scale: 0.95 }}
+      >
+        <NavLink to={to}>{t(text)}</NavLink>
+      </motion.div>
+    )
+  }
+
+  const createNavItemExit_unAuth = (
+    to: string,
+    text: string,
+    queue: number,
+  ) => {
+    return (
+      <motion.div
         className={styles.elemMainMenu}
         onClick={() => handleMainClick(queue)}
         whileTap={{ scale: 0.95 }}
       >
         <NavLink to={to}>{t(text)}</NavLink>
-      </motion.li>
+      </motion.div>
     )
   }
 
@@ -216,7 +245,7 @@ export const NavBar: React.FC<NavBarProps> = ({
       },
       {
         id: 'exit',
-        element: createNavItem_unAuth(
+        element: createNavItemExit_unAuth(
           '/',
           t('navBar.landing').concat(' (').concat(t('navBar.exit')).concat(')'),
           2,
@@ -227,12 +256,18 @@ export const NavBar: React.FC<NavBarProps> = ({
   )
 
   // 1. Создаём элементы как функции, чтобы переиспользовать
-  const createNavItem_isAuth = (to: string, text: string, queue: number) => {
+  const createNavItem_isAuth = (
+    to: RoutePaths,
+    text: string,
+    queue: number,
+  ) => {
     return (
-      <motion.li
+      <motion.div
         key={`nav-${to}`}
         className={styles.elemMainMenu}
         onClick={() => handleMainClick(queue)}
+        onMouseEnter={routeMap[to]}
+        onTouchStart={routeMap[to]}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.25 }}
       >
@@ -243,13 +278,13 @@ export const NavBar: React.FC<NavBarProps> = ({
         >
           {text}
         </NavLink>
-      </motion.li>
+      </motion.div>
     )
   }
 
   const itemMenuPosts_isAuth = (text: string, queue: number) => {
     return (
-      <li key={`menu-${queue}`} className={styles.menuMainPosts}>
+      <div key={`menu-${queue}`} className={styles.menuMainPosts}>
         <motion.div
           ref={triggerRef}
           className={styles.namePosts}
@@ -259,13 +294,13 @@ export const NavBar: React.FC<NavBarProps> = ({
         >
           {text}
         </motion.div>
-      </li>
+      </div>
     )
   }
 
   const itemMenuMore_isAuth = () => {
     return (
-      <li key={`more-isAuth`} className={styles.menuMainPosts}>
+      <div key={`more-isAuth`} className={styles.menuMainPosts}>
         <motion.div
           ref={moreButtonRef}
           className={styles.namePosts}
@@ -278,21 +313,22 @@ export const NavBar: React.FC<NavBarProps> = ({
             src={chevrons_right_white}
             width={24}
             height={24}
+            alt="arrow"
             loading="lazy"
           />
         </motion.div>
         {/* Подменю More*/}
-      </li>
+      </div>
     )
   }
 
   const itemMenuExit_isAuth = () => {
     return (
-      <li className={styles.elemMainMenu}>
+      <div className={styles.elemMainMenu}>
         <a href={'/'} onClick={logoutHandler}>
           {t('navBar.exit')}
         </a>
-      </li>
+      </div>
     )
   }
 
@@ -333,12 +369,19 @@ export const NavBar: React.FC<NavBarProps> = ({
     [t],
   )
 
-  const createNavItem_isAdmin = (to: string, text: string, queue: number) => {
+  const createNavItem_isAdmin = (
+    to: RoutePaths,
+    text: string,
+    queue: number,
+  ) => {
+    console.log('routeMap-admin-nav:', routeMap[to])
     return (
-      <motion.li
+      <motion.div
         key={`admin-nav-${to}`}
         className={styles.elemMainMenu}
         onClick={() => handleMainClick(queue)}
+        onMouseEnter={routeMap[to]}
+        onTouchStart={routeMap[to]}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.25 }}
       >
@@ -349,29 +392,31 @@ export const NavBar: React.FC<NavBarProps> = ({
         >
           {text}
         </NavLink>
-      </motion.li>
+      </motion.div>
     )
   }
 
   const itemMenuPosts_isAdmin = (text: string, queue: number) => {
     return (
-      <li key={`admin-menu-${queue}`} className={styles.menuMainPosts}>
+      <div key={`admin-menu-${queue}`} className={styles.menuMainPosts}>
         <motion.div
           ref={triggerRef}
           className={styles.namePosts}
           onClick={() => toggleDropdownParent(1)}
+          onMouseEnter={routeMap['/admin/posts']}
+          onTouchStart={routeMap['/admin/posts']}
           whileTap={{ scale: 0.95 }}
           transition={{ duration: 0.25 }}
         >
           {text}
         </motion.div>
-      </li>
+      </div>
     )
   }
 
   const itemMenuMore_isAdmin = () => {
     return (
-      <li key={`admin-more`} className={styles.menuMainPosts}>
+      <div key={`admin-more`} className={styles.menuMainPosts}>
         <motion.div
           ref={moreButtonRef}
           className={styles.namePosts}
@@ -384,11 +429,12 @@ export const NavBar: React.FC<NavBarProps> = ({
             src={chevrons_right_white}
             width={24}
             height={24}
+            alt="arrow"
             loading="lazy"
           />
         </motion.div>
         {/* Подменю More*/}
-      </li>
+      </div>
     )
   }
 
@@ -398,7 +444,10 @@ export const NavBar: React.FC<NavBarProps> = ({
         id: 'categories',
         element: createNavItem_isAdmin('/admin', t('navBar.home'), 0),
       },
-      { id: 'posts', element: itemMenuPosts_isAdmin(t('navBar.posts'), 1) },
+      {
+        id: 'posts',
+        element: itemMenuPosts_isAdmin(t('navBar.posts'), 1),
+      },
       {
         id: 'more',
         element: itemMenuMore_isAdmin(),
@@ -449,8 +498,6 @@ export const NavBar: React.FC<NavBarProps> = ({
               items: allNavItems_isAuth
                 .filter((item) => !hiddenIds.has(item.id))
                 .map((item) => item.element),
-              // nameId: visibleItems_isAuth.map((item) => item.id),
-              // items: visibleItems_isAuth.map((item) => item.element),
             },
             hiddenItems_v: {
               nameId: allNavItems_isAuth
@@ -492,8 +539,6 @@ export const NavBar: React.FC<NavBarProps> = ({
               items: allNavItems_isAdmin
                 .filter((item) => !hiddenAdminIds.has(item.id))
                 .map((item) => item.element),
-              // nameId: visibleItems_isAuth.map((item) => item.id),
-              // items: visibleItems_isAuth.map((item) => item.element),
             },
             hiddenItems_v: {
               nameId: allNavItems_isAdmin
@@ -520,8 +565,6 @@ export const NavBar: React.FC<NavBarProps> = ({
         }
       }
     }
-    // if (isAuthenticated && isAdmin)
-    //   return { visibleItems: isAdm, hiddenItems: [] }
     return {
       visibleItems_v: {
         nameId: allNavItems_unAuth.map((item) => item.id),
@@ -529,18 +572,7 @@ export const NavBar: React.FC<NavBarProps> = ({
       },
       hiddenItems_v: { nameId: [], items: [] },
     }
-  }, [
-    width,
-    isAuthenticated,
-    // isAdmin,
-    // isAuthVisible,
-    // isAuthHidden,
-    // visibleItems_isAuth,
-    // hiddenItems_isAuth,
-    allNavItems_isAuth,
-    allNavItems_unAuth,
-    // isAdm,
-  ])
+  }, [width, isAuthenticated, allNavItems_isAuth, allNavItems_unAuth])
 
   const getKey = (): string => {
     if (isAuthenticated && !isAdmin) return 'isAuth'
@@ -566,35 +598,23 @@ export const NavBar: React.FC<NavBarProps> = ({
     }
 
     load()
-
-    console.log('useEffect-i18n.language in Nav.Bar -----------------')
   }, [i18n.language, token])
 
   useEffect(() => {
     if (width! > 769) setIsOpenHamburger(false)
-    console.log('width=', width)
+    //console.log('width=', width)
   }, [width])
 
   // Закрываем dropdown more при клике вне
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      // const target = e.target as Node
-      // 1. Проверяем, кликнули ли мы на саму кнопку
-      // const isClickOnButton = moreButtonRef.current?.contains(target)
-
-      // 2. Проверяем, кликнули ли мы на dropdown содержимое
-      // const isClickOnDropdown = motionElemMoreRef.current?.contains(target)
-
       if (
-        // moreButtonRef.current &&
-        // !moreButtonRef.current.contains(e.target as Node)
         moreButtonRef.current &&
         !moreButtonRef.current.contains(e.target as Node) &&
         motionElemMoreRef.current &&
         !motionElemMoreRef.current.contains(e.target as Node)
       ) {
         setIsMoreOpen(false)
-        console.log('useEffect-dropdown-more')
       }
     }
 
@@ -610,23 +630,13 @@ export const NavBar: React.FC<NavBarProps> = ({
   // Закрываем dropdown posts при клике вне
   useEffect(() => {
     const handleClickPostsOutside = (e: MouseEvent) => {
-      // const target = e.target as Node
-      // 1. Проверяем, кликнули ли мы на саму кнопку
-      // const isClickOnButton = triggerRef.current?.contains(target)
-
-      // 2. Проверяем, кликнули ли мы на dropdown содержимое
-      // const isClickOnDropdown = motionElemRef.current?.contains(target)
-
       if (
-        // moreButtonRef.current &&
-        // !moreButtonRef.current.contains(e.target as Node)
         triggerRef.current &&
         !triggerRef.current.contains(e.target as Node) &&
         motionElemRef.current &&
         !motionElemRef.current.contains(e.target as Node)
       ) {
         setIsOpen(false)
-        console.log('useEffect-dropdown-posts')
       }
     }
 
@@ -644,30 +654,6 @@ export const NavBar: React.FC<NavBarProps> = ({
     const handleClickHamburgerOutside = (e: MouseEvent) => {
       const target = e.target as Node
 
-      console.log('=== DEBUG ===')
-
-      const htmlTarget = target as HTMLElement
-      console.log('1. isOpenHamburger:', isOpenHamburger)
-      console.log(
-        '2. motionElemHamburgerRef exists:',
-        !!motionElemHamburgerRef.current,
-      )
-      console.log(
-        '3. Target is in motionElemHamburgerRef:',
-        motionElemHamburgerRef.current?.contains(target as Node),
-      )
-      console.log('4. Target class:', htmlTarget.className)
-      console.log('5. Target tag:', htmlTarget.tagName)
-      console.log('6. Target text:', target?.textContent?.slice(0, 50))
-
-      // Для проверки структуры:
-      console.log('7. Parent elements:')
-      let current = target as HTMLElement
-      for (let i = 0; i < 5 && current; i++) {
-        console.log(`  Level ${i}:`, current.tagName, current.className)
-        current = current.parentElement as HTMLElement
-      }
-
       // Проверяем, что меню открыто
       if (!isOpenHamburger) return
 
@@ -679,7 +665,6 @@ export const NavBar: React.FC<NavBarProps> = ({
 
       // Если клик на кнопку hamburger или крестик - игнорируем
       if (isClickOnButton || parentButton) {
-        console.log('Click on hamburger button or cross - ignoring')
         return
       }
 
@@ -720,10 +705,10 @@ export const NavBar: React.FC<NavBarProps> = ({
     }
   }, [isOpenHamburger])
 
-  useEffect(() => {
-    renderCount.current += 1
-    console.log(`🔄 Navbar render #${renderCount.current} at ${Date.now()}`)
-  }, [])
+  // useEffect(() => {
+  //   renderCount.current += 1
+  //   console.log(`🔄 Navbar render #${renderCount.current} at ${Date.now()}`)
+  // }, [])
 
   useEffect(() => {
     if (isNavBarVisible) {
@@ -776,102 +761,119 @@ export const NavBar: React.FC<NavBarProps> = ({
             </>
           )}
           <div className={styles.enRu}>
-            {Object.keys(locales).map((locale: string, index) => (
-              <React.Fragment key={`locale-${index}`}>
-                {showRedLine &&
-                  Object.keys(locales).indexOf(i18n.language) === index && (
-                    <>
-                      {/* Линия для новой страницы (появление) */}
-                      {isNewPage && (
-                        <motion.div
-                          key="line-appear"
-                          className={styles.redLine}
-                          initial={{
-                            scaleX: 0,
-                            left: index === 0 ? '10%' : '60%',
-                            width: '30%',
-                          }}
-                          animate={{
-                            scaleX: 1,
-                            left: index === 0 ? '10%' : '60%',
-                            width: '30%',
-                          }}
-                          exit={{ scaleX: 0 }}
-                          transition={{
-                            scaleX: {
-                              type: 'spring',
-                              stiffness: 500,
-                              damping: 20,
-                            },
-                            duration: 0.3,
-                          }}
-                          style={{
-                            position: 'absolute',
-                            bottom: 0,
-                            height: '2px',
-                            backgroundColor: 'red',
-                            transformOrigin: 'center',
-                          }}
-                        />
-                      )}
+            {Object.keys(locales).map((locale: string, index) => {
+              const isActive = i18n.language === locale
+              return (
+                <React.Fragment key={`locale-${index}`}>
+                  {showRedLine &&
+                    Object.keys(locales).indexOf(i18n.language) === index && (
+                      <>
+                        {/* Линия для новой страницы (появление) */}
+                        {isNewPage && (
+                          <motion.div
+                            key="line-appear"
+                            className={styles.redLine}
+                            initial={{
+                              scaleX: 0,
+                              left: index === 0 ? '10%' : '60%',
+                              width: '30%',
+                            }}
+                            animate={{
+                              scaleX: 1,
+                              left: index === 0 ? '10%' : '60%',
+                              width: '30%',
+                            }}
+                            exit={{ scaleX: 0 }}
+                            transition={{
+                              scaleX: {
+                                type: 'spring',
+                                stiffness: 500,
+                                damping: 20,
+                              },
+                              duration: 0.3,
+                            }}
+                            style={{
+                              position: 'absolute',
+                              bottom: 0,
+                              height: '2px',
+                              backgroundColor: 'red',
+                              transformOrigin: 'center',
+                            }}
+                          />
+                        )}
 
-                      {/* Линия для смены языка (движение) */}
-                      {!isNewPage && (
-                        <motion.div
-                          layoutId="line-move"
-                          className={styles.redLine}
-                          initial={false}
-                          animate={{
-                            left: index === 0 ? '10%' : '60%',
-                            width: '30%',
-                          }}
-                          transition={{
-                            layout: {
-                              type: 'spring',
-                              stiffness: 400,
-                              damping: 25,
-                            },
-                            // left: {
-                            //   type: 'spring',
-                            //   stiffness: 300,
-                            //   damping: 25,
-                            // },
-                          }}
-                          style={{
-                            position: 'absolute',
-                            bottom: 0,
-                            height: '2px',
-                            backgroundColor: 'red',
-                          }}
-                        />
-                      )}
-                    </>
-                  )}
+                        {/* Линия для смены языка (движение) */}
+                        {!isNewPage && (
+                          <motion.div
+                            layoutId="line-move"
+                            className={styles.redLine}
+                            initial={false}
+                            animate={{
+                              left: index === 0 ? '10%' : '60%',
+                              width: '30%',
+                            }}
+                            transition={{
+                              layout: {
+                                type: 'spring',
+                                stiffness: 400,
+                                damping: 25,
+                              },
+                              // left: {
+                              //   type: 'spring',
+                              //   stiffness: 300,
+                              //   damping: 25,
+                              // },
+                            }}
+                            style={{
+                              position: 'absolute',
+                              bottom: 0,
+                              height: '2px',
+                              backgroundColor: 'red',
+                            }}
+                          />
+                        )}
+                      </>
+                    )}
 
-                <button
-                  key={locale}
-                  type="submit"
-                  className={styles.buttonLocale}
-                  onClick={() => {
-                    i18n.changeLanguage(locale)
-                    // setLanguage(locale)
-                    // localStorage.setItem('language', locale)
-                    // setActiveSubPage('')
-                    search.setQuery('')
-                    // if (!isNavBarVisible) {
-                    //   setShouldAnimate(false)
-                    // } else setShouldAnimate(true)
-                  }}
-                  style={{
-                    fontWeight: i18n.language === locale ? '600' : 'normal',
-                    cursor: locale === i18n.language ? 'default' : 'pointer',
-                  }}
-                  disabled={locale === i18n.language}
-                >
-                  {locales[locale].title}
-                </button>
-              </React.Fragment>
-            ))}
+                  <button
+                    key={locale}
+                    type="submit"
+                    className={styles.buttonLocale}
+                    onClick={() => {
+                      i18n.changeLanguage(locale)
+                      search.setQuery('')
+                    }}
+                    onMouseEnter={() => {
+                      if (!isActive) {
+                        // hover только для неактивных кнопок
+                        if (locale === 'ru') {
+                          setRuHovered(true)
+                        } else {
+                          setEnHovered(true)
+                        }
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      setRuHovered(false)
+                      setEnHovered(false)
+                    }}
+                    style={{
+                      fontWeight: i18n.language === locale ? '600' : 'normal',
+                      cursor: locale === i18n.language ? 'default' : 'pointer',
+                      color: isActive
+                        ? 'white' // активная всегда белая
+                        : (locale === 'ru' && ruHovered) ||
+                            (locale === 'en' && enHovered)
+                          ? 'rgb(211, 211, 211)' // hover для неактивных
+                          : 'white', // обычное состояние
+                    }}
+                    disabled={locale === i18n.language}
+                  >
+                    {locales[locale].title}
+                  </button>
+                </React.Fragment>
+              )
+            })}
           </div>
         </div>
         {/* единое меню для десктопа и мобильников*/}
@@ -881,17 +883,12 @@ export const NavBar: React.FC<NavBarProps> = ({
               key="mobileMenu"
               ref={motionElemHamburgerRef}
               className={styles.mobileMenu}
-              // initial={{ opacity: 0, x: -20 }}
-              // animate={{ opacity: 1, x: 0 }}
-              // exit={{ opacity: 0, x: -20 }}
-              // transition={{ duration: 0.3 }}
               initial="closed"
               animate={isOpenHamburger ? 'open' : 'closed'}
               exit="closed"
               variants={ulVariants}
             >
               <ul className={styles.navLinksVertical}>
-                {/* {getNavItems().map((item, index) => ( */}
                 {getVisibleAndHiddenItems.visibleItems_v.items.map(
                   (item, index) => (
                     <MenuItemHamburger
@@ -909,7 +906,6 @@ export const NavBar: React.FC<NavBarProps> = ({
                       setIsNavBarHamburgerAnimationComplete={
                         setIsNavBarHamburgerAnimationComplete
                       }
-                      // motionElemHamburgerRef={motionElemHamburgerRef}
                     />
                   ),
                 )}
@@ -918,7 +914,6 @@ export const NavBar: React.FC<NavBarProps> = ({
           ) : !isOpenHamburger && width! > 768 ? (
             <div className={styles.menuContainer}>
               <ul className={styles.navLinks}>
-                {/* {getNavItems().map((item, index) => ( */}
                 {getVisibleAndHiddenItems.visibleItems_v.items.map(
                   (item, index) => (
                     <MenuItem
@@ -943,8 +938,6 @@ export const NavBar: React.FC<NavBarProps> = ({
         <button
           className={styles.hamburger}
           onClick={() => {
-            // setIsOpenHamburger(!isOpenHamburger)
-            // setIsOpen(false)
             if (isOpenHamburger) {
               console.log('setIsClickRedCross(true)')
               isClickRedCrossRef.current = true
@@ -988,9 +981,6 @@ export const NavBar: React.FC<NavBarProps> = ({
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.2 }}
               >
-                {/* <MenuIcon
-                  style={{ fill: 'white', width: '29px', height: '25px' }}
-                /> */}
                 <img src={hamburger3} width={24} height={24} loading="lazy" />
               </motion.div>
             )}

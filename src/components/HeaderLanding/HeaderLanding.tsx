@@ -1,7 +1,7 @@
 import useScreenSize from '../../utilita/useScreenSize.ts'
 import { useTranslation } from 'react-i18next'
 import zastavka from '../../assets/zastavkaBlueGradient.webp'
-import cornFlower from '../../assets/static/cornflower.png'
+import cornFlower from '../../assets/static/cornflower.webp'
 import styles from './HeaderLanding.module.css'
 
 export const HeaderLanding = () => {
@@ -31,7 +31,9 @@ export const HeaderLanding = () => {
                 className={styles.headerImg}
                 src={cornFlower}
                 alt="header title"
-                loading="lazy"
+                fetchpriority="high"
+                loading="eager"
+                //loading="lazy"
               />
             </div>
           ) : null}

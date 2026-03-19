@@ -77,6 +77,7 @@ export const SidebarRight: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -100 }}
                   transition={{ duration: 0.3 }}
+                  style={{ willChange: 'y', transform: 'translateZ(0)' }}
                 >
                   <div className={styles.wrapperComment}>
                     <CommentPost
@@ -182,14 +183,17 @@ export const SidebarRight: React.FC = () => {
       const container = commentsContainerRef.current
       if (!container || !hasMoreRef.current) return
 
-      console.log('📊 Размеры контейнера:', {
-        scrollHeight: container.scrollHeight,
-        clientHeight: container.clientHeight,
-        scrollTop: container.scrollTop,
-        hasScrollbar: container.scrollHeight > container.clientHeight,
-      })
+      // console.log('📊 Размеры контейнера:', {
+      //   scrollHeight: container.scrollHeight,
+      //   clientHeight: container.clientHeight,
+      //   scrollTop: container.scrollTop,
+      //   hasScrollbar: container.scrollHeight > container.clientHeight,
+      // })
 
-      const { scrollTop, scrollHeight, clientHeight } = container
+      // const { scrollTop, scrollHeight, clientHeight } = container
+      const scrollTop = container.scrollTop
+      const scrollHeight = container.scrollHeight
+      const clientHeight = container.clientHeight
 
       if (scrollTop + clientHeight >= scrollHeight - 100) {
         // Загружаем следующую страницу

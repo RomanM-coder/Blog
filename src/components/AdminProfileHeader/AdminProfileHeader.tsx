@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import axiosIC from '../../utilita/axiosIC.ts'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
-import { basicUrl, basicColor } from '../../utilita/default.ts'
+import { basicUrl, basicColor, production } from '../../utilita/default.ts'
 import { IUser } from '../../utilita/modelUser.ts'
 import styles from './AdminProfileHeader.module.css'
 
@@ -65,9 +65,9 @@ export const AdminProfileHeader: React.FC<AdminProfileHeaderProps> = ({
 
       if (resServer.forUserId && resServer.forUserId === userId) {
         if (response.data.success) {
-          myToast(response.data.message, basicColor.green) // Аватар успешно обновлен
+          myToast(t(response.data.message), basicColor.green) // Аватар успешно обновлен
           loadUserProfile() // Перезагружаем профиль
-        } else myToast(response.data.message, basicColor.red)
+        } else myToast(t(response.data.message), basicColor.red)
       }
     } catch (error: any) {
       // ✅ Проверяем, есть ли ответ от сервера (ошибка 500, 400 и т.д.)
@@ -94,8 +94,13 @@ export const AdminProfileHeader: React.FC<AdminProfileHeaderProps> = ({
         <div className={styles.avatarContainer}>
           <img
             // src={profile.avatar || '/default-avatar.png'}
-            src={`${basicUrl.urlUserFiles}?id=${profile._id}&nameImage=${profile.avatar}`}
-            alt="Аватар"
+            //src={`${basicUrl.urlUserFiles}?id=${profile._id}&nameImage=${profile.avatar}`}
+            src={
+              production
+                ? `/uploads/avatars/${profile.avatar}`
+                : `${basicUrl.urlUserFiles}?id=${profile._id}&nameImage=${profile.avatar}`
+            }
+            alt="avatar"
             className={styles.avatarImage}
             loading="lazy"
           />

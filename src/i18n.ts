@@ -38,6 +38,10 @@ const initI18n = () => {
       //   },
       // },
 
+      // react: {
+      //   useSuspense: false, // Не ждать переводы для рендера
+      // },
+
       // 🔥 Загружать оба namespace
       // preload: ['ru', 'en'], // языки
       // ns: ['translation', 'admin'],

@@ -7,7 +7,6 @@ interface Inputs {
   email: string
   password: string
   captchaToken: string
-  // file: File | undefined
 }
 
 interface UseCheckingKeyboardProps {
@@ -15,7 +14,7 @@ interface UseCheckingKeyboardProps {
   setValue: UseFormSetValue<Inputs>
   timerRef: React.MutableRefObject<NodeJS.Timeout | undefined>
 }
-
+// проверка символов
 export const useCheckingKeyboard = ({
   myToast,
   setValue,
@@ -27,6 +26,10 @@ export const useCheckingKeyboard = ({
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const dataInput = event.target.value
+    setValue('password', '', {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
 
     // Очищаем предыдущий таймер
     if (timerRef.current) {
@@ -34,11 +37,7 @@ export const useCheckingKeyboard = ({
     }
 
     // СРАЗУ проверяем на недопустимые символы
-    const hasInvalidChars =
-      // i18n.language === 'en'
-      //   ?
-      /[^a-zA-Z0-9._%+-@]/.test(dataInput)
-    // : /[^а-яёА-ЯЁ0-9._%+-@]/.test(dataInput)
+    const hasInvalidChars = /[^a-zA-Z0-9._%+-@]/.test(dataInput)
     const hasRusSimbol = /[а-яёА-ЯЁ]/.test(dataInput)
 
     // Фильтруем значение

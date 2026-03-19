@@ -30,6 +30,10 @@
     "messageImageRuAltRequired": "Alt Ru is required",
     "messageNameCommentLong": "The comment is too long",
     "messageTransNameCommentLong": "The translation of the comment description is too long",
+    "messagePasswordRequired": "Password is required",
+    "messageNewPasswordRequired": "New password is required",
+    "messageConfirmNewPasswordRequired": "Confirmation of the new password is required",
+    "messageConfirmCaptcha": "Please confirm the captcha",
 
     "firstName": {
       "tooLong": "The name cannot be longer than 30 characters",
@@ -62,13 +66,45 @@
       "emailVerification": "Enter the email address for verification",
       "confirm": "confirm",
       "login": "Login",
-      "regin": "Regin"
+      "regin": "Registration",
+      "forgetPassword": "forget password?",
+      "messageFillEmailField": "Fill in the email field.",
+      "messageNotRealUser": "There is no such registered user.",
+      "messagePasswordRequired": "Password is required.",
+      "checking": "Email verification...",
+      "available": "Email is available",
+      "taken": "The email is already busy",
+      "invalid": "Incorrect email format",
+      "error": "Verification error"
+    },
+    "resetForm": {
+      "title": "Form for a new password",
+      "buttonSubmit": "SEND NEW PASSWORD",
+      "buttonCancel": "CANCEL",
+      "placeholderNewPassword": "New password",
+      "placeholderConfirmNewPassword": "Confirm new password",
+      "fieldNewPassword": "New password",
+      "fieldConfirmNewPassword": "Confirm new password",
+      "newPasswordRequired": "New password required",
+      "confirmNewPasswordRequired": "Confirm new password required",
+      "toast": {
+        "messageEmailPassword": "If a user with this email address exists, they will receive a link to reset password email address.",
+        "messageLinkExpired": "Reset link has expired.",
+        "messageInputNewPassword": "Input new password.",
+        "messageLinkIncorrect": "Invalid or expired reser link",
+        "messageUserNotFound": "The user was not found.",
+        "messagePasswordsDoNotMatch": "Fill in the password confirmation field correctly. The fields must be the same.",
+        "messageTokenRequired": "Token is required.",
+        "messageInvalidTokenFormat": "Invalid token format.",
+        "messageNewPasswordRequired": "New password is required.",
+        "messageNewPasswordIsString": "New password must be a string."
+      }
     },
     "toast": {
       "reg": {
-        "messageUserCreated": "The user has been created",
-        "messageDataIncorrectReg": "Incorrect data during registration",
-        "messageAlreadyExists": "Such a user already exists",
+        "messageUserCreated": "The user has been created.",
+        "messageDataIncorrectReg": "Incorrect data during registration.",
+        "messageAlreadyExists": "Such a user already exists.",
         "fileAdd": "The user's file has been successfully added ",
         "registrationFailed": "Registration failed",
         "userNotFound": "User not found",
@@ -79,18 +115,28 @@
       "login": {
         "userLogin": "The user is logged in",
         "loginFailed": "Login failed",
-        "messageDataIncorrectLog": "Incorrect data to log in to the system",
-        "messageUserNotFound": "The user was not found",
-        "messagePasswordIncorrect": "Invalid password, try again",
-        "messageEmailToken": "A token-based email has been sent to your email address",
-        "messageLinkIncorrect": "Invalid or expired confirmation link",
-        "messageEmailConfirm": "Email cofirmed successfully"
+        "messageDataIncorrectLog": "Incorrect data to log in to the system.",
+        "messageUserNotFound": "The user was not found.",
+        "messagePasswordIncorrect": "Invalid password, try again.",
+        "messageEmailToken": "If a user with this email address exists, they will receive a link to confirm their email address.",
+        "messageLinkIncorrect": "Invalid or expired confirmation link.",
+        "messageLinkExpired": "Confirmation link has expired.",
+        "messageEmailConfirm": "Email cofirmed successfully.",
+        "messageTokenRequired": "Token is required.",
+        "messageInvalidTokenFormat": "Invalid token format."
+      },
+      "forget": {
+        "messageEmailPassword": "If a user with this email exists, a link to reset the password is sent to them."
       },
       "error": "Error"
     }
   },
   "adminLogin": {
-    "login": "The admin is logged in"
+    "login": "The admin is logged in",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Forbidden",
+    "notFound": "Not found",
+    "serverError": "Error server"
   },
   "catList": {
     "searchInput": "Search for a category by name",
@@ -183,7 +229,13 @@
       "changeAvatar": "Change your avatar",
       "user": "User",
       "register": "Registered",
-      "year": "year"
+      "year": "year",
+
+      "userNotFound": "User not found",
+      "invalidUserData": "Invalid user data",
+      "fileNotLoaded": "File not loaded",
+      "fileOne": "Only 1 file is allowed for the avatar",
+      "avatarUpdatedSuccessfully": "Avatar has been successfully updated"
     },
     "profileInfo": {
       "header": "Profile editing",
@@ -202,6 +254,11 @@
       "placeholderLastName": "Input last name",
       "bio": "Bio",
       "placeholderBio": "Tell us about yourself..."
+    },
+    "toast": {
+      "userNotFound": "User not found",
+      "userUpdated": "The profile user`s has been changed",
+      "leastOneUpdate": "At least one update field must be specified"
     }
   },
   "adminPostPage": {
@@ -348,6 +405,11 @@
     "profileHeader": {
       "fileIsImage": "The file must be an image",
       "fileSize": "The file size should not exceed 2MB",
+      "userNotFound": "User not found",
+      "invalidUserData": "Invalid user data",
+      "fileNotLoaded": "File not loaded",
+      "fileOne": "Only 1 file is allowed for the avatar",
+      "avatarUpdatedSuccessfully": "Avatar has been successfully updated",
       "errorEdit": "Error updating the avatar",
       "loading": "Loading...",
       "changeAvatar": "Change your avatar",
@@ -368,7 +430,7 @@
       "role": "Role",
       "createdAt": "Created at",
       "lastLogin": "Last visit",
-      "confirmed": "Confirmed",
+      "confirmed": "Confirmed email",
       "blocked": "Blocked",
       "commentsCount": "Comments",
       "action": "Action",
@@ -376,8 +438,13 @@
       "delete": "Delete"
     },
     "toast": {
+      "userNotFound": "User not found",
+      "usersNotFound": "Users not found",
+      "fileOne": "Only 1 file is allowed for the avatar",
+      "arrayVotecomment": "Expected array votecomment",
+      "arrayVotepost": "Expected array votepost",
       "userAdded": "User added",
-      "userUpdated": "The user has been changed",
+      "userUpdated": "The profile user`s has been changed",
       "userDeleted": "User deleted"
     }
   },
@@ -476,6 +543,9 @@
   "lazyImages": {
     "notLoading": "Failed to upload: ",
     "loading": "Loading..."
+  },
+  "invalidLinkPage": {
+    "errorInvalidLink": "Error: status 404, there is no such page or invalid link."
   },
   "footer": {
     "title": "© React Blog",

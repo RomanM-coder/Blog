@@ -1,8 +1,17 @@
-import React, { useEffect, useState, useRef, useContext } from 'react'
+import React, { useEffect, useState, useRef, useContext, Suspense } from 'react'
+import { lazyWithNamedExport } from '../../../utilita/lazyWithNamedExport.ts'
 import { useGlobalState } from '../../../useGlobalState.ts'
 import { AdminCategoryCard } from '../../../components/AdminCategoryCard/AdminCategoryCard.tsx'
-import { AddEditCategoryForm } from '../AddEditCategoryForm/AddEditCategoryForm.tsx'
-import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
+const AddEditCategoryForm = lazyWithNamedExport(
+  () => import('../AddEditCategoryForm/AddEditCategoryForm.tsx'),
+  'AddEditCategoryForm',
+)
+// import { AddEditCategoryForm } from '../AddEditCategoryForm/AddEditCategoryForm.tsx'
+const DeleteForm = lazyWithNamedExport(
+  () => import('../DeleteForm/DeleteForm.tsx'),
+  'DeleteForm',
+)
+// import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
 import { useAdminCategoryes } from './adminCategory.hook.ts'
 import { ICategory } from '../../../utilita/modelCategory.ts'
 import { IUser } from '../../../utilita/modelUser.ts'
@@ -18,6 +27,7 @@ import { SearchContext } from '../../../context/SearchContext.ts'
 import { SortContext } from '../../../context/SortContext.ts'
 import { IPostFull } from '../../../utilita/modelPostFull.ts'
 import { ICommentFull } from '../../../utilita/modelCommentFull.ts'
+import { LoadingSpinner } from '../../LoadingSpinner/LoadingSpinner.tsx'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import styles from './AdminCategory.module.css'
@@ -387,22 +397,26 @@ export const AdminCategory: React.FC = () => {
         style={{ opacity: postsOpacity, pointerEvents: pointerEvents }}
       >
         {showAddEditForm && (
-          <AddEditCategoryForm
-            handleAddEditFormHide={handleAddEditFormHide}
-            mode={mode}
-            extendedSelectCategory={extendedSelectCategory}
-            setExtendedSelectCategory={setExtendedSelectCategory}
-            addCategory={addCategory}
-            editCategory={editCategory}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <AddEditCategoryForm
+              handleAddEditFormHide={handleAddEditFormHide}
+              mode={mode}
+              extendedSelectCategory={extendedSelectCategory}
+              setExtendedSelectCategory={setExtendedSelectCategory}
+              addCategory={addCategory}
+              editCategory={editCategory}
+            />
+          </Suspense>
         )}
         {showDeleteForm && (
-          <DeleteForm
-            type={'category'}
-            handleDeleteFormHide={handleDeleteFormHide}
-            selectedItem={selectedCategory}
-            onDelete={deleteCategory}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <DeleteForm
+              type={'category'}
+              handleDeleteFormHide={handleDeleteFormHide}
+              selectedItem={selectedCategory}
+              onDelete={deleteCategory}
+            />
+          </Suspense>
         )}
         <>
           <div className={styles.category}>

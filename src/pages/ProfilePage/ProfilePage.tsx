@@ -40,8 +40,10 @@ export const ProfilePage: React.FC = () => {
         message?: string
       }>(`${basicUrl.urlUser}/profile`)
 
-      if (response.data.success && response.data.userProfile) {
-        setProfile(response.data.userProfile)
+      const resServer = response.data
+
+      if (resServer.success && resServer.userProfile) {
+        setProfile(resServer.userProfile)
         setLoadingState('loaded')
       } else {
         setLoadingState('error')

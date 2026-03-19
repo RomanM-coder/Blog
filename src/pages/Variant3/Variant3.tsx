@@ -3,10 +3,10 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import useScreenSize from '../../utilita/useScreenSize.ts'
 import { LazyImage } from '../../components/LazyImage/LazyImage.tsx'
-import magnolia from '../../assets/static/magnolia-flower-clipart-md.png'
-import pinkFlower from '../../assets/static/pink-flower-clipart-md.png'
-import narcissus from '../../assets/static/narcissus-clipart-md.png'
-import bellFlower from '../../assets/static/bell-flower-clipart-md.png'
+import magnolia from '../../assets/static/magnolia-flower-clipart-md.webp'
+import pinkFlower from '../../assets/static/pink-flower-clipart-md.webp'
+import narcissus from '../../assets/static/narcissus-clipart-md.webp'
+import bellFlower from '../../assets/static/bell-flower-clipart-md.webp'
 // import pinkTulip from '/src/assets/pink-tulip-clipart-md.png'
 // import peonies from '/src/assets/peonies-clipart-md.png'
 import styles from './Variant3.module.css'
@@ -90,7 +90,7 @@ export const Variant3: React.FC<IVariant3> = ({ readyLoad }) => {
 
         // Проверяем, изменились ли высоты
         const hasChanged = newHeights.some((h, i) => {
-          h !== cardHeights[i]
+          return h !== cardHeights[i]
           // console.log(`Scroll progress= ${h}, ${i}`, scrollYProgress1)
         })
         // console.log(`Scroll progress= ${h}, ${i}`, scrollYProgress1)
@@ -112,7 +112,9 @@ export const Variant3: React.FC<IVariant3> = ({ readyLoad }) => {
         return
       }
 
-      clearTimeout(resizeTimeoutRef.current)
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current)
+      }
       resizeTimeoutRef.current = setTimeout(() => {
         updateCardHeights()
         lastWidthRef.current = currentWidth

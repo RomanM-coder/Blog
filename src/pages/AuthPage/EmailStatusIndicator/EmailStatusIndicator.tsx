@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from './EmailStatusIndicator.module.css'
 
 interface EmailStatusIndicatorProps {
@@ -8,31 +9,32 @@ interface EmailStatusIndicatorProps {
 export const EmailStatusIndicator: React.FC<EmailStatusIndicatorProps> = ({
   status,
 }) => {
+  const { t } = useTranslation()
   const statusConfig = {
     idle: null, // ничего не показываем
     checking: {
       icon: '⏳',
-      text: 'Проверка email...',
+      text: t('auth.Form.checking'),
       className: 'checking',
     },
     available: {
       icon: '✅',
-      text: 'Email свободен',
+      text: t('auth.Form.available'),
       className: 'available',
     },
     taken: {
       icon: '❌',
-      text: 'Email уже занят',
+      text: t('auth.Form.taken'),
       className: 'taken',
     },
     invalid: {
       icon: '⚠️',
-      text: 'Некорректный формат email',
+      text: t('auth.Form.invalid'),
       className: 'invalid',
     },
     error: {
       icon: '🔥',
-      text: 'Ошибка проверки',
+      text: t('auth.Form.error'),
       className: 'error',
     },
   }

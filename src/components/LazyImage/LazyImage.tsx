@@ -20,6 +20,9 @@ export const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
   useEffect(() => {
     if (!placeholderRef.current) return
 
+    // Принудительно установим position
+    placeholderRef.current.style.position = 'relative'
+
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries
@@ -58,6 +61,7 @@ export const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
         ref={placeholderRef} // Observer следит за этим div
         className={className}
         style={{
+          position: 'relative',
           background: '#f5f5f5',
           display: 'flex',
           alignItems: 'center',
@@ -79,6 +83,7 @@ export const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
       alt={alt}
       className={className}
       style={{
+        position: 'relative',
         // width: '100%',
         // height: '100%',
         objectFit: 'cover', // contain

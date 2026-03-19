@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import close from '../../../assets/static/close_big.svg'
 import { z } from 'zod'
-import { basicUrl } from '../../../utilita/default.ts'
+import { basicUrl, production } from '../../../utilita/default.ts'
 import styles from './AddEditCategoryForm.module.css'
 
 interface AddEditCategoryFormProps {
@@ -195,11 +195,16 @@ export const AddEditCategoryForm: React.FC<AddEditCategoryFormProps> = ({
 
   const downloadFile = async (selectedCategoryId: string) => {
     // const path = `http://localhost:5000/api/file/download?id=${selectedCategoryId}`
-    const path = `${basicUrl.urlDownload}?id=${selectedCategoryId}`
+    let path = ''
+    if (production) {
+      path = `/categoryFiles/${extendedSelectCategory.name}/${extendedSelectCategory.file}`
+    } else {
+      path = `${basicUrl.urlDownload}?id=${selectedCategoryId}`
+    }
     const response = await fetch(path, {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        //'Access-Control-Allow-Origin': '*',
         // authorization: `Bearer ${token}`
       },
     })
@@ -269,7 +274,7 @@ export const AddEditCategoryForm: React.FC<AddEditCategoryFormProps> = ({
             handleAddEditFormHide()
           }}
         >
-          <img src={close} width={24} height={24} loading="lazy" />
+          <img src={close} width={24} height={24} alt="close" loading="lazy" />
         </button>
         <h2>
           {mode === 'add'
@@ -375,7 +380,9 @@ export const AddEditCategoryForm: React.FC<AddEditCategoryFormProps> = ({
                   <div
                     id="image1"
                     style={{
-                      backgroundImage: `url(${basicUrl.urlDownload}?id=${extendedSelectCategory._id})`,
+                      backgroundImage: production
+                        ? `url(${basicUrl.urlDownload}?id=${extendedSelectCategory._id})`
+                        : `/categoryFiles/${extendedSelectCategory.name}/${extendedSelectCategory.file}`,
                       backgroundPosition: 'center',
                       backgroundSize: 'cover',
                       width: '25px',

@@ -27,15 +27,13 @@ interface Inputs {
   email: string
   password: string
   captchaToken: string
-  // file: File | undefined
 }
 
 const headers = {
   'Content-Type': 'multipart/form-data',
-  // 'Access-Control-Allow-Origin': '*',
 } as RawAxiosRequestHeaders
 
-// посылает письмо
+// login user
 export const useUserLogin = ({
   setEmailStatus,
   myToast,
@@ -44,13 +42,11 @@ export const useUserLogin = ({
   auth,
   recaptchaRef,
 }: UseUserLoginProps) => {
-  // const [, setIsLoading] = useGlobalState('isLoading')
   const { t, i18n } = useTranslation()
 
   const userLogin = async (authForm: Inputs): Promise<{ success: boolean }> => {
     const abortController = new AbortController()
     try {
-      // reset()
       console.log('email=', authForm.email)
 
       setEmailStatus('checking')

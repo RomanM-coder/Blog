@@ -21,7 +21,11 @@ import { PostList } from '../../components/PostList/PostList.tsx'
 import 'react-loading-skeleton/dist/skeleton.css'
 import styles from './PostPage.module.css'
 
-export const PostPage: React.FC = () => {
+interface PostPageProps {
+  categoryList: ICategory[]
+}
+
+export const PostPage: React.FC<PostPageProps> = ({ categoryList }) => {
   const [selectedPost, setSelectedPost] = useState<IPostFull>({} as IPostFull)
   const [, setFavorite] = useState<number>(0)
   const [, setNoFavorite] = useState<number>(0)
@@ -297,6 +301,7 @@ export const PostPage: React.FC = () => {
             handleUseGetPost_AfterAddNewComment={
               handleUseGetPost_AfterAddNewComment
             }
+            categoryList={categoryList}
           />
         )
       default:

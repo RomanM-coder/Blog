@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { basicUrl } from '../../utilita/default.ts'
+import { basicUrl, production } from '../../utilita/default.ts'
 import { MorphShapesCSS } from '../../components/MorphShapesCSS/MorphShapesCSS.tsx'
 import { ICommentForm } from '../../utilita/modelCommentForm.ts'
 import { ICommentFull } from '../../utilita/modelCommentFull.ts'
@@ -95,9 +95,15 @@ export const AdminComment: React.FC<IAdminCommentProps> = ({
                   <MorphShapesCSS />
                 ) : (
                   <img
-                    src={`${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`}
+                    //src={`${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`}
+                    src={
+                      production
+                        ? `/uploads/avatars/${comment.user.avatar}`
+                        : `${basicUrl.urlUserFiles}?id=${comment.user._id}&nameImage=${comment.user.avatar}`
+                    }
                     height={'40px'}
                     width={'40px'}
+                    alt={`avatar-${comment.user.email}`}
                     style={{ borderRadius: '50%' }}
                     loading="lazy"
                   />
@@ -131,7 +137,13 @@ export const AdminComment: React.FC<IAdminCommentProps> = ({
               className={styles.reaction_button}
               onClick={() => handleLike(comment)}
             >
-              <img src={heartRed} width={21} height={21} loading="lazy" />
+              <img
+                src={heartRed}
+                width={21}
+                height={21}
+                alt="heart-red"
+                loading="lazy"
+              />
               <span className={styles.reaction_button_counter}>
                 {comment.like}
               </span>
@@ -140,7 +152,13 @@ export const AdminComment: React.FC<IAdminCommentProps> = ({
               className={styles.reaction_button}
               onClick={() => handleDislike(comment)}
             >
-              <img src={heartGrey} width={21} height={21} loading="lazy" />
+              <img
+                src={heartGrey}
+                width={21}
+                height={21}
+                alt="heart-grey"
+                loading="lazy"
+              />
               <span className={styles.reaction_button_counter}>
                 {comment.dislike}
               </span>
@@ -154,14 +172,26 @@ export const AdminComment: React.FC<IAdminCommentProps> = ({
           onClick={() => handleEdit(comment)}
         >
           <div className={styles.wrapperPencil}>
-            <img src={pencil} width={20} height={20} loading="lazy" />
+            <img
+              src={pencil}
+              width={20}
+              height={20}
+              alt="pencil"
+              loading="lazy"
+            />
           </div>
         </button>
         <button
           className={styles.deleteButton}
           onClick={() => handleDelete(comment)}
         >
-          <img src={basket} width={24} height={24} loading="lazy" />
+          <img
+            src={basket}
+            width={24}
+            height={24}
+            alt="basket"
+            loading="lazy"
+          />
         </button>
       </div>
     </div>

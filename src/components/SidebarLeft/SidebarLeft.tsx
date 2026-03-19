@@ -2,7 +2,7 @@ import { useEffect, useRef, useMemo, useContext } from 'react'
 import { motion } from 'framer-motion'
 import { ICategory } from '../../utilita/modelCategory.ts'
 import { useGlobalState } from '../../useGlobalState.ts'
-import { basicUrl } from '../../utilita/default.ts'
+import { basicUrl, production } from '../../utilita/default.ts'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext.ts'
 import { SortContext } from '../../context/SortContext.ts'
@@ -118,7 +118,6 @@ export const SaidbarLeft: React.FC<SaidbarLeftProps> = ({
     setActiveSubPage(category._id!)
     search.clearSearch()
     navigate(`/category/${category._id}`)
-    // navigate(`/category/797979gggu097jhgt/all`)
   }
 
   const optionTopClick = (
@@ -168,19 +167,26 @@ export const SaidbarLeft: React.FC<SaidbarLeftProps> = ({
           //   }}
           // ></div>
           <img
-            src={`${basicUrl.urlDownload}?id=${item._id}`}
+            //src={`${basicUrl.urlDownload}?id=${item._id}`}
+            src={
+              production
+                ? `/categoryFiles/${item.name}/${item.link}`
+                : `${basicUrl.urlDownload}?id=${item._id}`
+            }
+            fetchpriority="high"
+            alt={item.name}
             style={{
               width: '24px',
               height: '24px',
               marginRight: '12px',
             }}
-            loading="lazy"
+            // loading="lazy"
           ></img>
         )}
         <div className={styles.sidebar_item_text}>{item.name}</div>
       </motion.div>
     ))
-  }, [categoryList, activeSubPage])
+  }, [categoryList, activeSubPage, categoryId])
 
   const zaglushkaSkeleton = useMemo(() => {
     console.time('🕒 skeleton creation')
@@ -216,7 +222,14 @@ export const SaidbarLeft: React.FC<SaidbarLeftProps> = ({
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.25 }}
           >
-            <img className={styles.img_item} src={item.icon} loading="lazy" />
+            <img
+              className={styles.img_item}
+              src={item.icon}
+              alt={item.icon}
+              fetchpriority="high"
+              loading="eager"
+              //loading="lazy"
+            />
             <div className={styles.sidebar_item_text}>{item.description}</div>
           </motion.div>
         ))}
@@ -235,7 +248,14 @@ export const SaidbarLeft: React.FC<SaidbarLeftProps> = ({
               optionButtonClick(item.value, item.active, event)
             }
           >
-            <img className={styles.img_item} src={item.icon} loading="lazy" />
+            <img
+              className={styles.img_item}
+              src={item.icon}
+              alt={item.icon}
+              fetchpriority="high"
+              loading="eager"
+              //loading="lazy"
+            />
             <div className={styles.sidebar_item_text}>{item.description}</div>
           </div>
         ))}

@@ -58,7 +58,6 @@ export const useAuth = () => {
     setIsAuthenticated(false)
     setIsAdmin(false)
     localStorage.removeItem('userData')
-    // window.location.href = '/'
   }, [setIsAuthenticated, setIsAdmin])
 
   const recordLoginDate = useCallback(async (jwtToken: string) => {

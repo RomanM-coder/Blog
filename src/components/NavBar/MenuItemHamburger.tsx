@@ -10,7 +10,7 @@ interface IMenuItemHamburgerProps {
   getKey: string
   width: number | undefined
   itemlength?: number
-  setMenuItemRef: (index: number, el: HTMLDivElement | null) => void
+  setMenuItemRef: (index: number, el: HTMLLIElement | null) => void
   setIsNavBarHamburgerAnimationComplete: React.Dispatch<
     React.SetStateAction<boolean>
   >
@@ -26,9 +26,9 @@ export const MenuItemHamburger: React.FC<IMenuItemHamburgerProps> = ({
   setMenuItemRef,
   setIsNavBarHamburgerAnimationComplete,
 }) => {
-  const itemRef = useRef<HTMLDivElement>(null)
+  const itemRef = useRef<HTMLLIElement>(null)
   // Создаем отдельный ref для индикатора
-  const indicatorRef = useRef<HTMLDivElement>(null)
+  const indicatorRef = useRef<HTMLLIElement>(null)
 
   const itemVariants: Variants = {
     open: {
@@ -84,28 +84,16 @@ export const MenuItemHamburger: React.FC<IMenuItemHamburgerProps> = ({
     }
   }, [index, setMenuItemRef])
 
-  // Дебаг: логируем изменение activePage
-  // useEffect(() => {
-  //   console.log(
-  //     `MenuItem ${index}: activePage = ${activePage}, should animate: ${activePage === index}`,
-  //   )
-  // }, [activePage, index])
-
   return (
-    <div
+    <li
       ref={itemRef}
       style={{
         position: 'relative',
-        // margin: marginWidth(),
         width: 'fitContent',
         margin: '0 auto',
-        //display: 'inline',
-        // Контейнер для всего элемента меню
       }}
     >
       <motion.div
-        // ref={motionElemHamburgerRef}
-        // key={`menu-item-${index}-${activePage}`}
         key={getKey}
         className={
           activePage === index
@@ -133,15 +121,11 @@ export const MenuItemHamburger: React.FC<IMenuItemHamburgerProps> = ({
             console.log('onAnimationComplete-open')
           }
         }}
-        // onUpdate={(latest) => {
-        //   // Для отладки: отслеживаем изменения значений анимации
-        //   console.log(`📊 MenuItem ${index} update:`, latest)
-        // }}
       >
         {item}
       </motion.div>
       {/* Индикатор ВНЕ анимируемого элемента */}
-      <div
+      <li
         ref={indicatorRef}
         style={{
           position: 'absolute',
@@ -151,17 +135,14 @@ export const MenuItemHamburger: React.FC<IMenuItemHamburgerProps> = ({
           // Размещаем внизу контейнера
           bottom: '0',
           height: '2px',
-          // Фон для отладки (потом удалите)
-          // backgroundColor: 'rgba(0, 255, 0, 0.3)',
           // Делаем невидимым
           opacity: 0,
           pointerEvents: 'none',
           // Гарантируем, что индикатор не влияет на размеры
           visibility: 'hidden',
-          // zIndex: 1000, // Для отладки
         }}
         aria-hidden="true"
       />
-    </div>
+    </li>
   )
 }

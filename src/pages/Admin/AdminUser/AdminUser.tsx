@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, Suspense } from 'react'
+import { lazyWithNamedExport } from '../../../utilita/lazyWithNamedExport.ts'
 import ReactPaginate from 'react-paginate'
 import { useGlobalState } from '../../../useGlobalState.ts'
 import { useTranslation } from 'react-i18next'
@@ -8,8 +9,16 @@ import Skeleton from 'react-loading-skeleton'
 import { useDebounce } from '../../../utilita/useDebounce.ts'
 import { useNavigate } from 'react-router-dom'
 import { handleApiError } from '../../../utilita/errorHandler.ts'
-import { AddEditUserForm } from '../AddEditUserForm/AddEditUserForm.tsx'
-import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
+// import { AddEditUserForm } from '../AddEditUserForm/AddEditUserForm.tsx'
+const AddEditUserForm = lazyWithNamedExport(
+  () => import('../AddEditUserForm/AddEditUserForm.tsx'),
+  'AddEditUserForm',
+)
+//import { DeleteForm } from '../DeleteForm/DeleteForm.tsx'
+const DeleteForm = lazyWithNamedExport(
+  () => import('../DeleteForm/DeleteForm.tsx'),
+  'DeleteForm',
+)
 import { ICategory } from '../../../utilita/modelCategory.ts'
 import { SearchContext } from '../../../context/SearchContext.ts'
 import { SortContext } from '../../../context/SortContext.ts'
@@ -19,6 +28,7 @@ import { IPostFull } from '../../../utilita/modelPostFull.ts'
 import useScreenSize from '../../../utilita/useScreenSize.ts'
 import plus from '../../../assets/static/plus.svg'
 import { SortableTable, Column } from '../UniversalTbl/UniversalTbl.tsx'
+import { LoadingSpinner } from '../../LoadingSpinner/LoadingSpinner.tsx'
 import toast from 'react-hot-toast'
 import 'react-loading-skeleton/dist/skeleton.css'
 import styles from './AdminUser.module.css'
@@ -263,11 +273,14 @@ export const AdminUser: React.FC = () => {
     const result = await useAddUser(newUser, sort.sortType, currentPage)
 
     if (result.success) {
-      myToast(t('adminUser.toast.userAdded'), basicColor.green)
+      if (result.forUserId && result.forUserId === userId)
+        myToast(t('adminUser.toast.userAdded'), basicColor.green)
     } else {
-      if (result.typeError === 'noCatch') {
-        myToast(result.message, basicColor.red)
-      } else handleApiError(result, t)
+      if (result.forUserId && result.forUserId === userId) {
+        if (result.typeError === 'noCatch') {
+          myToast(t(result.message), basicColor.red)
+        } else handleApiError(result, t)
+      }
     }
   }
 
@@ -277,11 +290,14 @@ export const AdminUser: React.FC = () => {
     const result = await useEditUser(editUser, sort.sortType, currentPage)
 
     if (result.success) {
-      myToast(t('adminUser.toast.userUpdated'), basicColor.green)
+      if (result.forUserId && result.forUserId === userId)
+        myToast(t('adminUser.toast.userUpdated'), basicColor.green)
     } else {
-      if (result.typeError === 'noCatch') {
-        myToast(result.message, basicColor.red)
-      } else handleApiError(result, t)
+      if (result.forUserId && result.forUserId === userId) {
+        if (result.typeError === 'noCatch') {
+          myToast(t(result.message), basicColor.red)
+        } else handleApiError(result, t)
+      }
     }
   }
 
@@ -294,15 +310,14 @@ export const AdminUser: React.FC = () => {
     if (user) {
       const result = await useDeleteUser(user, sort.sortType, currentPage)
       if (result.success) {
-        myToast(t('adminUser.toast.userDeleted'), basicColor.green)
+        if (result.forUserId && result.forUserId === userId)
+          myToast(t('adminUser.toast.userDeleted'), basicColor.green)
       } else {
-        if (result.typeError === 'noCatch') {
-          if (result.message === 'User not found') {
-            myToast(t('adminUser.toast.userNotFound'), basicColor.red)
-          } else {
-            myToast(result.message, basicColor.red)
-          }
-        } else handleApiError(result, t)
+        if (result.forUserId && result.forUserId === userId) {
+          if (result.typeError === 'noCatch') {
+            myToast(t(result.message), basicColor.red)
+          } else handleApiError(result, t)
+        }
       }
     }
   }
@@ -420,10 +435,14 @@ export const AdminUser: React.FC = () => {
       return
     }
 
-    const handleServerEditUser = (data: { messageKey: string }) => {
+    const handleServerEditUser = (data: {
+      messageKey: string
+      forUserId?: string // опциональное поле
+    }) => {
       console.log('📨 Событие получено! server_edit_user_response:', data)
       console.log('messageKey:', data.messageKey, 't:', t(data.messageKey))
-      myToast(t(data.messageKey), basicColor.orange)
+      // if (!data.forUserId || data.forUserId === userId) // вариант для сообщений
+      // myToast(t(data.messageKey), basicColor.orange)
     }
 
     socket.on('server_edit_user_response', handleServerEditUser)
@@ -467,30 +486,40 @@ export const AdminUser: React.FC = () => {
     <>
       <div className={styles.adminUsers}>
         {showAddEditUserForm && (
-          <AddEditUserForm
-            handleAddEditUserFormHide={handleAddEditUserFormHide}
-            modeUser={modeUser}
-            selectedUser={selectedUser}
-            addUser={addUser}
-            editUser={editUser}
-            votepost={votePosts}
-            votecomment={voteComments}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <AddEditUserForm
+              handleAddEditUserFormHide={handleAddEditUserFormHide}
+              modeUser={modeUser}
+              selectedUser={selectedUser}
+              addUser={addUser}
+              editUser={editUser}
+              votepost={votePosts}
+              votecomment={voteComments}
+            />
+          </Suspense>
         )}
         {showDeleteUserForm && (
-          <DeleteForm
-            type={'user'}
-            handleDeleteFormHide={handleDeleteUserFormHide}
-            selectedItem={selectedUser}
-            onDelete={deleteUser}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <DeleteForm
+              type={'user'}
+              handleDeleteFormHide={handleDeleteUserFormHide}
+              selectedItem={selectedUser}
+              onDelete={deleteUser}
+            />
+          </Suspense>
         )}
         <div className={styles.containerButton}>
           <h2 className={styles.title}>{t('adminUser.header')}</h2>
 
           <div className={styles.divAddButton}>
             <button className={styles.addButton} onClick={handleAddUser}>
-              <img src={plus} width={24} height={24} loading="lazy" />
+              <img
+                src={plus}
+                width={24}
+                height={24}
+                alt="plus"
+                loading="lazy"
+              />
             </button>
             <h3 className={styles.userCount}>
               {t('adminUser.usersCount')}&nbsp;&nbsp;&nbsp;{usersCount}

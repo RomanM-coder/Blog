@@ -28,6 +28,11 @@
 
     "messageNameCommentLong": "Комментарий слишком длинный",
     "messageTransNameCommentLong": "Перевод комментария слишком длинный",
+    "messagePasswordRequired": "Пароль необходим",
+    "messageNewPasswordRequired": "New password is required",
+    "messageConfirmNewPasswordRequired": "Confirmation of the new password is required",
+    "messageConfirmCaptcha": "Пожалуйста, подтвердите капчу",
+
     "firstName": {
       "tooLong": "Имя не может быть длиннее 30 символов",
       "invalidChars": "Имя может содержать только буквы, цифры, пробелы, дефисы и апострофы",
@@ -58,36 +63,78 @@
       "emailNotConfirmed": "Email не подтвержден",
       "emailVerification": "Введите email для проверки",
       "confirm": "подтвердить",
-      "login": "Логин",
-      "regin": "Регин"
+      "login": "Вход",
+      "regin": "Регистрация",
+      "forgetPassword": "забыли пароль?",
+      "messageNotRealUser": "Такого зарегистрированного пользователя нет.",
+      "messageFillEmailField": "Заполните поле email.",
+      "messagePasswordRequired": "ПАРОЛЬ необходим.",
+      "checking": "Проверка email...",
+      "available": "Email свободен",
+      "taken": "Email уже занят",
+      "invalid": "Некорректный формат email",
+      "error": "Ошибка проверки"
     },
-    "toast": {
-      "reg": {
-        "messageUserCreated": "Пользователь был создан",
-        "messageDataIncorrect": "Некорректные данные при регистрации",
-        "messageAlreadyExists": "Такой пользователь уже существует",
-        "fileAdd": "Файл пользователя успешно добавлен",
-        "registrationFailed": "Не удалось выполнить регистрацию",
-        "userNotFound": "Пользователь не найден",
-        "fileNotFound": "Файл не найден",
-        "fileExist": "Файл уже существует",
-        "invalidEmailFormat": "Некорректный email формат"
-      },
-      "login": {
-        "loginFailed": "Ошибка входа",
-        "userLogin": "Пользователь залогинен",
-        "messageDataIncorrect": "Некорректные данные при входе в систему",
-        "messageUserNotFound": "Пользователь не найден",
-        "messagePasswordIncorrect": "Неверный пароль, попробуйте снова",
-        "messageEmailToken": "Письмо с токеном отправлено на Вашу почту",
-        "messageLinkIncorrect": "Недействительная или просроченная ссылка для подтверждения",
-        "messageEmailConfirm": "Email успешно подтверждён"
-      },
-      "error": "Ошибка"
+    "resetForm": {
+      "title": "Форма для нового пароля",
+      "buttonSubmit": "ПЕРЕДАТЬ НОВЫЙ ПАРОЛЬ",
+      "buttonCancel": "ОТМЕНА",
+      "placeholderNewPassword": "Новый пароль",
+      "placeholderConfirmNewPassword": "Подтвердение нового пароля",
+      "fieldNewPassword": "Новый пароль",
+      "fieldConfirmNewPassword": "Подтвердение нового пароля",
+      "newPasswordRequired": "Новый пароль необходим",
+      "confirmNewPasswordRequired": "Подтверждение нового пароля необходимо",
+      "toast": {
+        "messageEmailPassword": "Если пользователь с таким адресом электронной почты существует, он получит ссылку для сброса пароля на адрес электронной почты.",
+        "messageLinkExpired": "Просроченная ссылка для сброса пароля.",
+        "messageInputNewPassword": "Введите новый пароль.",
+        "messageLinkIncorrect": "Недействительная или просроченная ссылка для сброса.",
+        "messageUserNotFound": "The user was not found.",
+        "messagePasswordsDoNotMatch": "Заполните правильно поле подтверждения пароля. Поля должны быть одинаковые.",
+        "messageTokenRequired": "Токен необходим.",
+        "messageInvalidTokenFormat": "Недопустимый формат токена.",
+        "messageNewPasswordRequired": "Новый пароль необходим.",
+        "messageNewPasswordIsString": "Новый пароль должен быть строкой."
+      }
     }
   },
+  "toast": {
+    "reg": {
+      "messageUserCreated": "Пользователь был создан.",
+      "messageDataIncorrect": "Некорректные данные при регистрации.",
+      "messageAlreadyExists": "Такой пользователь уже существует.",
+      "fileAdd": "Файл пользователя успешно добавлен",
+      "registrationFailed": "Не удалось выполнить регистрацию",
+      "userNotFound": "Пользователь не найден",
+      "fileNotFound": "Файл не найден",
+      "fileExist": "Файл уже существует",
+      "invalidEmailFormat": "Некорректный email формат"
+    },
+    "login": {
+      "loginFailed": "Ошибка входа",
+      "userLogin": "Пользователь залогинен",
+      "messageDataIncorrect": "Некорректные данные при входе в систему.",
+      "messageUserNotFound": "Пользователь не найден.",
+      "messagePasswordIncorrect": "Неверный пароль, попробуйте снова.",
+      "messageEmailToken": "Если пользователь с таким адресом электронной почты существует, он получит ссылку для подтверждения email на адрес электронной почты.",
+      "messageLinkIncorrect": "Недействительная или просроченная ссылка для подтверждения.",
+      "messageLinkExpired": "Просроченная ссылка для подтверждения.",
+      "messageEmailConfirm": "Email успешно подтверждён.",
+      "messageTokenRequired": "Токен необходим.",
+      "messageInvalidTokenFormat": "Недопустимый формат токена."
+    },
+    "forget": {
+      "messageEmailPassword": "Если пользователь с таким адресом электронной почты существует, ему будет отправлена ссылка для сброса пароля."
+    },
+    "error": "Ошибка"
+  },
   "adminLogin": {
-    "login": "Админ залогинен"
+    "login": "Админ залогинен",
+    "unauthorized": "Не авторизован",
+    "forbidden": "Запрещено",
+    "notFound": "Не найден",
+    "serverError": "Ошибка сервера"
   },
   "catList": {
     "searchInput": "Поиск категории по имени",
@@ -185,7 +232,13 @@
       "changeAvatar": "Сменить аватар",
       "user": "Пользователь",
       "register": "Зарегистрирован",
-      "year": "года"
+      "year": "года",
+
+      "userNotFound": "Пользователь не найден",
+      "invalidUserData": "Невалидные данные пользователя",
+      "fileNotLoaded": "Файл не загружен",
+      "fileOne": "Для аватара разрешен максимум 1 файл",
+      "avatarUpdatedSuccessfully": "Аватар был успешно изменён"
     },
     "profileInfo": {
       "header": "Редактирование профиля",
@@ -204,6 +257,11 @@
       "placeholderLastName": "Введите фамилию",
       "bio": "Биография",
       "placeholderBio": "Расскажите о себе..."
+    },
+    "toast": {
+      "userNotFound": "Пользователь не найден",
+      "userUpdated": "Профиль пользователя изменен",
+      "leastOneUpdate": "Необходимо указать хотя бы одно поле обновления"
     }
   },
   "adminPostPage": {
@@ -341,6 +399,11 @@
     "profileHeader": {
       "fileIsImage": "Файл должен быть изображением",
       "fileSize": "Размер файла не должен превышать 2MB",
+      "userNotFound": "Пользователь не найден",
+      "invalidUserData": "Невалидные данные пользователя",
+      "fileNotLoaded": "Файл не загружен",
+      "fileOne": "Для аватара разрешен максимум 1 файл",
+      "avatarUpdatedSuccessfully": "Аватар был успешно изменён",
       "errorEdit": "Ошибка при обновлении аватара",
       "loading": "Загрузка...",
       "changeAvatar": "Сменить аватар",
@@ -359,9 +422,9 @@
       "lastName": "Фамилия",
       "bio": "О себе",
       "role": "Роль",
-      "createdAt": "Создана",
+      "createdAt": "Создан",
       "lastLogin": "Последний визит",
-      "confirmed": "Подтверждён",
+      "confirmed": "Email подтверждён",
       "blocked": "Заблокирован",
       "commentsCount": "Комментариев",
       "action": "Действие",
@@ -369,8 +432,13 @@
       "delete": "Удалить"
     },
     "toast": {
+      "userNotFound": "Пользователь не найден",
+      "usersNotFound": "Пользователи не найдены",
+      "fileOne": "Для аватара разрешен максимум 1 файл",
+      "arrayVotecomment": "Ожидается массив votecomment",
+      "arrayVotepost": "Ожидается массив votepost",
       "userAdded": "Пользователь добавлен",
-      "userUpdated": "Пользователь изменен",
+      "userUpdated": "Профиль пользователя изменен",
       "userDeleted": "Пользователь удален"
     }
   },
@@ -469,6 +537,9 @@
   "lazyImages": {
     "notLoading": "Не удалось загрузить: ",
     "loading": "Загрузка..."
+  },
+  "invalidLinkPage": {
+    "errorInvalidLink": "Ошибка: статус 404, такой страницы нет или ссылка недействительна."
   },
   "footer": {
     "title": "© Реакт Блог",

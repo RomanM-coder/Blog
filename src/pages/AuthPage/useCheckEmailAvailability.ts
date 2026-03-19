@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios'
 import { useTranslation } from 'react-i18next'
-// import { UseFormSetValue } from 'react-hook-form'
 import { basicUrl } from '../../utilita/default.ts'
 
 const headers = {
@@ -8,10 +7,7 @@ const headers = {
   // 'Access-Control-Allow-Origin': '*',
 } as RawAxiosRequestHeaders
 
-// interface UseCheckEmailAvailabilityProps {
-//   emailToCheck: string
-// }
-
+// ТОЛЬКО для проверки доступности email (регистрация)
 export const useCheckEmailAvailability = () => {
   const { i18n } = useTranslation()
 
@@ -27,12 +23,16 @@ export const useCheckEmailAvailability = () => {
         headers,
       } as AxiosRequestConfig
 
-      const result = await axios<{ status: string }>(config)
+      const result = await axios<{
+        status: 'taken' | 'available' | 'invalid' | 'error'
+      }>(config)
 
       return {
         status: result.data.status,
       }
-    } catch (error: unknown) {}
+    } catch (error: unknown) {
+      return { status: 'error' }
+    }
   }
 
   return { checkEmailAvailability }

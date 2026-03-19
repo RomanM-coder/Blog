@@ -6,11 +6,12 @@ import { useGlobalState } from '../../useGlobalState.ts'
 import { MorphShapesCSS } from '../../components/MorphShapesCSS/MorphShapesCSS.tsx'
 import { LazyImage } from '../LazyImage/LazyImage.tsx'
 import { IPostFull } from '../../utilita/modelPostFull.ts'
+import { ICategory } from '../../utilita/modelCategory.ts'
 import toast from 'react-hot-toast'
 import heartGrey from '../../assets/static/heart-fill-grey.svg'
 import heartRed from '../../assets/static/heart-fill-red.svg'
 import eye from '../../assets/static/eye.svg'
-import { basicUrl, basicColor } from '../../utilita/default.ts'
+import { basicColor, basicUrl, production } from '../../utilita/default.ts'
 import styles from './BlogPost.module.css'
 
 interface IBlogPostProps {
@@ -19,8 +20,7 @@ interface IBlogPostProps {
   setNoFavorite: (num: number | ((prev: number) => number)) => void
   likeDislikePost: (up1: string, up2: number, up3: number) => void
   handleIncreaseViewPost: (val: string) => void
-  // handleSelectPost: (selPost: IPostFull) => void
-  // categoryId: string
+  categoryS: ICategory | undefined
 }
 
 export const BlogPost: React.FC<IBlogPostProps> = ({
@@ -29,8 +29,7 @@ export const BlogPost: React.FC<IBlogPostProps> = ({
   setNoFavorite,
   likeDislikePost,
   handleIncreaseViewPost,
-  // handleSelectPost,
-  // categoryId,
+  categoryS,
 }) => {
   const [showFullPost, setShowFullPost] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
@@ -82,7 +81,12 @@ export const BlogPost: React.FC<IBlogPostProps> = ({
   useEffect(() => {
     setFavorite(postFull.favorite)
     setNoFavorite(postFull.nofavorite)
+    // const categorySel = categoryList.find(
+    //   (category) => category._id === postFull.categoryId
+    // )
   }, [])
+
+  if (!categoryS) return
 
   // const styleIcon = post.liked ? 'red' : 'black'
   return (
@@ -102,9 +106,15 @@ export const BlogPost: React.FC<IBlogPostProps> = ({
                 <MorphShapesCSS />
               ) : (
                 <img
-                  src={`${basicUrl.urlUserFiles}?id=${postFull.user._id}&nameImage=${postFull.user.avatar}`}
+                  //src={`${basicUrl.urlUserFiles}?id=${postFull.user._id}&nameImage=${postFull.user.avatar}`}
+                  src={
+                    production
+                      ? `/uploads/avatars/${postFull.user.avatar}`
+                      : `${basicUrl.urlUserFiles}?id=${postFull.user._id}&nameImage=${postFull.user.avatar}`
+                  }
                   height={'40px'}
                   width={'40px'}
+                  alt={`avatar-${postFull.user.email}`}
                   style={{
                     // position: 'relative',
                     // top: '0px',
@@ -117,8 +127,14 @@ export const BlogPost: React.FC<IBlogPostProps> = ({
 
               {/* Миниатюра категории */}
               <img
-                src={`${basicUrl.urlDownload}?id=${postFull.categoryId}`}
+                //src={`${basicUrl.urlDownload}?id=${postFull.categoryId}`}
+                src={
+                  production
+                    ? `/categoryFiles/${categoryS.name}/${categoryS.link}`
+                    : `${basicUrl.urlDownload}?id=${postFull.categoryId}`
+                }
                 className={styles.category_badge}
+                alt={`picture-${categoryS.name}`}
               />
             </div>
           </a>
@@ -140,6 +156,7 @@ export const BlogPost: React.FC<IBlogPostProps> = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -50 }}
                   transition={{ duration: 0.5 }}
+                  style={{ willChange: 'y', transform: 'translateZ(0)' }}
                 >
                   {item.type === 'text' ? (
                     <figure
@@ -153,18 +170,33 @@ export const BlogPost: React.FC<IBlogPostProps> = ({
                       className={styles.block_wrapper_img}
                       // key={`section-${post._id}-${index}`}
                     >
-                      {/* <img
-                        //src={basicUrl.urlPostFiles}
-                        className={styles.content_block_img}
-                        src={`${basicUrl.urlPostFiles}?id=${postFull._id}&nameImage=${item.path}`}
-                        alt={item.alt}
-                        loading="lazy"
-                      /> */}
-                      <LazyImage
-                        src={`${basicUrl.urlPostFiles}?id=${postFull._id}&nameImage=${item.path}`}
-                        alt={item.alt!}
-                        className={styles.content_block_img}
-                      />
+                      {index === 0 ? (
+                        <img
+                          //src={basicUrl.urlPostFiles}
+                          className={styles.content_block_img}
+                          //src={`${basicUrl.urlPostFiles}?id=${postFull._id}&nameImage=${item.path}`}
+                          src={
+                            production
+                              ? `/postFiles/${item.path}`
+                              : `${basicUrl.urlPostFiles}?id=${postFull._id}&nameImage=${item.path}`
+                          }
+                          fetchpriority="high"
+                          loading="eager"
+                          alt={item.alt}
+                          // loading="lazy"
+                        />
+                      ) : (
+                        <LazyImage
+                          className={styles.content_block_img}
+                          //src={`${basicUrl.urlPostFiles}?id=${postFull._id}&nameImage=${item.path}`}
+                          src={
+                            production
+                              ? `/postFiles/${item.path}`
+                              : `${basicUrl.urlPostFiles}?id=${postFull._id}&nameImage=${item.path}`
+                          }
+                          alt={item.alt!}
+                        />
+                      )}
                     </figure>
                   )}
                 </motion.div>
@@ -190,19 +222,37 @@ export const BlogPost: React.FC<IBlogPostProps> = ({
       <div className={styles.content_reactions}>
         <div className={styles.reactions}>
           <div className={styles.reaction_button} onClick={handleFavorite}>
-            <img src={heartRed} width={21} height={21} loading="lazy" />
+            <img
+              src={heartRed}
+              width={21}
+              height={21}
+              alt="heart-red"
+              loading="lazy"
+            />
             <span className={styles.reaction_button_counter}>
               {postFull.favorite}
             </span>
           </div>
           <div className={styles.reaction_button} onClick={handleNoFavorite}>
-            <img src={heartGrey} width={21} height={21} loading="lazy" />
+            <img
+              src={heartGrey}
+              width={21}
+              height={21}
+              alt="heart-grey"
+              loading="lazy"
+            />
             <span className={styles.reaction_button_counter}>
               {postFull.nofavorite}
             </span>
           </div>
           <div className={styles.reaction_eye}>
-            <img src={eye} width="20px" height="20px" loading="lazy" />
+            <img
+              src={eye}
+              width="20px"
+              height="20px"
+              alt="eye"
+              loading="lazy"
+            />
             <span className={styles.reaction_button_counter}>
               {postFull.views}
             </span>
